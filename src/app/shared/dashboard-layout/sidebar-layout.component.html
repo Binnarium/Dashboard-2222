@@ -1,0 +1,22 @@
+<div class="min-h-screen flex flex-row">
+
+  <!-- sidebar -->
+  <ng-content select="dashboard-sidebar"></ng-content>
+
+  <!-- main content of dashboard -->
+  <main class="relative min-h-screen flex-grow bg-red-50">
+
+    <!-- dashboard navigation bar  -->
+    <ng-content select="dashboard-navbar"></ng-content>
+
+    <!-- scroll content -->
+    <div class="relative z-10">
+
+      <!-- main content -->
+      <ng-content></ng-content>
+
+      <!-- footer section -->
+      <ng-content select="dashboard-footer"></ng-content>
+    </div>
+  </main>
+</div>

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'dashboard-auth',
-  templateUrl: './auth.component.html',
+  selector: 'dashboard-navbar',
+  templateUrl: './navbar.component.html',
   styles: [
   ]
 })
-export class AuthComponent implements OnInit {
+export class NavbarComponent implements OnInit {
 
   constructor() { }
 
