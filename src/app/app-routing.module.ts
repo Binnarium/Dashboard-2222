@@ -10,6 +10,13 @@ const routes: Routes = [
   { path: 'inicio', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
 
   // home module
+  {
+    path: 'ciudades', children: [
+      { path: 'introduccion', loadChildren: () => import('./city-introduction/city-introduction.module').then(m => m.CityIntroductionModule) }
+    ]
+  },
+
+  // home module
   { path: 'restringido', loadChildren: () => import('./unauthorized/unauthorized.module').then(m => m.UnauthorizedModule) },
 
   // redirect all inconsistent routes to home

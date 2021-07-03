@@ -1,0 +1,20 @@
+<dashboard-sidebar-layout>
+  <dashboard-sidebar>
+    <h2 dashboard-sidebar-header>Laboratorio Móvil 2222</h2>
+    <h3 dashboard-sidebar-section-name>Ciudades</h3>
+    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', 'quitu']" routerLinkActive
+      #home="routerLinkActive" [active]="home.isActive">Quitu</a>
+    <a dashboard-sidebar-item>Azatlan</a>
+    <dashboard-sidebar-divider></dashboard-sidebar-divider>
+    <a dashboard-sidebar-item>Lecturas Recomendadas</a>
+    <button dashboard-sidebar-item>Clubhouse</button>
+  </dashboard-sidebar>
+  <dashboard-sidebar>
+    <h2 dashboard-sidebar-header>Quitu</h2>
+    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', 'quitu']" routerLinkActive
+      #introduction="routerLinkActive" [active]="introduction.isActive">Introducción</a>
+    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', 'quitu']" routerLinkActive
+      #history="routerLinkActive" [active]="history.isActive">Historia</a>
+  </dashboard-sidebar>
+  Introduccion ciudad
+</dashboard-sidebar-layout>
