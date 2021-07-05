@@ -1,0 +1,53 @@
+<div class="relative w-full pb-16/9 overflow-hidden bg-gray-200 rounded">
+
+  <!-- Background in case no video is available -->
+  <ng-container *ngIf="!video">
+    <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <i class="fas fas fa-video text-6xl text-gray-600"></i>
+    </span>
+  </ng-container>
+
+  <!-- video player in case of video -->
+  <ng-container *ngIf="video">
+    <span class="absolute inset-0 object-cover z-2 w-full h-full ">
+      <video class="w-full h-full" [src]="video.url" controls></video>
+    </span>
+  </ng-container>
+
+  <!-- Upload button -->
+  <div class="absolute top-6 right-6 z-3">
+    <!-- progress bar -->
+    <ng-container *ngIf="progress; else uploadInput">
+      <div class="px-4 py-2 bg-white rounded relative overflow-hidden">
+
+        <!-- background progress -->
+        <div class="absolute bg-blue-200 top-0 bottom-0 left-0 transition-all duration-150 z-2"
+          [ngStyle]="{width: progress?.percentage+'%'}"></div>
+
+        <div class="relative h-full text-gray-700 text-xs font-bold  flex justify-center items-center z-3 p-2 flex-col">
+          {{progress?.percentage}}%
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- template text to upload the asset -->
+    <ng-template #uploadInput>
+
+      <!-- input with a upload event -->
+      <div
+        class="px-4 py-2 bg-white rounded shadow focus-within:shadow-outline ease-linear transition-all duration-150 ">
+        <label class="cursor-pointer h-full text-gray-700 text-md flex justify-center items-center">
+          <input class="hidden" type="file" accept="video/*" (change)="upload($event)">
+
+          <!-- icon -->
+          <i class="fas fa-video" title="Subir Video"></i>
+
+          <!-- text -->
+          <span class="ml-2 text-xs uppercase font-semibold">
+            Subir Video
+          </span>
+        </label>
+      </div>
+    </ng-template>
+  </div>
+</div>

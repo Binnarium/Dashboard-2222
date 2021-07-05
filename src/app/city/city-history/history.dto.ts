@@ -1,13 +1,13 @@
+import { ImageDTO } from "src/app/shared/upload/asset.dto";
+
 type ContentHistoryKind = 'HISTORY#IMAGE' | 'HISTORY#TEXT' | 'HISTORY#TITLE'
 
 interface ContentHistoryDto {
   kind: ContentHistoryKind
 }
 
-export interface ImageContentHistoryDto extends ContentHistoryDto {
+export interface ImageContentHistoryDto extends ContentHistoryDto, ImageDTO {
   kind: 'HISTORY#IMAGE';
-  imageUrl: string;
-  reference: string;
 }
 
 export interface TextContentHistoryDto extends ContentHistoryDto {

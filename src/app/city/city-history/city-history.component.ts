@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
+import { ImageDTO } from 'src/app/shared/upload/asset.dto';
 import { HistoryDto } from './history.dto';
 import { LoadHistoryService } from './load-history.service';
 import { SaveHistoryService } from './save-history.service';
@@ -64,8 +65,11 @@ export class CityHistoryComponent implements OnDestroy {
         });
         else if (content.kind === 'HISTORY#IMAGE') newControl = this.fb.group({
           kind: 'HISTORY#IMAGE',
-          imageUrl: content.imageUrl ?? null,
-          reference: content.reference ?? null,
+          url: content.url ?? null,
+          path: content.path ?? null,
+          width: content.width ?? null,
+          height: content.height ?? null,
+          name: content.name ?? null,
         });
         else newControl = this.fb.group({
           kind: 'HISTORY#TEXT',
@@ -84,5 +88,34 @@ export class CityHistoryComponent implements OnDestroy {
 
   get historyContent(): FormArray {
     return this.form.get('content') as FormArray;
+  }
+
+  uploadImage(image: ImageDTO, index: number) {
+    this.historyContent.controls[index].setValue({ ...image, kind: 'HISTORY#IMAGE' },);
+  }
+
+  addTitle() {
+    this.historyContent.push(this.fb.group({
+      kind: 'HISTORY#TITLE',
+      title: null,
+    }));
+  }
+  addText() {
+
+    this.historyContent.push(this.fb.group({
+      kind: 'HISTORY#TEXT',
+      text: null,
+    }));
+  }
+  addImage() {
+    this.historyContent.push(this.fb.group({
+      kind: 'HISTORY#IMAGE',
+      url: null,
+      path: null,
+      width: null,
+      height: null,
+      name: null,
+    }));
+
   }
 }

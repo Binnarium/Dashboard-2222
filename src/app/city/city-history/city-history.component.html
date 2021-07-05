@@ -35,7 +35,7 @@
       <!-- wrapper for content -->
       <div div formArrayName="content">
         <!-- iterate thought all controls -->
-        <ng-container *ngFor="let control of historyContent.controls ; let i = index" [formGroupName]="i">
+        <ng-container *ngFor="let control of historyContent.controls ; let idx = index" [formGroupName]="idx">
 
           <!-- text form control -->
           <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#TEXT'">
@@ -43,11 +43,11 @@
             <div class="relative w-full mb-3">
               <!-- label -->
               <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
-                Sección Text
+                Texto
               </label>
 
               <!-- input text -->
-              <textarea formControlName="text"
+              <textarea formControlName="text" rows="4"
                 class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
             </div>
           </div>
@@ -58,12 +58,12 @@
             <div class="relative w-full mb-3">
               <!-- label -->
               <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
-                Sección titulo
+                Titulo
               </label>
 
               <!-- input text -->
-              <textarea formControlName="title"
-                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+              <input type="text" formControlName="title"
+                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
             </div>
           </div>
 
@@ -72,17 +72,20 @@
             <!-- form group -->
             <div class="relative w-full mb-3">
               <!-- label -->
-              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
+              <h3 class="block uppercase text-gray-700 text-xs font-bold mb-4">
                 Imagen
-              </label>
+              </h3>
 
               <!-- input text -->
-              <textarea formControlName="imageUrl"
-                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+              <dashboard-upload-image [image]="control.value" (completed)="uploadImage($event, idx)">
+              </dashboard-upload-image>
             </div>
           </div>
         </ng-container>
       </div>
+      <button type="button" (click)="addTitle()">Añadir Titulo</button>
+      <button type="button" (click)="addImage()">Añadir Imagen</button>
+      <button type="button" (click)="addText()">Añadir Texto</button>
     </form>
   </div>
 
