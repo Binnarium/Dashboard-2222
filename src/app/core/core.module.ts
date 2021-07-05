@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CitiesModuleModule } from './cities-module/cities-module.module';
+import { FirebaseModule } from './firebase/firebase.module';
 
 
 
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule
-  ]
+    FirebaseModule,
+    CitiesModuleModule
+  ],
+  exports: [
+    FirebaseModule,
+    CitiesModuleModule
+  ],
 })
 export class CoreModule { }

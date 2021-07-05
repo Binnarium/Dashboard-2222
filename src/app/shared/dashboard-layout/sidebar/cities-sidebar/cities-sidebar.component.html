@@ -1,0 +1,45 @@
+<dashboard-sidebar *ngIf="cityId$ | async as city">
+
+  <h2 dashboard-sidebar-header>
+    {{ city }}
+  </h2>
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', city]" routerLinkActive
+    #introduction="routerLinkActive" [active]="introduction.isActive">
+    Introducción
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Historia
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Argumentación Principal
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Objetivos
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Videos y Podcast
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Lecturas y Recursos Online
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Actividades
+  </a>
+
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', city]" routerLinkActive #history="routerLinkActive"
+    [active]="history.isActive">
+    Encuentros Clubhouse
+  </a>
+</dashboard-sidebar>

@@ -1,16 +1,16 @@
-<div class="min-h-screen flex flex-row">
+<div class="h-screen flex flex-row overflow-hidden">
 
   <!-- sidebar -->
-  <ng-content select="dashboard-sidebar"></ng-content>
+  <ng-content select="dashboard-sidebar, dashboard-main-sidebar, dashboard-cities-sidebar"></ng-content>
 
   <!-- main content of dashboard -->
-  <main class="relative min-h-screen flex-grow bg-red-50">
+  <main class="relative min-h-screen flex-grow bg-blue-50">
 
     <!-- dashboard navigation bar  -->
     <ng-content select="dashboard-navbar"></ng-content>
 
     <!-- scroll content -->
-    <div class="relative z-10">
+    <div class="relative z-0">
 
       <!-- main content -->
       <ng-content></ng-content>

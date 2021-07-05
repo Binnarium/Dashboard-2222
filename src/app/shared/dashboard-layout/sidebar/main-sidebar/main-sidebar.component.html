@@ -1,0 +1,41 @@
+<dashboard-sidebar>
+  <h2 dashboard-sidebar-header>Laboratorio Móvil 2222</h2>
+
+  <!-- Players -->
+  <a dashboard-sidebar-item>
+    Jugadores
+  </a>
+
+  <!-- divide cities from other content -->
+  <dashboard-sidebar-divider></dashboard-sidebar-divider>
+
+  <!-- cities section name -->
+  <h3 dashboard-sidebar-section-name>Ciudades</h3>
+
+  <!-- display all cities -->
+  <a *ngFor="let city of cities$ |async" dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', city.id]"
+    routerLinkActive #item="routerLinkActive" [active]="item.isActive">
+    {{city.name}}
+  </a>
+
+  <!-- divide cities from other content -->
+  <dashboard-sidebar-divider></dashboard-sidebar-divider>
+
+  <!-- readings -->
+  <a dashboard-sidebar-item>
+    Lecturas Recomendadas
+  </a>
+
+  <!-- Questions -->
+  <a dashboard-sidebar-item>
+    Clubhouse
+  </a>
+
+  <!-- divide cities from other content -->
+  <dashboard-sidebar-divider></dashboard-sidebar-divider>
+
+  <!-- Questions -->
+  <a dashboard-sidebar-item>
+    Configuración
+  </a>
+</dashboard-sidebar>

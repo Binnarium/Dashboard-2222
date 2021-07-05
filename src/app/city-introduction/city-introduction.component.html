@@ -1,20 +1,49 @@
 <dashboard-sidebar-layout>
-  <dashboard-sidebar>
-    <h2 dashboard-sidebar-header>Laboratorio Móvil 2222</h2>
-    <h3 dashboard-sidebar-section-name>Ciudades</h3>
-    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', 'quitu']" routerLinkActive
-      #home="routerLinkActive" [active]="home.isActive">Quitu</a>
-    <a dashboard-sidebar-item>Azatlan</a>
-    <dashboard-sidebar-divider></dashboard-sidebar-divider>
-    <a dashboard-sidebar-item>Lecturas Recomendadas</a>
-    <button dashboard-sidebar-item>Clubhouse</button>
-  </dashboard-sidebar>
-  <dashboard-sidebar>
-    <h2 dashboard-sidebar-header>Quitu</h2>
-    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', 'quitu']" routerLinkActive
-      #introduction="routerLinkActive" [active]="introduction.isActive">Introducción</a>
-    <a dashboard-sidebar-item [routerLink]="['/ciudades', 'historia', 'quitu']" routerLinkActive
-      #history="routerLinkActive" [active]="history.isActive">Historia</a>
-  </dashboard-sidebar>
-  Introduccion ciudad
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <!-- main content of page -->
+  <div class="w-full p-8 flex flex-col">
+
+    <!-- header -->
+    <div class="flex flex-row justify-between mb-6">
+      <!-- page title -->
+      <h1 class="text-gray-800 text-xl font-bold">
+        Configurar Introducción
+      </h1>
+
+      <!-- saved text -->
+      <ng-container *ngIf="saved; else savingTemplate">
+        <span class="uppercase text-green-500 text-xs font-bold">
+          Guardado
+        </span>
+      </ng-container>
+
+      <ng-template #savingTemplate>
+        <span class="uppercase text-gray-400 text-xs font-bold">
+          Guardando...
+        </span>
+      </ng-template>
+    </div>
+
+    <form [formGroup]="informationForm">
+      <div class="flex flex-wrap">
+        <!-- form group -->
+        <div class="relative w-full mb-3">
+          <!-- label -->
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
+            Texto Introductorio
+          </label>
+
+          <!-- input text -->
+          <textarea formControlName="description"
+            class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+
 </dashboard-sidebar-layout>
