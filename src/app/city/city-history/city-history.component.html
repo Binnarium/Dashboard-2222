@@ -1,0 +1,89 @@
+<dashboard-sidebar-layout>
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <!-- main content of page -->
+  <div class="w-full p-8 flex flex-col">
+
+    <!-- header -->
+    <div class="flex flex-row justify-between mb-6">
+      <!-- page title -->
+      <h1 class="text-gray-800 text-xl font-bold">
+        Configurar Introducción
+      </h1>
+
+      <!-- saved text -->
+      <ng-container *ngIf="saved; else savingTemplate">
+        <span class="uppercase text-green-500 text-xs font-bold">
+          Guardado
+        </span>
+      </ng-container>
+
+      <ng-template #savingTemplate>
+        <span class="uppercase text-gray-400 text-xs font-bold">
+          Guardando...
+        </span>
+      </ng-template>
+    </div>
+
+
+    <!-- form -->
+    <form [formGroup]="form">
+      <!-- wrapper for content -->
+      <div div formArrayName="content">
+        <!-- iterate thought all controls -->
+        <ng-container *ngFor="let control of historyContent.controls ; let i = index" [formGroupName]="i">
+
+          <!-- text form control -->
+          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#TEXT'">
+            <!-- form group -->
+            <div class="relative w-full mb-3">
+              <!-- label -->
+              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
+                Sección Text
+              </label>
+
+              <!-- input text -->
+              <textarea formControlName="text"
+                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+            </div>
+          </div>
+
+          <!-- title form control -->
+          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#TITLE'">
+            <!-- form group -->
+            <div class="relative w-full mb-3">
+              <!-- label -->
+              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
+                Sección titulo
+              </label>
+
+              <!-- input text -->
+              <textarea formControlName="title"
+                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+            </div>
+          </div>
+
+          <!-- IMAGE form control -->
+          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#IMAGE'">
+            <!-- form group -->
+            <div class="relative w-full mb-3">
+              <!-- label -->
+              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
+                Imagen
+              </label>
+
+              <!-- input text -->
+              <textarea formControlName="imageUrl"
+                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+
+</dashboard-sidebar-layout>

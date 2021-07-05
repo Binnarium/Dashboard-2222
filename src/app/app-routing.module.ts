@@ -12,7 +12,8 @@ const routes: Routes = [
   // home module
   {
     path: 'ciudades', children: [
-      { path: 'introduccion', loadChildren: () => import('./city-introduction/city-introduction.module').then(m => m.CityIntroductionModule) }
+      { path: 'introduccion', loadChildren: () => import('./city/city-introduction/city-introduction.module').then(m => m.CityIntroductionModule) },
+      { path: 'historia', loadChildren: () => import('./city/city-history/city-history.module').then(m => m.CityHistoryModule) },
     ]
   },
 
