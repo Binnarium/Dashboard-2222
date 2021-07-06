@@ -22,7 +22,7 @@ jobs:
       run: npm ci
 
     - name: Build Project
-      run: npm run build:production
+      run: npm run build
 
     - name: Cache Artifacts
       uses: actions/upload-artifact@v2
@@ -32,6 +32,7 @@ jobs:
 
   preview:
     name: Deploy dashboard to preview channel
+    needs: build
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
