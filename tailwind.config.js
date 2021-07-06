@@ -5,7 +5,14 @@ module.exports = {
     './src/**/*.{html,js,jsx,ts,tsx,vue}',
   ],
   theme: {
-    extend: {},
+    colors: {
+      white: '#ffffff',
+      gray: '#242C30',
+      black: '#212120',
+      primary: '#EC541F',
+    },
+    extend: {
+    },
   },
   variants: {
     extend: {},

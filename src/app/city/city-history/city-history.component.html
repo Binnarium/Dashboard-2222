@@ -83,9 +83,21 @@
           </div>
         </ng-container>
       </div>
-      <button type="button" (click)="addTitle()">Añadir Titulo</button>
-      <button type="button" (click)="addImage()">Añadir Imagen</button>
-      <button type="button" (click)="addText()">Añadir Texto</button>
+      <!-- row of actions -->
+      <div class=" sticky bottom-0 w-full flex flex-row gap-4 justify-end">
+        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
+          (click)="addTitle()">
+          Añadir Titulo
+        </button>
+        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
+          (click)="addImage()">
+          Añadir Imagen
+        </button>
+        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
+          (click)="addText()">
+          Añadir Texto
+        </button>
+      </div>
     </form>
   </div>
 

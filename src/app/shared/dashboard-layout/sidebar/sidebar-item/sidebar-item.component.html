@@ -1,5 +1,11 @@
-<span class="text-xs uppercase py-3 font-bold block text-left" [ngClass]="isActive
-  ? 'text-blue-600 hover:text-blue-700'
-  : 'text-gray-800 hover:text-gray-600'">
+<span class="text-xs uppercase p-4 font-bold text-left cursor-pointer flex flex-row" [ngClass]="isActive
+  ? 'text-white bg-black'
+  : 'text-white text-opacity-60 hover:text-opacity-100'">
+
+  <!-- active icon -->
+  <div class="w-auto mr-3" *ngIf="isActive">
+    <i class="text-white fas fa-arrow-right"></i>
+  </div>
+
   <ng-content></ng-content>
 </span>

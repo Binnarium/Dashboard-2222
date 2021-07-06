@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CityHistoryRoutingModule } from './city-history-routing.module';
 import { CityHistoryComponent } from './city-history.component';
 import { LoadHistoryService } from './load-history.service';
 import { SaveHistoryService } from './save-history.service';
 
-
+const routes: Routes = [{ path: ':cityId', component: CityHistoryComponent }];
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { SaveHistoryService } from './save-history.service';
   ],
   imports: [
     CommonModule,
-    CityHistoryRoutingModule,
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     SharedModule,
   ],
