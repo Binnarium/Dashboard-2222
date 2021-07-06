@@ -1,0 +1,56 @@
+<dashboard-sidebar-layout>
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <ng-container *ngIf="city$|async as city">
+
+    <div class="flex flex-col items-center justify-center h-full w-full py-8">
+      <!-- name of city -->
+      <h1 class="text-4xl font-medium text-white  mb-14">
+        {{city.name}}
+      </h1>
+
+      <!-- image -->
+      <img class="w-80 h-auto mb-10" [src]="city.iconUrl" [alt]="city.name">
+
+      <!-- actions -->
+      <div class="flex flex-row flex-wrap items-center justify-center gap-4 max-w-2xl">
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'introduccion', city.id]">
+          Introducción
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'historia', city.id]">
+          Historia
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'argumentacion', city.id]">
+          Argumentación Principal
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'objetivos', city.id]">
+          Objetivos
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'contenido', city.id]">
+          Videos y Podcast
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'recursos', city.id]">
+          Lecturas y Recursos Online
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'actividades', city.id]">
+          Actividades
+        </a>
+
+        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'clubhouse', city.id]">
+          Encuentros Clubhouse
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
+</dashboard-sidebar-layout>
