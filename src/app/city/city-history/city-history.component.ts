@@ -116,6 +116,8 @@ export class CityHistoryComponent implements OnDestroy {
       height: null,
       name: null,
     }));
-
+  }
+  deleteItem(index: number): void {
+    this.historyContent.removeAt(index);
   }
 }

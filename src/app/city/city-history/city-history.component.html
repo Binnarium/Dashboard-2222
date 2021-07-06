@@ -5,100 +5,91 @@
   <!-- cities container -->
   <dashboard-cities-sidebar></dashboard-cities-sidebar>
 
-  <!-- main content of page -->
-  <div class="w-full p-8 flex flex-col">
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Historia
+    </h1>
 
-    <!-- header -->
-    <div class="flex flex-row justify-between mb-6">
-      <!-- page title -->
-      <h1 class="text-gray-800 text-xl font-bold">
-        Configurar Introducción
-      </h1>
-
-      <!-- saved text -->
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
       <ng-container *ngIf="saved; else savingTemplate">
-        <span class="uppercase text-green-500 text-xs font-bold">
-          Guardado
-        </span>
+        Guardado <i class="far fa-save"></i>
       </ng-container>
-
       <ng-template #savingTemplate>
-        <span class="uppercase text-gray-400 text-xs font-bold">
-          Guardando...
-        </span>
+        <i class=" animate-spin fas fa-spinner"></i>
       </ng-template>
-    </div>
+    </span>
+    </dashboard-topbar>
 
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 ">
+    <!-- wrapper for content -->
+    <div formArrayName="content" class="flex flex-col gap-8">
+      <!-- iterate thought all controls -->
+      <ng-container *ngFor="let control of historyContent.controls; let idx = index" [formGroupName]="idx">
 
-    <!-- form -->
-    <form [formGroup]="form">
-      <!-- wrapper for content -->
-      <div div formArrayName="content">
-        <!-- iterate thought all controls -->
-        <ng-container *ngFor="let control of historyContent.controls ; let idx = index" [formGroupName]="idx">
+        <!-- text form control -->
+        <div dashboard-form-group *ngIf="control.value.kind === 'HISTORY#TEXT'">
+          <!-- label -->
+          <label dashboard-form-label>
+            Texto
+            <button dashboard-form-label-action type="button" (click)="deleteItem(idx)" class="bg-red">
+              <i class="fas fa-trash text-white"></i>
+            </button>
+          </label>
 
-          <!-- text form control -->
-          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#TEXT'">
-            <!-- form group -->
-            <div class="relative w-full mb-3">
-              <!-- label -->
-              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
-                Texto
-              </label>
-
-              <!-- input text -->
-              <textarea formControlName="text" rows="4"
-                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
-            </div>
+          <!-- input text -->
+          <textarea formControlName="text" rows="4"
+            class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
           </div>
 
-          <!-- title form control -->
-          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#TITLE'">
-            <!-- form group -->
-            <div class="relative w-full mb-3">
-              <!-- label -->
-              <label class="block uppercase text-gray-700 text-xs font-bold mb-4">
-                Titulo
-              </label>
+        <!-- title form control -->
+        <div dashboard-form-group *ngIf="control.value.kind === 'HISTORY#TITLE'">
+          <!-- label -->
+          <label dashboard-form-label>
+            Titulo
+            <button dashboard-form-label-action type="button" (click)="deleteItem(idx)" class="bg-red">
+              <i class="fas fa-trash text-white"></i>
+            </button>
 
-              <!-- input text -->
-              <input type="text" formControlName="title"
-                class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-            </div>
+          </label>
+
+          <!-- input text -->
+          <input type="text" formControlName="title"
+            class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
           </div>
 
-          <!-- IMAGE form control -->
-          <div class="flex flex-wrap" *ngIf="control.value.kind === 'HISTORY#IMAGE'">
-            <!-- form group -->
-            <div class="relative w-full mb-3">
-              <!-- label -->
-              <h3 class="block uppercase text-gray-700 text-xs font-bold mb-4">
-                Imagen
-              </h3>
+        <!-- IMAGE form control -->
+        <div dashboard-form-group *ngIf="control.value.kind === 'HISTORY#IMAGE'">
+          <!-- label -->
+          <h3 dashboard-form-label>
+            Imagen
+            <button dashboard-form-label-action type="button" (click)="deleteItem(idx)" class="bg-red">
+              <i class="fas fa-trash text-white"></i>
+            </button>
 
-              <!-- input text -->
-              <dashboard-upload-image [image]="control.value" (completed)="uploadImage($event, idx)">
-              </dashboard-upload-image>
-            </div>
+          </h3>
+
+          <!-- input text -->
+          <dashboard-upload-image [image]="control.value" (completed)="uploadImage($event, idx)">
+          </dashboard-upload-image>
           </div>
-        </ng-container>
+      </ng-container>
       </div>
-      <!-- row of actions -->
-      <div class=" sticky bottom-0 w-full flex flex-row gap-4 justify-end">
-        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
-          (click)="addTitle()">
-          Añadir Titulo
-        </button>
-        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
-          (click)="addImage()">
-          Añadir Imagen
-        </button>
-        <button class="bg-primary text-onPrimary px-8 py-4 font-medium text-sm uppercase rounded-md" type="button"
-          (click)="addText()">
-          Añadir Texto
-        </button>
-      </div>
-    </form>
-  </div>
+  </form>
+  <!-- row of actions -->
+  <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addTitle()">
+      Añadir Titulo
+    </button>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addImage()">
+      Añadir Imagen
+    </button>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addText()">
+      Añadir Texto
+    </button>
+  </dashboard-footer>
 
 </dashboard-sidebar-layout>

@@ -1,3 +1,8 @@
-<div class="uppercase text-white text-xs font-bold px-4 py-2 bg-black">
-  <ng-content></ng-content>
-</div>
+<div class="uppercase text-white text-xs font-bold flex flex-row items-baseline">
+  <!-- text content -->
+  <div class="px-4 py-2 bg-black w-min whitespace-nowrap">
+    <ng-content></ng-content>
+  </div>
+  <!-- action content -->
+  <ng-content select="[dashboard-form-label-action]"></ng-content>
+  </div>

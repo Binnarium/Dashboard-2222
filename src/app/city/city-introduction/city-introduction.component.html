@@ -21,29 +21,27 @@
         <i class=" animate-spin fas fa-spinner"></i>
       </ng-template>
     </span>
-    </dashboard-topbar>
+  </dashboard-topbar>
 
 
   <!-- main content of page -->
-  <div class="w-full p-8 flex flex-col">
-    <form [formGroup]="informationForm">
-      <!-- form group -->
-      <div dashboard-form-group>
-        <!-- label -->
-        <label dashboard-form-label>
-          Texto Introductorio
-        </label>
+  <form [formGroup]="informationForm" class="w-full p-8 flex flex-col">
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Texto Introductorio
+      </label>
 
-        <!-- explanation -->
-        <span class="text-white text-base">
-          Texto que se mostrara en la pantalla inicial de cada ciudad.
-        </span>
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Texto que se mostrara en la pantalla inicial de cada ciudad.
+      </span>
 
-        <!-- input text -->
-        <textarea formControlName="description" rows="6"
-          class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
-        </div>
-    </form>
-  </div>
+      <!-- input text -->
+      <textarea formControlName="description" rows="6"
+        class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
+      </div>
+      </form>
 
 </dashboard-sidebar-layout>
