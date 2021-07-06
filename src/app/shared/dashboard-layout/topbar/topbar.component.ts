@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'dashboard-navbar',
-  templateUrl: './navbar.component.html',
+  selector: 'dashboard-topbar',
+  templateUrl: './topbar.component.html',
   styles: [
   ]
 })
-export class NavbarComponent implements OnInit {
+export class TopbarComponent implements OnInit {
 
   constructor() { }
 

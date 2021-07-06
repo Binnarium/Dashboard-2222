@@ -4,13 +4,15 @@
   <ng-content select="dashboard-sidebar, dashboard-main-sidebar, dashboard-cities-sidebar"></ng-content>
 
   <!-- main content of dashboard -->
-  <main class="relative min-h-screen flex-grow bg-primary">
-
-    <!-- dashboard navigation bar  -->
-    <ng-content select="dashboard-navbar"></ng-content>
+  <main class="relative min-h-screen flex-grow bg-primary overflow-x-auto">
 
     <!-- scroll content -->
-    <div class="relative z-0 overflow-x-auto w-full h-full">
+    <div class="relative z-0 w-full h-full max-w-6xl mx-auto flex flex-col px-8">
+
+      <!-- dashboard navigation bar -->
+      <div class="w-full sticky top-0 z-20">
+        <ng-content select="dashboard-topbar"></ng-content>
+      </div>
 
       <!-- main content -->
       <ng-content></ng-content>

@@ -1,22 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { CityIntroductionRoutingModule } from './city-introduction-routing.module';
+import { CityIntroductionComponent } from './city-introduction.component';
 import { LoadIntroductionService } from './load-introduction.service';
 import { SaveIntroductionService } from './save-introduction.service';
 
-
+const routes: Routes = [{
+  path: ':cityId',
+  component: CityIntroductionComponent,
+}];
 
 @NgModule({
   declarations: [
-    CityIntroductionRoutingModule.pages
+    CityIntroductionComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
-    CityIntroductionRoutingModule
+    RouterModule.forChild(routes)
   ],
   providers: [
     LoadIntroductionService,
