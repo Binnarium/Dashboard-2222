@@ -18,7 +18,7 @@ export class SaveIntroductionService {
       .doc(cityId)
       .collection('pages')
       .doc<IntroductionDto>('introduction')
-      .update(payload);
+      .set(payload, { merge: true });
 
     return from(saveTask).pipe(
       mapTo(true),

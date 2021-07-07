@@ -17,7 +17,7 @@
   <h3 dashboard-sidebar-section-name>Ciudades</h3>
 
   <!-- display all cities -->
-  <a *ngFor="let city of cities$ |async" dashboard-sidebar-item [routerLink]="['/ciudades', 'introduccion', city.id]"
+  <a *ngFor="let city of cities$ |async" dashboard-sidebar-item [routerLink]="['/ciudades', city.id]"
     routerLinkActive [active]="(activeCity$ |async) === city.id">
     {{city.name}}
   </a>

@@ -21,7 +21,7 @@
         <i class=" animate-spin fas fa-spinner"></i>
       </ng-template>
     </span>
-    </dashboard-topbar>
+  </dashboard-topbar>
 
   <!-- main content of page -->
   <form [formGroup]="form" class="w-full p-8 ">
@@ -42,8 +42,8 @@
 
           <!-- input text -->
           <textarea formControlName="text" rows="4"
-            class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"></textarea>
-          </div>
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full"></textarea>
+        </div>
 
         <!-- title form control -->
         <div dashboard-form-group *ngIf="control.value.kind === 'HISTORY#TITLE'">
@@ -58,8 +58,8 @@
 
           <!-- input text -->
           <input type="text" formControlName="title"
-            class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150">
-          </div>
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+        </div>
 
         <!-- IMAGE form control -->
         <div dashboard-form-group *ngIf="control.value.kind === 'HISTORY#IMAGE'">
@@ -75,9 +75,9 @@
           <!-- input text -->
           <dashboard-upload-image [image]="control.value" (completed)="uploadImage($event, idx)">
           </dashboard-upload-image>
-          </div>
+        </div>
       </ng-container>
-      </div>
+    </div>
   </form>
   <!-- row of actions -->
   <dashboard-footer>
