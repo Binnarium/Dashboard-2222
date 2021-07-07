@@ -1,0 +1,70 @@
+<dashboard-sidebar-layout>
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Argumentación Conceptual de la ciudad
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Ilustración
+      </h3>
+
+      <!-- input text -->
+      <dashboard-upload-image [image]="form.controls.illustration.value" (completed)="uploadImage($event)">
+      </dashboard-upload-image>
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group formArrayName="questions">
+      <!-- label -->
+      <label dashboard-form-label>
+        Argumento (3 a 5 preguntas)
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Se partirá de tres a cinco preguntas, que serán el argumento de aprendizaje de inicio de cada parada e
+        interroguen al docente en sus debilidades y fortalezas.
+      </span>
+
+      <!-- input text -->
+      <textarea *ngFor="let control of questionsArray.controls; let idx = index" [formControlName]="idx" rows="3"
+        class="px-4 py-4  text-gray-700 bg-white  text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
+    </div>
+  </form>
+
+  <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="removeQuestion()">
+      Eliminar Pregunta
+    </button>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addQuestion()">
+      Añadir Pregunta
+    </button>
+  </dashboard-footer>
+
+</dashboard-sidebar-layout>

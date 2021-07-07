@@ -9,7 +9,7 @@
   <dashboard-topbar>
     <!-- page title -->
     <h1 class="text-white text-xl font-bold">
-      Configurar Introducción
+      Configurar Mensaje de Bienvenida / Ingreso
     </h1>
 
     <!-- saved text -->
@@ -23,25 +23,53 @@
     </span>
   </dashboard-topbar>
 
-
   <!-- main content of page -->
-  <form [formGroup]="informationForm" class="w-full p-8 flex flex-col">
-    <!-- form group -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+    <!-- title -->
     <div dashboard-form-group>
       <!-- label -->
       <label dashboard-form-label>
-        Texto Introductorio
+        Título Introductorio
       </label>
 
       <!-- explanation -->
       <span class="text-white text-base">
-        Texto que se mostrara en la pantalla inicial de cada ciudad.
+        Texto introductorio en la pestaña de bienvenida.
       </span>
 
       <!-- input text -->
-      <textarea formControlName="description" rows="12"
+      <input formControlName="pageTitle" type="text"
+        class="px-4 py-4 text-gray-700 bg-white  text-sm  focus:outline-none  w-full ">
+    </div>
+
+    <!-- video form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Video rector
+      </h3>
+
+      <!-- video -->
+      <dashboard-upload-video [video]="form.controls.welcomeVideo.value" (completed)="uploadVideo($event)">
+      </dashboard-upload-video>
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Texto profundidad
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Texto que se mostrara en la pantalla de bienvenida
+      </span>
+
+      <!-- input text -->
+      <textarea formControlName="profundityText" rows="12"
         class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white  text-sm  focus:outline-none  w-full "></textarea>
-      </div>
-      </form>
+    </div>
+  </form>
 
 </dashboard-sidebar-layout>
