@@ -1,32 +1,32 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { VideoDTO } from '../asset.dto';
+import { AudioDto } from '../asset.dto';
 import { IUpload, UploadFileProgressDto } from '../i-upload';
 import { UploadSingleFileService } from '../upload-single-file.service';
 
 @Component({
-  selector: 'dashboard-upload-video',
-  templateUrl: './upload-video.component.html',
+  selector: 'dashboard-upload-audio',
+  templateUrl: './upload-audio.component.html',
   providers: [
     { provide: IUpload, useClass: UploadSingleFileService }
   ]
 })
-export class UploadVideoComponent implements OnDestroy {
+export class UploadAudioComponent implements OnDestroy {
 
   constructor(
     private readonly uploadService: IUpload,
   ) { }
 
-  public video: VideoDTO | null = null;
+  public audio: AudioDto | null = null;
 
-  @Input('video')
-  public set _video(file: VideoDTO | null) {
-    this.video = file;
+  @Input('audio')
+  public set _audio(file: AudioDto | null) {
+    this.audio = file;
   }
 
   @Output()
-  public completed: EventEmitter<NonNullable<VideoDTO>> = new EventEmitter();
+  public completed: EventEmitter<NonNullable<AudioDto>> = new EventEmitter();
 
   public progress: UploadFileProgressDto | null = null;
 
@@ -38,17 +38,17 @@ export class UploadVideoComponent implements OnDestroy {
     if (!file || !!this.progress || !!this.uploadFileSubscription)
       return;
 
-    this.uploadFileSubscription = this.uploadService.upload$('uploads/video', file).pipe(
+    this.uploadFileSubscription = this.uploadService.upload$('uploads/audio', file).pipe(
       finalize(() => {
         if (this.progress?.url) {
-          const video: NonNullable<VideoDTO> = {
+          const audio: NonNullable<AudioDto> = {
             name: this.progress.name,
             path: this.progress.path,
             url: this.progress.url,
             duration: 0,
             format: null
           };
-          this.completed.emit(video);
+          this.completed.emit(audio);
         }
 
         this.uploadFileSubscription?.unsubscribe();
@@ -56,7 +56,6 @@ export class UploadVideoComponent implements OnDestroy {
         this.progress = null;
       })
     ).subscribe(d => {
-      console.log(this.progress)
       this.progress = d;
     });
   }

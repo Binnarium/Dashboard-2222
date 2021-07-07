@@ -1,0 +1,153 @@
+<dashboard-sidebar-layout>
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Contenido (Videos & Podcast)
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 ">
+    <!-- wrapper for content -->
+    <div formArrayName="content" class="flex flex-col gap-8">
+      <!-- iterate thought all controls -->
+      <ng-container *ngFor="let contentItem of cityContent.controls; let idx = index" [formGroupName]="idx">
+
+        <!-- video form -->
+        <ng-container *ngIf="contentItem.value.kind === 'CONTENT#VIDEO'">
+          <!-- video title -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>
+              Titulo del video
+              <button dashboard-form-label-action type="button" (click)="deleteItem(idx)" class="bg-red">
+                <i class="fas fa-trash text-white"></i>
+              </button>
+            </label>
+
+            <!-- input text -->
+            <input type="text" formControlName="title"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+          </div>
+
+          <!-- video author -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>Author del video</label>
+
+            <!-- input text -->
+            <input type="text" formControlName="author"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+          </div>
+
+          <!-- Description author -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>Descripción del video</label>
+
+            <!-- input text -->
+            <textarea type="text" formControlName="description" rows="8"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+            </textarea>
+          </div>
+
+          <!-- video control -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <h3 dashboard-form-label>
+              Video
+            </h3>
+
+            <!-- input text -->
+            <dashboard-upload-video [video]="contentItem.value" (completed)="uploadContent($event, idx)">
+            </dashboard-upload-video>
+          </div>
+
+
+        </ng-container>
+        <!-- podcast form -->
+        <ng-container *ngIf="contentItem.value.kind === 'CONTENT#PODCAST'">
+          <!-- podcast title -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>
+              Titulo del podcast
+              <button dashboard-form-label-action type="button" (click)="deleteItem(idx)" class="bg-red">
+                <i class="fas fa-trash text-white"></i>
+              </button>
+            </label>
+
+            <!-- input text -->
+            <input type="text" formControlName="title"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+          </div>
+
+          <!-- podcast author -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>Author del podcast</label>
+
+            <!-- input text -->
+            <input type="text" formControlName="author"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+          </div>
+
+          <!-- Description author -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>Descripción del podcast</label>
+
+            <!-- input text -->
+            <textarea type="text" formControlName="description" rows="8"
+              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
+            </textarea>
+          </div>
+
+          <!-- podcast control -->
+          <div dashboard-form-group>
+            <!-- label -->
+            <h3 dashboard-form-label>
+              Audio
+            </h3>
+
+            <!-- input text -->
+            <dashboard-upload-audio [audio]="contentItem.value" (completed)="uploadContent($event, idx)">
+            </dashboard-upload-audio>
+          </div>
+
+
+        </ng-container>
+
+        <div *ngIf="idx < cityContent.controls.length -1" class="w-full bg-white h-1"></div>
+      </ng-container>
+    </div>
+  </form>
+
+  <!-- row of actions -->
+  <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addVideo()">
+      Añadir Contenido Video
+    </button>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addPodcast()">
+      Añadir Contenido Podcast
+    </button>
+  </dashboard-footer>
+
+</dashboard-sidebar-layout>

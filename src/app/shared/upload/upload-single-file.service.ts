@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { IUpload, UploadFileProgressDto, UploadState } from './i-upload';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { IUpload, UploadFileProgressDto, UploadState } from './i-upload';
 export class UploadSingleFileService extends IUpload {
 
   upload$(folder: string, file: File): Observable<UploadFileProgressDto> {
+
     const fileName = file.name;
     const now = Date.now();
     const path = `${folder}/${now}-${fileName}`;
@@ -28,6 +29,11 @@ export class UploadSingleFileService extends IUpload {
 
         return data;
       }),
+      catchError(err => {
+        console.log(err)
+        throw new Error("");
+
+      })
     );
   }
 }

@@ -1,17 +1,22 @@
 interface AssetDto {
-  url: string;
-  path: string;
-  name: string;
+  url: null | string;
+  path: null | string;
+  name: null | string;
 }
 
 export interface ImageDTO extends AssetDto {
-  width: number;
-  height: number;
+  width: null | number;
+  height: null | number;
 }
 
 export interface VideoDTO extends AssetDto {
-  duration?: number;
-  format?: string;
+  duration: null | number;
+  format: null | string;
+}
+
+export interface AudioDto extends AssetDto {
+  duration: null | number;
+  format: null | string;
 }
 
 export interface DocumentDTO extends AssetDto {
