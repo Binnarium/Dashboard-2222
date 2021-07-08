@@ -1,20 +1,33 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DashboardLayoutModule } from './dashboard-layout/dashboard-layout.module';
+import { ComponentsModule } from './components/components.module';
+import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from './forms/forms.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { TopbarComponent } from './topbar/topbar.component';
 import { UploadModule } from './upload/upload.module';
 
 
 
 @NgModule({
   imports: [
-    DashboardLayoutModule,
+    CommonModule,
+    SidebarModule,
     UploadModule,
     FormsModule,
+    ComponentsModule
+  ],
+  declarations: [
+    TopbarComponent,
+    FooterComponent,
   ],
   exports: [
-    DashboardLayoutModule,
+    SidebarModule,
     UploadModule,
     FormsModule,
+    TopbarComponent,
+    FooterComponent,
+    ComponentsModule
   ],
 })
 export class SharedModule { }

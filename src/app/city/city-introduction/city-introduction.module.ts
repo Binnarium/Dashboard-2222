@@ -8,7 +8,7 @@ import { LoadIntroductionService } from './load-introduction.service';
 import { SaveIntroductionService } from './save-introduction.service';
 
 const routes: Routes = [{
-  path: ':cityId',
+  path: '',
   component: CityIntroductionComponent,
 }];
 

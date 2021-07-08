@@ -79,7 +79,7 @@ export class CityArgumentComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  uploadImage(image: ImageDTO) {
+  uploadImage(image: NonNullable<ImageDTO>) {
     this.form.controls['illustration'].setValue(image);
   }
 

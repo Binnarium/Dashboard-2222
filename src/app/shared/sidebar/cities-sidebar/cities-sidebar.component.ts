@@ -6,8 +6,6 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'dashboard-cities-sidebar',
   templateUrl: './cities-sidebar.component.html',
-  styles: [
-  ]
 })
 export class CitiesSidebarComponent {
 

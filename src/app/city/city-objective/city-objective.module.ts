@@ -3,27 +3,28 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CityArgumentComponent } from './city-argument.component';
-import { LoadArgumentService } from './load-argument.service';
-import { SaveArgumentService } from './save-argument.service';
+import { CityObjectiveComponent } from './city-objective.component';
+import { LoadObjectiveService } from './load-objective.service';
+import { SaveObjectiveService } from './save-objective.service';
 
 const routes: Routes = [{
   path: '',
-  component: CityArgumentComponent,
-}]
+  component: CityObjectiveComponent
+}];
 
 @NgModule({
   declarations: [
-    CityArgumentComponent
+    CityObjectiveComponent
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     SharedModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
   ],
   providers: [
-    SaveArgumentService, LoadArgumentService,
+    LoadObjectiveService,
+    SaveObjectiveService,
   ]
 })
-export class CityArgumentModule { }
+export class CityObjectiveModule { }
