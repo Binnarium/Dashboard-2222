@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { LoadCityService } from '../core/cities-module/load-city.service';
+import { CityColorService } from '../core/cities-module/city-color.service';
 
 @Component({
   selector: 'dashboard-city',
@@ -23,13 +23,12 @@ import { LoadCityService } from '../core/cities-module/load-city.service';
 export class CityComponent {
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly loadCityService: LoadCityService,
+    private readonly cityColorService: CityColorService,
   ) { }
 
   readonly cityColor$: Observable<string> = this.route.params.pipe(
     map(params => params.cityId as string),
-    switchMap(cityId => this.loadCityService.city$(cityId)),
-    map(city => city?.configuration.colorHex ?? null),
-    map(color => color ? `#${(color - 0xff000000).toString(16)}` : 'inherit'),
+    switchMap(cityId => this.cityColorService.color$(cityId)),
+    map(color => color ? `#${color}` : 'inherit')
   );
 }

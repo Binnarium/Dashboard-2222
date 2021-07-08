@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CityDto } from './load-cities.service';
+import { CityDto, LoadCitiesService } from './load-cities.service';
 
 
 @Injectable({
@@ -11,17 +10,13 @@ import { CityDto } from './load-cities.service';
 export class LoadCityService {
 
   constructor(
-    private readonly afFirestore: AngularFirestore,
+    private readonly loadCitiesService: LoadCitiesService,
   ) { }
 
   public city$(cityId: string): Observable<CityDto | null> {
-    return this.afFirestore
-      .collection('cities')
-      .doc<CityDto>(cityId)
-      .valueChanges()
-      .pipe(
-        map(city => city ?? null),
-        shareReplay(1),
-      );
+    return this.loadCitiesService.cities$.pipe(
+      map(cities => cities.find(city => city.id === cityId) ?? null),
+      shareReplay(1),
+    );
   }
 }

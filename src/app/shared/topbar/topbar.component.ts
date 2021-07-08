@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { CityColorService } from 'src/app/core/cities-module/city-color.service';
 
 @Component({
   selector: 'dashboard-topbar',
@@ -6,11 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent {
 
-  constructor() { }
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly cityColorService: CityColorService,
+  ) { }
 
-  ngOnInit(): void {
-  }
+  readonly cityColor$: Observable<string> = this.route.params.pipe(
+    map(params => params.cityId as string),
+    switchMap(cityId => this.cityColorService.color$(cityId)),
+    map(color => color ? `#${color}` : 'inherit'),
+    shareReplay(1),
+  );
 
 }

@@ -1,3 +1,4 @@
-<div class="w-full border-t border-black flex flex-row gap-4 justify-end py-4">
+<div [ngStyle]="{'background-color': cityColor$|async}" [ngClass]="!!(cityColor$|async)?'bg-primary':''"
+  class=" z-20 sticky bottom-0x w-full border-t border-black flex flex-row gap-4 justify-end py-4">
   <ng-content></ng-content>
 </div>
