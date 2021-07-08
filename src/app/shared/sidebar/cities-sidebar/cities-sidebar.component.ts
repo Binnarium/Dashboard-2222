@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'dashboard-cities-sidebar',
   templateUrl: './cities-sidebar.component.html',
-  styles: [
-  ]
 })
 export class CitiesSidebarComponent {
 
@@ -17,6 +15,7 @@ export class CitiesSidebarComponent {
 
   public readonly cityId$: Observable<string | null> = this.route.params.pipe(
     map(params => params.cityId ?? null),
+    tap(console.log),
   );
 
 }

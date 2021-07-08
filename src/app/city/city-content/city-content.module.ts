@@ -8,7 +8,7 @@ import { LoadContentService } from './load-content.service';
 import { SaveContentService } from './save-content.service';
 
 const routes: Routes = [{
-  path: ':cityId',
+  path: '',
   component: CityContentComponent,
 }];
 

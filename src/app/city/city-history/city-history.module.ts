@@ -7,7 +7,7 @@ import { CityHistoryComponent } from './city-history.component';
 import { LoadHistoryService } from './load-history.service';
 import { SaveHistoryService } from './save-history.service';
 
-const routes: Routes = [{ path: ':cityId', component: CityHistoryComponent }];
+const routes: Routes = [{ path: '', component: CityHistoryComponent }];
 
 @NgModule({
   declarations: [

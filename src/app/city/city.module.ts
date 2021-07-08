@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 import { CityRoutingModule } from './city-routing.module';
 import { CityComponent } from './city.component';
 
@@ -10,7 +11,9 @@ import { CityComponent } from './city.component';
     CityComponent
   ],
   imports: [
-    CommonModule, CityRoutingModule
+    CommonModule,
+    CityRoutingModule,
+    SharedModule
   ]
 })
 export class CityModule { }
