@@ -1,20 +1,28 @@
 import { NgModule } from '@angular/core';
-import { DashboardLayoutModule } from './dashboard-layout/dashboard-layout.module';
+import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from './forms/forms.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { TopbarComponent } from './topbar/topbar.component';
 import { UploadModule } from './upload/upload.module';
 
 
 
 @NgModule({
   imports: [
-    DashboardLayoutModule,
+    SidebarModule,
     UploadModule,
     FormsModule,
   ],
+  declarations: [
+    TopbarComponent,
+    FooterComponent,
+  ],
   exports: [
-    DashboardLayoutModule,
+    SidebarModule,
     UploadModule,
     FormsModule,
+    TopbarComponent,
+    FooterComponent,
   ],
 })
 export class SharedModule { }

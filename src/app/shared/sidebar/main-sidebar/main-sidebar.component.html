@@ -24,7 +24,7 @@
 
   <!-- display all cities -->
   <a *ngFor="let city of cities$ |async; let i = index" dashboard-sidebar-item [routerLink]="['/ciudades', city.id]"
-    routerLinkActive [active]="(activeCity$ |async) === city.id">
+    routerLinkActive #cityRoute="routerLinkActive" [active]="cityRoute.isActive">
     {{i + 1}}. {{city.name}}
   </a>
 
