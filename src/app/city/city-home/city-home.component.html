@@ -1,48 +1,47 @@
-  <ng-container *ngIf="city$|async as city">
+<dashboard-container *ngIf="city$|async as city">
 
-    <div class="flex flex-col items-center justify-center h-full w-full py-8">
-      <!-- name of city -->
-      <h1 class="text-4xl font-medium text-white  mb-14">
-        {{city.name}}
-      </h1>
+  <div class="flex flex-col items-center justify-center h-full w-full py-8">
+    <!-- name of city -->
+    <h1 class="text-4xl font-medium text-white  mb-14">
+      {{city.name}}
+    </h1>
 
-      <!-- image -->
-      <img class="w-80 h-auto mb-10" [src]="city.iconUrl" [alt]="city.name">
+    <!-- image -->
+    <img class="w-80 h-auto mb-10" [src]="city.iconUrl" [alt]="city.name">
 
-      <!-- actions -->
-      <div class="flex flex-row flex-wrap items-center justify-center gap-4 max-w-2xl">
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'introduccion', city.id]">
-          Introducción
-        </a>
+    <!-- actions -->
+    <div class="flex flex-row flex-wrap items-center justify-center gap-4 max-w-2xl">
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'introduccion']">
+        Introducción
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'historia', city.id]">
-          Historia
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'historia']">
+        Historia
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'argumentacion', city.id]">
-          Argumentación Principal
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'argumentacion']">
+        Argumentación Principal
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'objetivos', city.id]">
-          Objetivos
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'objetivos']">
+        Objetivos
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'contenido', city.id]">
-          Videos y Podcast
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'contenido']">
+        Videos y Podcast
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'recursos', city.id]">
-          Lecturas y Recursos Online
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'recursos']">
+        Lecturas y Recursos Online
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'actividades', city.id]">
-          Actividades
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'actividades']">
+        Actividades
+      </a>
 
-        <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', 'clubhouse', city.id]">
-          Encuentros Clubhouse
-        </a>
+      <a class="text-white bg-black hover:bg-gray px-4 py-2 " [routerLink]="['/ciudades', city.id, 'clubhouse']">
+        Encuentros Clubhouse
+      </a>
       </div>
-    </div>
-  </ng-container>
-
+      </div>
+</dashboard-container>
