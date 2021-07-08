@@ -8,7 +8,7 @@ import { LoadArgumentService } from './load-argument.service';
 import { SaveArgumentService } from './save-argument.service';
 
 const routes: Routes = [{
-  path: ':cityId',
+  path: '',
   component: CityArgumentComponent,
 }]
 

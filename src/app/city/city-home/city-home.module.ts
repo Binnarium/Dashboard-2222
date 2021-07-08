@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CityHomeComponent } from './city-home.component';
 
 const routes: Routes = [{
-  path: ':cityId',
+  path: '',
   component: CityHomeComponent,
 }];
 

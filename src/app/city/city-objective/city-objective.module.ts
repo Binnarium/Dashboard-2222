@@ -8,7 +8,7 @@ import { LoadObjectiveService } from './load-objective.service';
 import { SaveObjectiveService } from './save-objective.service';
 
 const routes: Routes = [{
-  path: ':cityId',
+  path: '',
   component: CityObjectiveComponent
 }];
 

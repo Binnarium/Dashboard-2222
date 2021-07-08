@@ -56,7 +56,6 @@ export class UploadVideoComponent implements OnDestroy {
         this.progress = null;
       })
     ).subscribe(d => {
-      console.log(this.progress)
       this.progress = d;
     });
   }
