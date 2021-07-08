@@ -1,0 +1,89 @@
+<dashboard-sidebar-layout>
+  <!-- main sidebar container -->
+  <dashboard-main-sidebar></dashboard-main-sidebar>
+
+  <!-- cities container -->
+  <dashboard-cities-sidebar></dashboard-cities-sidebar>
+
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Objetivos y Contenido de la Ciudad
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Objetivo Principal
+      </label>
+
+      <!-- input text -->
+      <input formControlName="mainObjective"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+    </div>
+
+    <!-- content -->
+    <div dashboard-form-group formArrayName="content">
+      <!-- label -->
+      <label dashboard-form-label>
+        Contenido
+
+        <button dashboard-form-label-action type="button" (click)="removeContent()" class="bg-red">
+          <i class="fas fa-trash text-white"></i>
+        </button>
+        <button dashboard-form-label-action type="button" (click)="addContent()" class="bg-green">
+          <i class="fas fa-plus text-white"></i>
+        </button>
+      </label>
+      <!-- explanation -->
+      <span class="text-white text-base">
+        No más que tres temas
+      </span>
+
+      <!-- input text -->
+      <textarea *ngFor="let control of contentArray.controls; let idx = index" [formControlName]="idx" rows="3"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
+
+    </div>
+    <!-- content -->
+    <div dashboard-form-group formArrayName="ideas">
+      <!-- label -->
+      <label dashboard-form-label>
+        Ideas para desaprender
+        <button dashboard-form-label-action type="button" (click)="removeIdeas()" class="bg-red">
+          <i class="fas fa-trash text-white"></i>
+        </button>
+        <button dashboard-form-label-action type="button" (click)="addIdeas()" class="bg-green">
+          <i class="fas fa-plus text-white"></i>
+        </button>
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Una a dos ideas para desaprender
+      </span>
+
+      <!-- input text -->
+      <textarea *ngFor="let control of ideasArray.controls; let idx = index" [formControlName]="idx" rows="3"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
+    </div>
+  </form>
+
+</dashboard-sidebar-layout>

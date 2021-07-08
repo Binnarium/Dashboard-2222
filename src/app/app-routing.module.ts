@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'historia', loadChildren: () => import('./city/city-history/city-history.module').then(m => m.CityHistoryModule) },
       { path: 'argumentacion', loadChildren: () => import('./city/city-argument/city-argument.module').then(m => m.CityArgumentModule) },
       { path: 'contenido', loadChildren: () => import('./city/city-content/city-content.module').then(m => m.CityContentModule) },
+      // { path: 'objetivo', loadChildren: () => import('./city/city-objective/city-objective.module').then(m => m.CityObjectiveModule) },
     ]
   },
 
