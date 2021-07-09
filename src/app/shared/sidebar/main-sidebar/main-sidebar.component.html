@@ -34,10 +34,17 @@
   <h3 dashboard-sidebar-section-name>
     Configuración
   </h3>
+  <!-- Questions -->
+  <a dashboard-sidebar-item routerLink="/competencias" routerLinkActive #competences="routerLinkActive"
+    [active]="competences.isActive">
+    Competencias Duras y Blandas
+  </a>
+
   <!-- readings -->
   <a dashboard-sidebar-item>
     Lecturas Recomendadas
   </a>
+
 
   <!-- Questions -->
   <a dashboard-sidebar-item>
