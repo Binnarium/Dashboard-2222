@@ -26,18 +26,6 @@
         class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none w-full ">
     </div>
 
-    <!-- video form control -->
-    <div dashboard-form-group>
-      <!-- label -->
-      <h3 dashboard-form-label>
-        Imagen Decorativa
-      </h3>
-
-      <!-- video -->
-      <dashboard-upload-image [image]="form.controls.image.value" (completed)="uploadImage($event)">
-      </dashboard-upload-image>
-    </div>
-
     <!-- form group -->
     <div dashboard-form-group>
       <!-- label -->
@@ -51,6 +39,20 @@
         <option value="COMPETENCE#HARD">Competencia Dura</option>
       </select>
     </div>
+
+    <!-- video form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Imagen Decorativa
+      </h3>
+
+      <!-- video -->
+      <dashboard-upload-image [image]="form.controls.image.value" (completed)="uploadImage($event)">
+      </dashboard-upload-image>
+    </div>
+
+
   </form>
 
   <!-- row of actions -->

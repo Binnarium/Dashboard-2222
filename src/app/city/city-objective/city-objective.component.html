@@ -78,6 +78,32 @@
       <textarea *ngFor="let control of ideasArray.controls; let idx = index" [formControlName]="idx" rows="3"
         class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
     </div>
+    <!-- competences -->
+    <div *ngIf="competencesGroup" dashboard-form-group formGroupName="competences">
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Competencias
+      </h3>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Selecciona una a dos competencias duras (currículum oculto) y una a dos competencias blandas (currículum oculto)
+        a alcanzar.
+        <br>
+        <b>Nota:</b> Unicamente aparecerán las competencias con nombre, para agregar una nueva competencia accede a la
+        <a routerLink="/competencias" class="underline">configuración de competencias</a> </span>
+
+      <!-- all competences -->
+      <label *ngFor="let competence of competences$|async" class="flex flex-row gap-4 items-center">
+        <ng-container *ngIf="competencesGroup.controls[competence.id]">
+
+          <input type="checkbox" [formControlName]="competence.id">
+          <span class="text-white uppercase font-semibold">
+            {{competence.name}} - {{competence.kind === 'COMPETENCE#HARD' ? 'Competencia Dura': 'Competencia Suave'}}
+          </span>
+        </ng-container>
+      </label>
+    </div>
   </form>
 
 </dashboard-container>
