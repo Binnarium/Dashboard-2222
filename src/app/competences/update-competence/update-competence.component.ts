@@ -1,10 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ImageDTO } from 'src/app/shared/upload/asset.dto';
 import { CompetenceDto } from '../competence.dto';
+import { DeleteCompetenceService } from './delete-competence.service';
 import { LoadCompetenceService } from './load-competence.service';
 import { SaveCompetenceService } from './save-competence.service';
 
@@ -18,8 +19,10 @@ export class UpdateCompetenceComponent implements OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly loadCompetenceService: LoadCompetenceService,
     private readonly saveCompetenceService: SaveCompetenceService,
+    private readonly deleteCompetenceService: DeleteCompetenceService,
   ) { }
 
   /** form so upload content */
@@ -75,8 +78,29 @@ export class UpdateCompetenceComponent implements OnDestroy {
     })
   }
 
+  delete() {
+    if (this.deleteSub)
+      return;
+
+    const competenceId = this.route.snapshot.params.competenceId as string;
+
+    this.deleteSub = this.deleteCompetenceService.delete$(competenceId).subscribe(saved => {
+      if (!saved)
+        alert('Ocurrió un error al eliminarlo, vuelve a intentarlo')
+      else
+        this.router.navigate(['/competencias']);
+
+      this.deleteSub?.unsubscribe();
+      this.deleteSub = null;
+    })
+  }
+
   get isSaving(): boolean {
     return !!this.saveSub;
+  }
+
+  get isDeleting(): boolean {
+    return !!this.deleteSub;
   }
 
 }

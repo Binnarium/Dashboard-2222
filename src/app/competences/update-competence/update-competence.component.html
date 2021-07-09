@@ -13,7 +13,7 @@
   </dashboard-topbar>
 
   <!-- main content of page -->
-  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8" (ngSubmit)="save()">
     <!-- title -->
     <div dashboard-form-group>
       <!-- label -->
@@ -55,6 +55,14 @@
 
   <!-- row of actions -->
   <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="delete()">
+      Eliminar
+      <!-- loader with spin animation when creating new -->
+      <ng-container *ngIf="isDeleting">
+        <i class="fas fa-spinner animate-spin"></i>
+      </ng-container>
+    </button>
+
     <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="save()">
       Guardar
       <!-- loader with spin animation when creating new -->

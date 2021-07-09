@@ -17,10 +17,10 @@ export class FooterComponent {
     private readonly cityColorService: CityColorService,
   ) { }
 
-  readonly cityColor$: Observable<string> = this.route.params.pipe(
+  readonly cityColor$: Observable<{ 'background-color': string } | null> = this.route.params.pipe(
     map(params => params.cityId as string),
     switchMap(cityId => this.cityColorService.color$(cityId)),
-    map(color => color ? `#${color}` : 'inherit'),
+    map(color => color ? { 'background-color': `#${color}` } : null),
     shareReplay(1),
   );
 

@@ -44,5 +44,4 @@ export class CompetencesComponent implements OnDestroy {
       this.createSub = null;
     });
   }
-
 }
