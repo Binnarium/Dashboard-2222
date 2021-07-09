@@ -2,17 +2,25 @@
   <div class="sticky top-0 left-0 h-screen">
     <dashboard-sidebar>
       <!-- competences -->
+      <a dashboard-sidebar-item routerLink="/competencias" routerLinkActive #all="routerLinkActive" [active]="all.isActive"
+        [routerLinkActiveOptions]="{exact: true}">
+        Todas las competencias
+      </a>
+
+      <!-- divider -->
+      <dashboard-sidebar-divider></dashboard-sidebar-divider>
+
       <a dashboard-sidebar-item *ngFor="let competence of competences$|async; let i = index"
-        [routerLink]="['/competencias', competence.id]" routerLinkActive #welcome="routerLinkActive"
-        [active]="welcome.isActive">
+        [routerLink]="['/competencias', competence.id]" routerLinkActive #competenceLink="routerLinkActive"
+        [active]="competenceLink.isActive">
         <ng-container *ngIf="competence.name as name;else noNameTemplate">
           {{name}}
         </ng-container>
         <ng-template #noNameTemplate>
           Sin nombre - {{competence.id.slice(0,4)}}
-
         </ng-template>
       </a>
+
       <!-- divider -->
       <dashboard-sidebar-divider></dashboard-sidebar-divider>
 
@@ -35,7 +43,43 @@
     </dashboard-sidebar>
   </div>
 
-  <div class="flex-grow">
-    <router-outlet></router-outlet>
+  <div class="flex-grow h-full">
+    <router-outlet #outlet="outlet"></router-outlet>
+
+    <!-- is activated -->
+    <dashboard-container *ngIf="!outlet.isActivated">
+
+      <div class="h-full p-8 flex flex-row gap-8 flex-wrap items-center justify-center">
+        <div *ngFor="let competence of competences$|async" [routerLink]="['/competencias', competence.id]"
+          class="w-auto flex flex-col gap-4 items-center cursor-pointer">
+          <!-- item image -->
+          <div class="relative w-32  h-32 bg-gray">
+            <div class="relative w-full h-full">
+              <!-- image -->
+              <ng-container *ngIf="competence.image.url as url; else noImageTemplate">
+                <img class="w-full h-full object-contain" [src]="url" [alt]="competence.id">
+              </ng-container>
+
+              <!-- no image template -->
+              <ng-template #noImageTemplate>
+                <span class="h-full flex items-center justify-center text-white font-bold">
+                  Sin imagen
+                </span>
+              </ng-template>
+            </div>
+          </div>
+
+          <!-- container -->
+          <span [title]="competence.name" class="text-sm bg-black px-4 py-2 text-white w-32 truncate text-center">
+            <ng-container *ngIf="competence.name as name;else noNameTemplate">
+              {{name}}
+            </ng-container>
+            <ng-template #noNameTemplate>
+              Sin nombre
+            </ng-template>
+          </span>
+        </div>
+      </div>
+    </dashboard-container>
   </div>
-</div>
+  </div>
