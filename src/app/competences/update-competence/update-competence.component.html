@@ -1,0 +1,78 @@
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Competencia
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      Guardado automático inhabilitado
+    </span>
+  </dashboard-topbar>
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8" (ngSubmit)="save()">
+    <!-- title -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Nombre de la Competencia
+      </label>
+
+      <!-- input text -->
+      <input formControlName="name" type="text"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none w-full ">
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Tipo de competencia
+      </label>
+
+      <select formControlName="kind"
+        class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white  text-sm  focus:outline-none  w-full ">
+        <option value="COMPETENCE#SOFT">Competencia Suave</option>
+        <option value="COMPETENCE#HARD">Competencia Dura</option>
+      </select>
+    </div>
+
+    <!-- video form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Imagen Decorativa
+      </h3>
+
+      <!-- video -->
+      <dashboard-upload-image [image]="form.controls.image.value" (completed)="uploadImage($event)">
+      </dashboard-upload-image>
+    </div>
+
+
+  </form>
+
+  <!-- row of actions -->
+  <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="delete()">
+      Eliminar
+      <!-- loader with spin animation when creating new -->
+      <ng-container *ngIf="isDeleting">
+        <i class="fas fa-spinner animate-spin"></i>
+      </ng-container>
+    </button>
+
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="save()">
+      Guardar
+      <!-- loader with spin animation when creating new -->
+      <ng-container *ngIf="isSaving">
+        <i class="fas fa-spinner animate-spin"></i>
+      </ng-container>
+    </button>
+  </dashboard-footer>
+
+
+</dashboard-container>

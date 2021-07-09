@@ -15,6 +15,9 @@ const routes: Routes = [
   { path: 'ciudades/:cityId', loadChildren: () => import('./city/city.module').then(m => m.CityModule) },
 
   // home module
+  { path: 'competencias', loadChildren: () => import('./competences/competences.module').then(m => m.CompetencesModule) },
+
+  // home module
   { path: 'restringido', loadChildren: () => import('./unauthorized/unauthorized.module').then(m => m.UnauthorizedModule) },
 
   // redirect all inconsistent routes to home
