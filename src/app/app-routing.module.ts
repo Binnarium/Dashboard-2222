@@ -18,6 +18,11 @@ const routes: Routes = [
   { path: 'competencias', loadChildren: () => import('./competences/competences.module').then(m => m.CompetencesModule) },
 
   // home module
+  { path: 'configuracion-clubhouse', loadChildren: () => import('./clubhouse-configuration/clubhouse-configuration.module').then(m => m.ClubhouseConfigurationModule) },
+  // home module
+  { path: 'configuracion', loadChildren: () => import('./app-configuration/app-configuration.module').then(m => m.AppConfigurationModule) },
+
+  // home module
   { path: 'restringido', loadChildren: () => import('./unauthorized/unauthorized.module').then(m => m.UnauthorizedModule) },
 
   // redirect all inconsistent routes to home

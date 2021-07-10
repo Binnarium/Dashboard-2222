@@ -1,7 +1,4 @@
 <dashboard-sidebar>
-  <!--
-  <h2 dashboard-sidebar-header>Laboratorio Móvil 2222</h2>
--->
   <h3 dashboard-sidebar-section-name>
     Plataforma
   </h3>
@@ -34,6 +31,12 @@
   <h3 dashboard-sidebar-section-name>
     Configuración
   </h3>
+  <!-- app conf -->
+  <a dashboard-sidebar-item routerLink="/configuracion" routerLinkActive #appConf="routerLinkActive"
+    [active]="appConf.isActive">
+    configuración de la Aplicación
+  </a>
+
   <!-- Questions -->
   <a dashboard-sidebar-item routerLink="/competencias" routerLinkActive #competences="routerLinkActive"
     [active]="competences.isActive">
@@ -47,7 +50,8 @@
 
 
   <!-- Questions -->
-  <a dashboard-sidebar-item>
-    Clubhouse
+  <a dashboard-sidebar-item routerLink="/configuracion-clubhouse" routerLinkActive #clubhouseConf="routerLinkActive"
+    [active]="clubhouseConf.isActive">
+    Configuración Encuentros Clubhouse
   </a>
 </dashboard-sidebar>
