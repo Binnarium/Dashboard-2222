@@ -1,1 +1,42 @@
-<p>app-configuration works!</p>
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configuración General de la Aplicación
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Fecha de Finalización
+      </h3>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Fecha en la que se espera finalize el curso. Esta fecha se utilizara para calcular los dias restantes de curso,
+        incluido otros aspectos de la aplicación
+      </span>
+
+      <!-- input text -->
+      <input type="date" formControlName="courseFinalizationDate"
+        class="px-4 py-4  text-gray-700 bg-white  text-sm focus:outline-none focus:shadow-outline w-full ">
+    </div>
+  </form>
+
+</dashboard-container>
