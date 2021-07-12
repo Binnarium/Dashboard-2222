@@ -21,7 +21,7 @@ const firebaseConfig: Readonly<FirebaseOptions> = {
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
+    AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireMessagingModule,

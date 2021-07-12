@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CityDto, LoadCitiesService } from './load-cities.service';
+import { CityDto } from './city.dto';
+import { LoadCitiesService } from './load-cities.service';
 
 
 @Injectable({
