@@ -1,51 +1,70 @@
-<dashboard-sidebar *ngIf="cityId$ | async as city">
+<dashboard-sidebar *ngIf="cityConf$ | async as cityConf">
 
   <h2 dashboard-sidebar-header>
-    {{ city }}
+    {{ cityConf.name }}
   </h2>
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'introduccion']" routerLinkActive
-    #introduction="routerLinkActive" [active]="introduction.isActive">
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'introduccion']" routerLinkActive
+    #introduction="routerLinkActive" [active]="introduction.isActive" [routerLinkActiveOptions]="{exact: true}">
     Introducción Ciudad
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'historia']" routerLinkActive #history="routerLinkActive"
-    [active]="history.isActive">
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'historia']" routerLinkActive
+    #history="routerLinkActive" [active]="history.isActive">
     Introducción Temática
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'argumentacion']" routerLinkActive
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'argumentacion']" routerLinkActive
     #argument="routerLinkActive" [active]="argument.isActive">
-    Preguntas
+    Argumentación Principal & Preguntas
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'objetivo']" routerLinkActive #objective="routerLinkActive"
-    [active]="objective.isActive">
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'objetivo']" routerLinkActive
+    #objective="routerLinkActive" [active]="objective.isActive">
     Obj/Contenidos/Ideas desaprender
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'contenido']" routerLinkActive #content="routerLinkActive"
-    [active]="content.isActive">
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'contenido']" routerLinkActive
+    #content="routerLinkActive" [active]="content.isActive">
     Videos y Podcast
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'recursos']" routerLinkActive #resources="routerLinkActive"
-    [active]="resources.isActive">
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'recursos']" routerLinkActive
+    #resources="routerLinkActive" [active]="resources.isActive">
     Lecturas y Recursos Online
   </a>
+  <dashboard-sidebar-divider *ngIf="cityConf.enabledPages?.activities"></dashboard-sidebar-divider>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'actividades']" routerLinkActive
-    #activities="routerLinkActive" [active]="activities.isActive">
-    Actividades
+  <h2 dashboard-sidebar-section-name *ngIf="cityConf.enabledPages?.activities">
+    Actividades de la ciudad
+  </h2>
+
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.questionary" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'cuestionario']" routerLinkActive #questionary="routerLinkActive"
+    [active]="questionary.isActive">
+    Cuestionario Multiple Choice
   </a>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.project" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'proyecto']" routerLinkActive #project="routerLinkActive"
+    [active]="project.isActive">
+    Proyecto Docente
+  </a>
+
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.readings" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'club-lectores']" routerLinkActive #readings="routerLinkActive"
+    [active]="readings.isActive">
+    Club de Lectores
+  </a>
+
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.clubhouse" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
     [active]="clubhouse.isActive">
     Encuentros Clubhouse
   </a>
 
   <dashboard-sidebar-divider></dashboard-sidebar-divider>
 
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', city,'configuracion']" routerLinkActive
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'configuracion']" routerLinkActive
     #configuration="routerLinkActive" [active]="configuration.isActive">
     Configuración
   </a>

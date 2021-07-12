@@ -12,7 +12,6 @@ const routes: Routes = [
       { path: 'contenido', loadChildren: () => import('./city-content/city-content.module').then(m => m.CityContentModule) },
       { path: 'objetivo', loadChildren: () => import('./city-objective/city-objective.module').then(m => m.CityObjectiveModule) },
       { path: 'recursos', loadChildren: () => import('./city-resources/city-resources.module').then(m => m.CityResourcesModule) },
-      { path: 'actividades', loadChildren: () => import('./city-activities/city-activities.module').then(m => m.CityActivitiesModule) },
       { path: 'configuracion', loadChildren: () => import('./city-configuration/city-configuration.module').then(m => m.CityConfigurationModule) },
     ]
   }
