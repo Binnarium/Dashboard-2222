@@ -3,7 +3,7 @@
   <dashboard-topbar>
     <!-- page title -->
     <h1 class="text-white text-xl font-bold">
-      Configurar Objetivos, Contenidos de la Ciudad, e Ideas Desaprender
+      Configurar Objetivos e Ideas Desaprender
     </h1>
 
     <!-- saved text -->
@@ -33,29 +33,6 @@
         class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
     </div>
 
-    <!-- content -->
-    <div dashboard-form-group formArrayName="content">
-      <!-- label -->
-      <label dashboard-form-label>
-        Contenido
-
-        <button dashboard-form-label-action type="button" (click)="removeContent()" class="bg-red">
-          <i class="fas fa-trash text-white"></i>
-        </button>
-        <button dashboard-form-label-action type="button" (click)="addContent()" class="bg-green">
-          <i class="fas fa-plus text-white"></i>
-        </button>
-      </label>
-      <!-- explanation -->
-      <span class="text-white text-base">
-        No más que tres temas
-      </span>
-
-      <!-- input text -->
-      <textarea *ngFor="let control of contentArray.controls; let idx = index" [formControlName]="idx" rows="3"
-        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
-
-    </div>
     <!-- content -->
     <div dashboard-form-group formArrayName="ideas">
       <!-- label -->

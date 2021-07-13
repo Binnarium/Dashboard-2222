@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -25,9 +25,8 @@ export class CityObjectiveComponent implements OnDestroy {
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ObjectiveDto, null | FormArray | FormGroup>>{
-    mainObjective: null,
-    content: this.fb.array([]),
+  public readonly form: FormGroup = this.fb.group(<Record<keyof ObjectiveDto, FormControl | FormArray | FormGroup>>{
+    mainObjective: this.fb.control(null),
     competences: this.fb.group({}),
     ideas: this.fb.array([]),
   });
@@ -71,13 +70,6 @@ export class CityObjectiveComponent implements OnDestroy {
       if (!!objective?.mainObjective)
         this.form.controls[<keyof ObjectiveDto>'mainObjective'].setValue(objective.mainObjective, { emitEvent: false });
 
-      // every time a new value comes, update the controls
-      const objectiveFormArray = objective?.content?.map(objective => this.fb.control(objective ?? null))
-        ?? [
-          this.fb.control(null),
-        ];
-      this.form.setControl(<keyof ObjectiveDto>'content', this.fb.array(objectiveFormArray), { emitEvent: false });
-
       // load ideas
       const ideasFormArray = objective?.ideas?.map(idea => this.fb.control(idea ?? null))
         ?? [
@@ -96,35 +88,12 @@ export class CityObjectiveComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get contentArray(): FormArray {
-    return this.form.controls[<keyof ObjectiveDto>'content'] as FormArray;
-  }
-
   get ideasArray(): FormArray {
     return this.form.controls[<keyof ObjectiveDto>'ideas'] as FormArray;
   }
 
   get competencesGroup(): FormGroup {
     return this.form.controls[<keyof ObjectiveDto>'competences'] as FormGroup;
-  }
-
-  addContent(): void {
-    const contentArray = this.contentArray;
-    if (contentArray.length >= 3) {
-      alert('No se puede tener más de 3 contenidos');
-      return;
-    }
-
-    this.contentArray.push(this.fb.control(null));
-  }
-
-  removeContent(): void {
-    const contentArray = this.contentArray;
-    if (contentArray.length <= 1) {
-      alert('No se puede eliminar, debe tener al menos un contenido');
-      return;
-    }
-    this.contentArray.removeAt(contentArray.length - 1);
   }
 
   addIdeas(): void {

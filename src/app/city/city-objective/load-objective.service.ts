@@ -25,7 +25,6 @@ export class LoadObjectiveService {
 
           const mapperObjective: ObjectiveDto = {
             competences,
-            content: data?.content ?? null,
             ideas: data?.ideas ?? null,
             mainObjective: data?.mainObjective ?? null
           }

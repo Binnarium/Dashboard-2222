@@ -52,6 +52,6 @@ export class WelcomeComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
   uploadVideo(video: NonNullable<VideoDTO>) {
-    this.form.controls['uploadVideo'].setValue(video);
+    this.form.controls['welcomeVideo'].setValue(video);
   }
 }

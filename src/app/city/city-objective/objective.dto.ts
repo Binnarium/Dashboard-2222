@@ -1,15 +1,18 @@
 import firebase from "firebase/app";
 
-export interface ObjectiveDto {
+interface BaseObjectiveDto {
   mainObjective: string | null;
-  content: Array<string> | null;
-  competences: { [key: string]: boolean };
+  competences: { [key: string]: boolean } | Array<firebase.firestore.DocumentReference> | null;
+  ideas: Array<string> | null;
+}
+export interface ObjectiveDto extends BaseObjectiveDto {
+  mainObjective: string | null;
+  competences: { [key: string]: boolean } | null;
   ideas: Array<string> | null;
 }
 
-export interface ObjectiveFirebaseDto {
+export interface ObjectiveFirebaseDto extends BaseObjectiveDto {
   mainObjective: string | null;
-  content: Array<string> | null;
-  competences: Array<firebase.firestore.DocumentReference>;
+  competences: Array<firebase.firestore.DocumentReference> | null;
   ideas: Array<string> | null;
 }

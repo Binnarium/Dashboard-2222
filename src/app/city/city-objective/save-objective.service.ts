@@ -16,10 +16,9 @@ export class SaveObjectiveService {
 
   public save$(cityId: string, payload: ObjectiveDto): Observable<boolean> {
 
-    const enabled = Object.entries(payload.competences).filter(([_, value]) => value);
+    const enabled = Object.entries(payload.competences ?? {}).filter(([_, value]) => value);
 
     const newValue: ObjectiveFirebaseDto = {
-      content: payload.content,
       ideas: payload.ideas,
       mainObjective: payload.mainObjective,
       competences: enabled.map(([c, _]) => this.getCompetenceReference(c)),
