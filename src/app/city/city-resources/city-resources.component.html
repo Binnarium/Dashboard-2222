@@ -1,1 +1,175 @@
-<p>city-resources works!</p>
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Recursos de la Ciudad
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <label dashboard-form-label>
+      Lecturas
+    </label>
+
+    <div formArrayName="readings" class="grid grid-cols-1 2xl:grid-cols-2 gap-8">
+
+      <!-- content -->
+      <div class="w-full flex flex-col gap-8" *ngFor="let control of readingsFormArray.controls; let idx = index"
+        [formArrayName]="idx">
+        <label dashboard-form-label>
+          Libro {{idx+1}}
+          <button dashboard-form-label-action type="button" (click)="removeReading(idx)" class="bg-red">
+            <i class="fas fa-trash text-white"></i>
+          </button>
+        </label>
+
+        <!-- label -->
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Nombre
+          </label>
+
+          <!-- explanation
+            <span class="text-white text-base">
+              Una a dos ideas para desaprender
+            </span>
+          -->
+
+          <input type="text" formControlName="name"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+        </div>
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Autor
+          </label>
+
+          <input type="text" formControlName="author"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+        </div>
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Resumen
+          </label>
+
+          <textarea rows="5" formControlName="about"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+          </textarea>
+        </div>
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Fecha de publicación
+          </label>
+
+          <input type="date" formControlName="publishedDate"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+        </div>
+
+        <div dashboard-form-group>
+          <!-- label -->
+          <h3 dashboard-form-label>
+            Portada del Libro
+          </h3>
+
+          <!-- input text -->
+          <dashboard-upload-image [image]="control.value.cover" (completed)="uploadCover($event, idx)">
+          </dashboard-upload-image>
+        </div>
+      </div>
+    </div>
+    <div class="border-white border-t-2"></div>
+
+    <label dashboard-form-label>
+      Enlaces Externos
+    </label>
+
+    <div formArrayName="externalLinks" class="grid grid-cols-1 2xl:grid-cols-2 gap-8">
+      <!-- content -->
+      <div class="w-full flex flex-col gap-8" *ngFor="let control of externalLinksFormArray.controls; let idx = index"
+        [formArrayName]="idx">
+        <label dashboard-form-label>
+          Enlace Externo {{idx+1}}
+          <button dashboard-form-label-action type="button" (click)="removeExternalLink(idx)" class="bg-red">
+            <i class="fas fa-trash text-white"></i>
+          </button>
+        </label>
+
+        <!-- label -->
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Título del Enlace
+          </label>
+
+          <!-- explanation
+            <span class="text-white text-base">
+              Una a dos ideas para desaprender
+            </span>
+          -->
+
+          <input type="text" formControlName="title"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+        </div>
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Resumen
+          </label>
+
+          <textarea rows="5" formControlName="description"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+          </textarea>
+        </div>
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Enlace
+          </label>
+
+          <input type="url" formControlName="link"
+            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
+        </div>
+
+
+        <div dashboard-form-group>
+          <label dashboard-form-label>
+            Tipo de Enlace
+          </label>
+          <select formControlName="kind">
+            <option value="LINK#YOUTUBE">Youtube</option>
+            <option value="LINK#FACEBOOK">Facebook</option>
+            <option value="LINK#TWITTER">Twitter</option>
+            <option value="LINK#TIK_TOK">Tik Tok</option>
+            <option value="LINK#INSTAGRAM">Instagram</option>
+            <option value="LINK#OTHER">Otro</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+
+  <dashboard-footer>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addReading()">
+      Añadir Lectura
+    </button>
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="addExternalLink()">
+      Añadir Enlace
+    </button>
+  </dashboard-footer>
+</dashboard-container>
