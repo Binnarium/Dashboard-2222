@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CityResourcesComponent } from './city-resources.component';
+import { LoadResourcesService } from './load-resources.service';
+import { SaveResourcesService } from './save-resources.service';
 
 const routes: Routes = [{ path: '', component: CityResourcesComponent }];
 
@@ -17,6 +19,10 @@ const routes: Routes = [{ path: '', component: CityResourcesComponent }];
     SharedModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+  ],
+  providers: [
+    LoadResourcesService,
+    SaveResourcesService,
   ]
 })
 export class CityResourcesModule { }
