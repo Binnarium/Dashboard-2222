@@ -23,16 +23,16 @@ export class LoadResourcesService {
           const content: CityResourcesDto = {
             externalLinks: data?.externalLinks ?? null,
             readings: data?.readings?.map(reading => {
-              let publishedDate: string | null = null
-              if (reading.publishedDate) {
-                publishedDate = reading.publishedDate.toDate().toISOString().split('T')[0]
+              let publishedYear: number | null = null
+              if (reading.publishedYear) {
+                publishedYear = reading.publishedYear;
               }
               const newReading: ReadingDto = {
                 about: reading.about,
                 author: reading.author,
                 cover: reading.cover,
                 name: reading.name,
-                publishedDate
+                publishedYear
               };
               return newReading;
             }) ?? null

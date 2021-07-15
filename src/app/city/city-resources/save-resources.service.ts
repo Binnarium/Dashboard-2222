@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import firebase from 'firebase/app';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
 import { CityResourcesDto, FirebaseCityResourcesDto, FirebaseReadingDto } from './city-resources.dto';
@@ -24,7 +23,7 @@ export class SaveResourcesService {
           author: reading.author,
           cover: reading.cover,
           name: reading.name,
-          publishedDate: reading.publishedDate ? firebase.firestore.Timestamp.fromDate(new Date(reading.publishedDate)) : null,
+          publishedYear: reading.publishedYear ? reading.publishedYear : null,
         };
         return firebaseReading;
       }) ?? null,
