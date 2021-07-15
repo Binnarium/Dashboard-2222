@@ -50,12 +50,6 @@
     Proyecto Docente
   </a>
 
-  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.readings" dashboard-sidebar-item
-    [routerLink]="['/ciudades', cityConf.id,'club-lectores']" routerLinkActive #readings="routerLinkActive"
-    [active]="readings.isActive">
-    Club de Lectores
-  </a>
-
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.clubhouse" dashboard-sidebar-item
     [routerLink]="['/ciudades', cityConf.id,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
     [active]="clubhouse.isActive">

@@ -28,7 +28,6 @@ export class CityConfigurationComponent implements OnDestroy {
       activities: this.fb.control(true),
       questionary: this.fb.control(null),
       clubhouse: this.fb.control(null),
-      readings: this.fb.control(null),
       project: this.fb.control(null),
     })
   });
