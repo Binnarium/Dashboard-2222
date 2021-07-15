@@ -1,0 +1,50 @@
+<div class="w-full max-w-xl mx-auto h-full flex items-center justify-center py-20 px-8 flex-col gap-12">
+  <img src="/assets/logo_2222.svg" alt="" class="w-80">
+  <img src="/assets/logo_utpl.svg" alt="" class="w-64">
+
+
+  <ng-container *ngIf="user$|async as user; else noUserTemplate">
+    <h2 class="text-white text-xl text-center">
+      Bienvenido {{user.displayName | titlecase}} al panel de administración.
+    </h2>
+
+    <span class="text-white text-lg text-center">
+      <ng-container *ngIf="user.isAdmin; else noAdminTemplate">
+        <b>Tienes acceso administrador</b> para poder actualizar la información del lab movil 2222. También puedes
+        camiar de
+        cuenta.
+      </ng-container>
+
+      <ng-template #noAdminTemplate>
+        No tienes acceso al panel administrador. Si necesitas acceso desde esta cuenta solicita autorización a <a
+          href="https://wa.me/+593992620353" target="_blank" rel="noopener noreferrer" class="bg-black px-2">Bruno
+          Esparza</a>, o intenta ingresar con una cuenta diferente.
+      </ng-template>
+    </span>
+  </ng-container>
+
+  <ng-template #noUserTemplate>
+    <h2 class="text-white text-xl text-center">
+      Inicia sesión para acceder al panel administrador
+    </h2>
+  </ng-template>
+
+  <div id="login-actions" class="flex flex-row gap-8">
+    <button *ngIf="!(user$|async)" (click)="googleSignIn()"
+      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
+      Ingresa con Google
+    </button>
+    <button *ngIf="!(user$|async)" (click)="utplSignIn()"
+      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
+      Ingresa con Microsoft
+    </button>
+    <button *ngIf="user$|async" (click)="signOut()"
+      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
+      Cerrar Sesión
+    </button>
+  </div>
+
+  <span *ngIf="isSigningIn">
+    <i class="text-white text-2xl animate-spin fas fa-spinner"></i>
+  </span>
+</div>

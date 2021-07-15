@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './core/auth/user.service';
 
 @Component({
   selector: 'dashboard-root',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
     <div class="relative w-full h-full flex flex-row">
 
       <!-- make sidebar static -->
-      <div class="sticky top-0 left-0 h-screen">
+      <div *ngIf="isAdmin$|async" class="sticky top-0 left-0 h-screen">
         <dashboard-main-sidebar></dashboard-main-sidebar>
       </div>
 
@@ -21,4 +22,11 @@ import { Component } from '@angular/core';
   </main>
   `,
 })
-export class AppComponent { }
+export class AppComponent {
+
+  constructor(
+    private readonly isAdminService: UserService,
+  ) { }
+
+  public readonly isAdmin$ = this.isAdminService.isAdministrator$;
+}
