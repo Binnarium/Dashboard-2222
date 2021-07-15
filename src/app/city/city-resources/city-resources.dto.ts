@@ -1,18 +1,17 @@
-import firebase from 'firebase/app';
 import { ImageDTO } from "src/app/shared/upload/asset.dto";
 interface BaseReadingDto {
   name: string | null;
   cover: ImageDTO | null;
   about: string | null;
   author: string | null;
-  publishedDate: string | firebase.firestore.Timestamp | null;
+  publishedYear: number | null;
 }
 export interface ReadingDto extends BaseReadingDto {
-  publishedDate: string | null;
+  publishedYear: number | null;
 }
 
 export interface FirebaseReadingDto extends BaseReadingDto {
-  publishedDate: firebase.firestore.Timestamp | null;
+  publishedYear: number | null;
 }
 
 export interface ExternalLinkDto {
