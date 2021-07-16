@@ -6,7 +6,6 @@ export interface CityConfigurationPagesDto {
   // activities
   questionary: boolean | null;
   clubhouse: boolean | null;
-  readings: boolean | null;
   project: boolean | null;
 }
 
