@@ -25,7 +25,6 @@ export class WelcomeComponent implements OnDestroy {
   public readonly form: FormGroup = this.fb.group(<Record<keyof WelcomeDto, FormControl | FormGroup>>{
     profundityText: this.fb.control(null),
     pageTitle: this.fb.control(null),
-    largeText: this.fb.control(null),
     welcomeVideo: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
