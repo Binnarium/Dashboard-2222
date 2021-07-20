@@ -22,6 +22,7 @@ export class SaveResourcesService {
           about: reading.about,
           author: reading.author,
           cover: reading.cover,
+          link: reading.link,
           name: reading.name,
           publishedYear: reading.publishedYear ? reading.publishedYear : null,
         };

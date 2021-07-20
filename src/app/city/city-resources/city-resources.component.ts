@@ -105,6 +105,7 @@ export class CityResourcesComponent implements OnDestroy {
       name: this.fb.control(reading?.name),
       author: this.fb.control(reading?.author),
       about: this.fb.control(reading?.about),
+      link: this.fb.control(reading?.link),
       publishedYear: this.fb.control(reading?.publishedYear),
       cover: this.fb.group(<Record<keyof ImageDTO, FormControl>>{
         height: this.fb.control(reading?.cover?.height),
