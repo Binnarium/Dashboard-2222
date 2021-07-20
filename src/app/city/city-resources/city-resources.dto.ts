@@ -4,6 +4,7 @@ interface BaseReadingDto {
   cover: ImageDTO | null;
   about: string | null;
   author: string | null;
+  link: string | null;
   publishedYear: number | null;
 }
 export interface ReadingDto extends BaseReadingDto {

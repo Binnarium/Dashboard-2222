@@ -32,6 +32,7 @@ export class LoadResourcesService {
                 author: reading.author,
                 cover: reading.cover,
                 name: reading.name,
+                link: reading.link,
                 publishedYear
               };
               return newReading;
