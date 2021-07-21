@@ -20,8 +20,12 @@ export class UserService {
       if (!user)
         return of(null);
 
-      const uid = user.uid;
-      const ref = this.userCollection(uid);
+      const email = user.email;
+
+      if (!email)
+        return of(user as UserDto);
+
+      const ref = this.userCollection(email);
 
       const userChanges = ref.valueChanges().pipe(
         map(data => data ? Object.assign(data, user) as UserDto : null)
@@ -35,7 +39,7 @@ export class UserService {
     map(user => !!user?.isAdmin)
   );
 
-  private userCollection(uid: string) {
-    return this.afFirestore.collection('users').doc<UserRoleDto>(uid);
+  private userCollection(email: string) {
+    return this.afFirestore.collection('users').doc<UserRoleDto>(email);
   }
 }
