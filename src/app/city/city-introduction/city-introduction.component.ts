@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -23,8 +23,8 @@ export class CityIntroductionComponent implements OnDestroy {
   ) { }
 
   /** form so upload content */
-  public readonly informationForm: FormGroup = this.fb.group({
-    description: null,
+  public readonly informationForm: FormGroup = this.fb.group(<Record<keyof IntroductionDto, FormControl>>{
+    description: this.fb.control(null),
   });
 
   /** Current state of the form if its value have been saved */
@@ -52,8 +52,10 @@ export class CityIntroductionComponent implements OnDestroy {
       tap(saved => this.saved = saved),
     ).subscribe();
 
-  private readonly loadInscriptionSub: Subscription = this.introduction$.subscribe(
-    introduction => introduction ? this.informationForm.setValue(introduction, { emitEvent: false }) : null
+  private readonly loadInscriptionSub: Subscription = this.introduction$.subscribe(introduction => {
+    if (introduction?.description)
+      this.informationForm.controls[<keyof IntroductionDto>'description'].setValue(introduction.description, { emitEvent: false });
+  }
   );
 
   ngOnDestroy(): void {
