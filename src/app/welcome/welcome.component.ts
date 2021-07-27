@@ -10,8 +10,6 @@ import { WelcomeDto } from './welcome.dto';
 @Component({
   selector: 'dashboard-welcome',
   templateUrl: './welcome.component.html',
-  styles: [
-  ]
 })
 export class WelcomeComponent implements OnDestroy {
 
@@ -39,14 +37,19 @@ export class WelcomeComponent implements OnDestroy {
   public saved = true;
 
   /** load from database */
-  private readonly loadInscriptionSub: Subscription = this.loadWelcomeService.load$
-    .pipe(
-      take(1),
-      shareReplay(),
-    )
-    .subscribe(
-      welcome => welcome ? this.form.setValue(welcome, { emitEvent: false }) : null
-    );
+  private readonly loadInscriptionSub: Subscription = this.loadWelcomeService.load$.pipe(
+    take(1),
+    shareReplay(),
+  ).subscribe(welcome => {
+    if (welcome?.pageTitle)
+      this.form.controls[<keyof WelcomeDto>'pageTitle'].setValue(welcome.pageTitle, { emitEvent: false });
+    if (welcome?.profundityText)
+      this.form.controls[<keyof WelcomeDto>'profundityText'].setValue(welcome.profundityText, { emitEvent: false });
+    if (welcome?.teamText)
+      this.form.controls[<keyof WelcomeDto>'teamText'].setValue(welcome.teamText, { emitEvent: false });
+    if (welcome?.welcomeVideo)
+      this.form.controls[<keyof WelcomeDto>'welcomeVideo'].setValue(welcome.welcomeVideo, { emitEvent: false });
+  });
 
   private autoSaveSub: Subscription = this.form.valueChanges.pipe(
     tap(() => this.saved = false),
@@ -60,6 +63,6 @@ export class WelcomeComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
   uploadVideo(video: NonNullable<VideoDTO>) {
-    this.form.controls['welcomeVideo'].setValue(video);
+    this.form.controls[<keyof WelcomeDto>'welcomeVideo'].setValue(video);
   }
 }

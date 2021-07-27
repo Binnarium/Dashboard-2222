@@ -122,7 +122,7 @@ export class CityResourcesComponent implements OnDestroy {
       title: this.fb.control(link?.title),
       description: this.fb.control(link?.description),
       link: this.fb.control(link?.link),
-      kind: this.fb.control(link?.kind),
+      kind: this.fb.control(link?.kind ?? <'LINK#OTHER'>'LINK#OTHER'),
     });
   }
 

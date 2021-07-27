@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
-import { CityConfigurationDto } from './city-configuration.dto';
+import { CityDto } from 'src/app/core/cities-module/city.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class SaveCityConfigurationService {
     private readonly afFirestore: AngularFirestore,
   ) { }
 
-  public save$(cityId: string, payload: CityConfigurationDto): Observable<boolean> {
+  public save$(cityId: string, payload: CityDto): Observable<boolean> {
     const saveTask = this.afFirestore.collection('cities')
-      .doc<CityConfigurationDto>(cityId)
+      .doc<CityDto>(cityId)
       .set(payload, { merge: true });
 
     return from(saveTask).pipe(

@@ -1,9 +1,27 @@
+import { ImageDTO } from "src/app/shared/upload/asset.dto";
+
+export interface CityEnabledPagesDto {
+  // pages
+  activities: boolean | null;
+  // activities
+  questionary: boolean | null;
+  clubhouse: boolean | null;
+  project: boolean | null;
+}
+
 export interface CityDto {
-  stage: number;
-  iconUrl: string;
   id: string;
   name: string;
+
+  stage: number;
+
+  icon: ImageDTO;
+
   configuration: {
     colorHex: number,
   };
+
+  enabledPages: null | CityEnabledPagesDto;
 }
+
+

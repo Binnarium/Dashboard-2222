@@ -7,7 +7,9 @@
     </h1>
 
     <!-- image -->
-    <img class="w-80 h-auto mb-10" [src]="city.iconUrl" [alt]="city.name">
+    <ng-container *ngIf="city?.icon?.url as url">
+      <img class="w-80 h-auto mb-10" [src]="url" [alt]="city.name">
+    </ng-container>
 
   </div>
 </dashboard-container>
