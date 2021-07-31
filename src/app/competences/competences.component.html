@@ -53,7 +53,7 @@
         <div *ngFor="let competence of competences$|async" [routerLink]="['/competencias', competence.id]"
           class="w-auto flex flex-col gap-4 items-center cursor-pointer">
           <!-- item image -->
-          <div class="relative w-32  h-32 bg-gray">
+          <div class="relative w-32  h-32 ">
             <div class="relative w-full h-full">
               <!-- image -->
               <ng-container *ngIf="competence.image.url as url; else noImageTemplate">
@@ -62,7 +62,7 @@
 
               <!-- no image template -->
               <ng-template #noImageTemplate>
-                <span class="h-full flex items-center justify-center text-white font-bold">
+                <span class="bg-gray w-full h-full flex items-center justify-center text-white font-bold">
                   Sin imagen
                 </span>
               </ng-template>
