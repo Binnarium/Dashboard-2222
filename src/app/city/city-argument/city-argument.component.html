@@ -47,8 +47,11 @@
       </span>
 
       <!-- input text -->
-      <textarea *ngFor="let control of questionsArray.controls; let idx = index" [formControlName]="idx" rows="3"
-        class="px-4 py-4  text-gray-700 bg-white  text-sm focus:outline-none focus:shadow-outline w-full "></textarea>
+      <ng-container *ngFor="let control of questionsArray.controls; let idx = index">
+        <!-- input text -->
+        <dashboard-textarea [control]="control"></dashboard-textarea>
+      </ng-container>
+
     </div>
   </form>
 

@@ -56,10 +56,8 @@
             <!-- label -->
             <label dashboard-form-label>Descripción del video</label>
 
-            <!-- input text -->
-            <textarea type="text" formControlName="description" rows="12"
-              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
-            </textarea>
+          <!-- input text -->
+          <dashboard-textarea [control]="getDescriptionControl(idx)"></dashboard-textarea>
           </div>
 
           <!-- video control -->
@@ -108,10 +106,8 @@
             <!-- label -->
             <label dashboard-form-label>Descripción del podcast</label>
 
-            <!-- input text -->
-            <textarea type="text" formControlName="description" rows="12"
-              class="px-4 py-4 text-gray bg-white text-sm focus:outline-none w-full">
-            </textarea>
+          <!-- input text -->
+          <dashboard-textarea [control]="getDescriptionControl(idx)"></dashboard-textarea>
           </div>
 
           <!-- podcast control -->

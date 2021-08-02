@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -128,6 +128,11 @@ export class CityContentComponent implements OnDestroy {
     }
     this.cityContent.push(this.fb.group(voidVideo));
   }
+
+  public getDescriptionControl(index: number): FormControl {
+    return ((this.form.controls['content'] as FormArray).at(index) as FormGroup).controls['description'] as FormControl;
+  }
+
 
   deleteItem(index: number): void {
     this.cityContent.removeAt(index);

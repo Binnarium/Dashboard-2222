@@ -15,7 +15,7 @@ import { UploadModule } from './upload/upload.module';
     SidebarModule,
     UploadModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [
     TopbarComponent,
@@ -27,7 +27,7 @@ import { UploadModule } from './upload/upload.module';
     FormsModule,
     TopbarComponent,
     FooterComponent,
-    ComponentsModule
+    ComponentsModule,
   ],
 })
 export class SharedModule { }
