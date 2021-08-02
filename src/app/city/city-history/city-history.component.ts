@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -93,6 +93,9 @@ export class CityHistoryComponent implements OnDestroy {
   uploadImage(image: ImageDTO, index: number) {
     this.historyContent.controls[index].setValue({ ...image, kind: 'HISTORY#IMAGE' },);
   }
+  public getDescriptionControl(index: number): FormControl {
+    return (this.historyContent.controls[index] as FormGroup).controls['text'] as FormControl;
+  }
 
   addTitle() {
     this.historyContent.push(this.fb.group({
@@ -120,4 +123,5 @@ export class CityHistoryComponent implements OnDestroy {
   deleteItem(index: number): void {
     this.historyContent.removeAt(index);
   }
+
 }

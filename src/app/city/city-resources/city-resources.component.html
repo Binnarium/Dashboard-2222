@@ -75,9 +75,9 @@
             Resumen
           </label>
 
-          <textarea rows="5" formControlName="about"
-            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
-          </textarea>
+          <!-- input text -->
+          <dashboard-textarea [control]="getAboutControl(idx)"></dashboard-textarea>
+
         </div>
 
         <div dashboard-form-group>
@@ -136,12 +136,11 @@
 
         <div dashboard-form-group>
           <label dashboard-form-label>
-            Resumen
+            Información
           </label>
 
-          <textarea rows="5" formControlName="description"
-            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full ">
-          </textarea>
+          <!-- input text -->
+          <dashboard-textarea [control]="getLinkDescriptionControl(idx)"></dashboard-textarea>
         </div>
 
         <div dashboard-form-group>

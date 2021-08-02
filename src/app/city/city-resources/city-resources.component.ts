@@ -127,6 +127,17 @@ export class CityResourcesComponent implements OnDestroy {
   }
 
   uploadCover(image: ImageDTO, index: number) {
-    (this.readingsFormArray.controls[index] as FormGroup).controls['cover'].setValue(image);
+    (this.readingsFormArray.controls[index] as FormGroup).controls[<keyof ReadingDto>'cover'].setValue(image);
+  }
+
+  public getAboutControl(index: number): FormControl {
+    return ((this.form.controls[<keyof CityResourcesDto>'readings'] as FormArray)
+      .at(index) as FormGroup)
+      .controls[<keyof ReadingDto>'about'] as FormControl;
+  }
+  public getLinkDescriptionControl(index: number): FormControl {
+    return ((this.form.controls[<keyof CityResourcesDto>'externalLinks'] as FormArray)
+      .at(index) as FormGroup)
+      .controls[<keyof ExternalLinkDto>'description'] as FormControl;
   }
 }

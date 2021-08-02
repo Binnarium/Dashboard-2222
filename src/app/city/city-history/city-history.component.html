@@ -36,8 +36,7 @@
           </label>
 
           <!-- input text -->
-          <textarea formControlName="text" rows="6"
-            class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full"></textarea>
+          <dashboard-textarea [control]="getDescriptionControl(idx)"></dashboard-textarea>
         </div>
 
         <!-- title form control -->
