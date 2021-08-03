@@ -21,7 +21,7 @@ export class SignInWithUtplService implements ISignIn {
       tenant: '6eeb49aa-436d-43e6-becd-bbdf79e5077d',
     });
 
-    const signIn = this.afAuth.signInWithPopup(provider);
+    const signIn = this.afAuth.signInWithRedirect(provider);
     return from(signIn).pipe(
       mapTo(true),
       catchError(err => {
