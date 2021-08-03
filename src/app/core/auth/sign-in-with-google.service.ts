@@ -16,7 +16,7 @@ export class SignInWithGoogleService implements ISignIn {
 
   sign$(): Observable<boolean> {
     const provider = new firebase.auth.GoogleAuthProvider();
-    const signIn = this.afAuth.signInWithPopup(provider);
+    const signIn = this.afAuth.signInWithRedirect(provider);
     return from(signIn).pipe(
       mapTo(true),
       catchError(err => {
