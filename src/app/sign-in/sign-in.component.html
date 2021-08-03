@@ -38,6 +38,10 @@
       class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
       Ingresa con Microsoft
     </button>
+    <button *ngIf="!(user$|async)" (click)="utplSignIn()"
+      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
+      Ingresa con UTPL
+    </button>
     <button *ngIf="user$|async" (click)="signOut()"
       class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
       Cerrar Sesión
