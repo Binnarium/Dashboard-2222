@@ -16,6 +16,7 @@ export interface CityDto {
   stage: number;
 
   icon: ImageDTO;
+  iconMap: ImageDTO;
 
   configuration: {
     colorHex: number,
