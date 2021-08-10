@@ -13,10 +13,10 @@ export interface VideoContentDto extends BaseContentDto, VideoDTO {
   kind: 'CONTENT#VIDEO';
 }
 
-export interface PodcastContentDto extends BaseContentDto, AudioDto {
+export interface AudioContentDto extends BaseContentDto, AudioDto {
   kind: 'CONTENT#PODCAST';
 }
 
 export interface ContentDto {
-  content: Array<VideoContentDto | PodcastContentDto>,
+  content: Array<VideoContentDto | AudioContentDto>,
 }
