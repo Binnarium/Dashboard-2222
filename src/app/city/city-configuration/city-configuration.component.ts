@@ -32,6 +32,13 @@ export class CityConfigurationComponent implements OnDestroy {
       width: this.fb.control(null),
       url: this.fb.control(null),
     }),
+    iconMap: this.fb.group(<Record<keyof ImageDTO, FormControl>>{
+      height: this.fb.control(null),
+      name: this.fb.control(null),
+      path: this.fb.control(null),
+      width: this.fb.control(null),
+      url: this.fb.control(null),
+    }),
     enabledPages: this.fb.group(<Record<keyof CityEnabledPagesDto, FormControl>>{
       activities: this.fb.control(true),
       questionary: this.fb.control(null),
@@ -74,6 +81,8 @@ export class CityConfigurationComponent implements OnDestroy {
       }
       if (conf?.icon)
         this.iconControl.setValue(conf.icon, { emitEvent: false })
+      if (conf?.iconMap)
+        this.iconMapControl.setValue(conf.iconMap, { emitEvent: false })
     }
   );
 
@@ -85,6 +94,9 @@ export class CityConfigurationComponent implements OnDestroy {
   uploadImage(image: ImageDTO): void {
     this.iconControl.setValue(image);
   }
+  uploadImageMap(image: ImageDTO): void {
+    this.iconMapControl.setValue(image);
+  }
 
   get enabledPagesControl(): FormGroup {
     return this.form.controls[<keyof CityDto>'enabledPages'] as FormGroup;
@@ -92,5 +104,8 @@ export class CityConfigurationComponent implements OnDestroy {
 
   get iconControl(): FormGroup {
     return this.form.controls[<keyof CityDto>'icon'] as FormGroup;
+  }
+  get iconMapControl(): FormGroup {
+    return this.form.controls[<keyof CityDto>'iconMap'] as FormGroup;
   }
 }

@@ -31,6 +31,18 @@
       </dashboard-upload-image>
     </div>
 
+    <!-- icon Map image -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Imagen del Mapa
+      </h3>
+
+      <!-- input text -->
+      <dashboard-upload-image [image]="iconMapControl.value" (completed)="uploadImageMap($event)">
+      </dashboard-upload-image>
+    </div>
+
     <ng-container formGroupName="enabledPages">
       <!-- form group -->
       <div dashboard-form-group *ngIf="enabledPagesControl.controls.activities.value">

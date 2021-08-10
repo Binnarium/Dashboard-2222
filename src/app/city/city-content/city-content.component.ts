@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { AudioDto, VideoDTO } from 'src/app/shared/upload/asset.dto';
-import { PodcastContentDto, VideoContentDto } from './city-content.dto';
+import { AudioContentDto, VideoContentDto } from './city-content.dto';
 import { LoadContentService } from './load-content.service';
 import { SaveContentService } from './save-content.service';
 
@@ -49,7 +49,7 @@ export class CityContentComponent implements OnDestroy {
     // every time a new value comes, update the controls
   ).subscribe(payload => {
     const formElements = payload?.content.map(item => {
-      let formContent: VideoContentDto | PodcastContentDto | null = null;
+      let formContent: VideoContentDto | AudioContentDto | null = null;
 
       if (item.kind === 'CONTENT#VIDEO') {
         const temp: VideoContentDto = {
@@ -66,7 +66,7 @@ export class CityContentComponent implements OnDestroy {
         formContent = temp;
       }
       else {
-        const temp: PodcastContentDto = {
+        const temp: AudioContentDto = {
           kind: 'CONTENT#PODCAST',
           author: item.author ?? null,
           description: item.description ?? null,
@@ -94,13 +94,13 @@ export class CityContentComponent implements OnDestroy {
   }
 
   uploadContent(content: NonNullable<VideoDTO | AudioDto>, index: number) {
-    const currentValue = this.cityContent.controls[index].value as VideoContentDto | PodcastContentDto;
+    const currentValue = this.cityContent.controls[index].value as VideoContentDto | AudioContentDto;
     const newVal = Object.assign(currentValue, { ...content })
     this.cityContent.controls[index].setValue(newVal);
   }
 
   addPodcast() {
-    const voidVideo: PodcastContentDto = {
+    const voidVideo: AudioContentDto = {
       kind: 'CONTENT#PODCAST',
       author: null,
       description: null,
