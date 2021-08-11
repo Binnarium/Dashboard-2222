@@ -24,6 +24,7 @@ export class WelcomeComponent implements OnDestroy {
     profundityText: this.fb.control(null),
     pageTitle: this.fb.control(null),
     teamText: this.fb.control(null),
+    workloadText: this.fb.control(null),
     welcomeVideo: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
@@ -47,6 +48,8 @@ export class WelcomeComponent implements OnDestroy {
       this.form.controls[<keyof WelcomeDto>'profundityText'].setValue(welcome.profundityText, { emitEvent: false });
     if (welcome?.teamText)
       this.form.controls[<keyof WelcomeDto>'teamText'].setValue(welcome.teamText, { emitEvent: false });
+    if (welcome?.workloadText)
+      this.form.controls[<keyof WelcomeDto>'workloadText'].setValue(welcome.workloadText, { emitEvent: false });
     if (welcome?.welcomeVideo)
       this.form.controls[<keyof WelcomeDto>'welcomeVideo'].setValue(welcome.welcomeVideo, { emitEvent: false });
   });
