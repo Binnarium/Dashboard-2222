@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
-import { ImageDTO } from 'src/app/shared/upload/asset.dto';
 import { CityArgumentDto } from './city-argument.dto';
 import { LoadArgumentService } from './load-argument.service';
 import { SaveArgumentService } from './save-argument.service';
@@ -24,15 +23,8 @@ export class CityArgumentComponent implements OnDestroy {
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group({
+  public readonly form: FormGroup = this.fb.group(<Record<keyof CityArgumentDto, FormArray>>{
     questions: this.fb.array([]),
-    illustration: this.fb.group(<ImageDTO>{
-      height: null,
-      name: null,
-      path: null,
-      url: null,
-      width: null,
-    })
   });
 
   /** Current state of the form if its value have been saved */
@@ -69,18 +61,12 @@ export class CityArgumentComponent implements OnDestroy {
         this.fb.control(null),
         this.fb.control(null),
       ];
-    this.form.setControl('questions', this.fb.array(questionsFormArray), { emitEvent: false });
-    if (!!argument?.illustration)
-      this.form.controls['illustration'].setValue(argument.illustration, { emitEvent: false });
+    this.form.setControl(<keyof CityArgumentDto>'questions', this.fb.array(questionsFormArray), { emitEvent: false });
   });
 
   ngOnDestroy(): void {
     this.loadArgumentSub.unsubscribe();
     this.autoSaveSub.unsubscribe();
-  }
-
-  uploadImage(image: NonNullable<ImageDTO>) {
-    this.form.controls['illustration'].setValue(image);
   }
 
   get questionsArray(): FormArray {

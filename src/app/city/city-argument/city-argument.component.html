@@ -21,18 +21,6 @@
   <!-- main content of page -->
   <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
 
-    <!-- IMAGE form control -->
-    <div dashboard-form-group>
-      <!-- label -->
-      <h3 dashboard-form-label>
-        Ilustración
-      </h3>
-
-      <!-- input text -->
-      <dashboard-upload-image [image]="form.controls.illustration.value" (completed)="uploadImage($event)">
-      </dashboard-upload-image>
-    </div>
-
     <!-- form group -->
     <div dashboard-form-group formArrayName="questions">
       <!-- label -->
