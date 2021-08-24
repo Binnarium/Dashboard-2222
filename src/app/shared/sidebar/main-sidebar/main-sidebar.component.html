@@ -32,6 +32,11 @@
     Configuración
   </h3>
   <!-- app conf -->
+  <a dashboard-sidebar-item routerLink="/ficha-equipo" routerLinkActive #team="routerLinkActive" [active]="team.isActive">
+    Ficha del Equipo
+  </a>
+
+  <!-- app conf -->
   <a dashboard-sidebar-item routerLink="/configuracion" routerLinkActive #appConf="routerLinkActive"
     [active]="appConf.isActive">
     configuración de la Aplicación

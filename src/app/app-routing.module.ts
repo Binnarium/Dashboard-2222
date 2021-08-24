@@ -43,6 +43,13 @@ const routes: Routes = [
     canActivate: [CanAccessDashboardGuard]
   },
 
+  // team module
+  {
+    path: 'ficha-equipo',
+    loadChildren: () => import('./team/team.module').then(m => m.TeamModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
   // redirect all inconsistent routes to home
   {
     path: '**',
