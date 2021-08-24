@@ -12,7 +12,7 @@ import { SaveProjectVideoService } from './save-project-video.service';
   selector: 'dashboard-city-project-video',
   templateUrl: './city-project-video.component.html',
 })
-export class CityIntroductoryVideoComponent implements OnDestroy {
+export class CityProjectVideoComponent implements OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,

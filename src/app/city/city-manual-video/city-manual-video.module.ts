@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CityProjectVideoComponent } from './city-project-video.component';
-import { LoadProjectVideoService } from './load-project-video.service';
-import { SaveProjectVideoService } from './save-project-video.service';
+import { CityManualVideoComponent } from './city-manual-video.component';
+import { LoadManualVideoService } from './load-manual-video.service';
+import { SaveManualVideoService } from './save-manual-video.service';
 
 const routes: Routes = [{
   path: '',
-  component: CityProjectVideoComponent,
+  component: CityManualVideoComponent,
 }]
 
 @NgModule({
   declarations: [
-    CityProjectVideoComponent
+    CityManualVideoComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,7 @@ const routes: Routes = [{
     RouterModule.forChild(routes)
   ],
   providers: [
-    SaveProjectVideoService, LoadProjectVideoService,
+    SaveManualVideoService, LoadManualVideoService,
   ]
 })
-export class CityProjectVideoModule { }
+export class CityManualVideoModule { }

@@ -6,6 +6,7 @@ export interface CityEnabledPagesDto {
   argumentation: boolean | null;
   resources: boolean | null;
   projectVideo: boolean | null;
+  manualVideo: boolean | null;
 
   activities: boolean | null;
   // activities
