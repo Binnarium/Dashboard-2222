@@ -1,0 +1,37 @@
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Video Introductorio de la ciudad
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Video
+      </h3>
+
+      <!-- input text -->
+      <dashboard-upload-video [video]="form.controls.video.value" (completed)="uploadVideo($event)">
+      </dashboard-upload-video>
+    </div>
+  </form>
+
+</dashboard-container>

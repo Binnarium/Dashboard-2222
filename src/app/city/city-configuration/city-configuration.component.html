@@ -44,6 +44,58 @@
     </div>
 
     <ng-container formGroupName="enabledPages">
+      <!--  -->
+      <div dashboard-form-group>
+        <!-- label -->
+        <h3 dashboard-form-label>
+          Páginas Habilitadas
+        </h3>
+
+        <!-- explanation -->
+        <span class="text-white text-base">
+        </span>
+
+        <!-- introductory video -->
+        <label class="flex flex-row gap-4 items-center">
+          <input type="checkbox" formControlName="introductoryVideo">
+          <span class="text-white uppercase font-semibold">
+            Video Introductorio
+            </span>
+            </label>
+
+            <!-- introductory video -->
+            <label class="flex flex-row gap-4 items-center">
+              <input type="checkbox" formControlName="argumentation">
+              <span class="text-white uppercase font-semibold">
+                Argumentación Principal & Preguntas
+              </span>
+            </label>
+
+            <!-- introductory video -->
+            <label class="flex flex-row gap-4 items-center">
+              <input type="checkbox" formControlName="resources">
+              <span class="text-white uppercase font-semibold">
+                Lecturas y Recursos Online
+          </span>
+        </label>
+
+        <!-- input text -->
+        <label class="flex flex-row gap-4 items-center">
+          <input type="checkbox" formControlName="projectVideo">
+          <span class="text-white uppercase font-semibold">
+            Video del Proyecto
+          </span>
+        </label>
+
+        <!-- input text -->
+        <label class="flex flex-row gap-4 items-center">
+          <input type="checkbox" formControlName="activities">
+          <span class="text-white uppercase font-semibold">
+            Actividades
+          </span>
+        </label>
+
+      </div>
       <!-- form group -->
       <div dashboard-form-group *ngIf="enabledPagesControl.controls.activities.value">
         <!-- label -->
@@ -71,6 +123,8 @@
           </span>
         </label>
 
+
+
         <!-- input text -->
         <label class="flex flex-row gap-4 items-center">
           <input type="checkbox" formControlName="project">
@@ -78,51 +132,6 @@
             Proyecto
           </span>
         </label>
-      </div>
-
-      <!--  -->
-      <div dashboard-form-group>
-        <!-- label -->
-        <h3 dashboard-form-label>
-          Páginas Habilitadas
-        </h3>
-
-        <!-- explanation -->
-        <span class="text-white text-base">
-        </span>
-
-        <!-- introductory video -->
-        <label class="flex flex-row gap-4 items-center">
-          <input type="checkbox" formControlName="introductoryVideo">
-          <span class="text-white uppercase font-semibold">
-            Video Introductorio
-          </span>
-        </label>
-
-        <!-- introductory video -->
-        <label class="flex flex-row gap-4 items-center">
-          <input type="checkbox" formControlName="argumentation">
-          <span class="text-white uppercase font-semibold">
-            Argumentación Principal & Preguntas
-          </span>
-        </label>
-
-        <!-- introductory video -->
-        <label class="flex flex-row gap-4 items-center">
-          <input type="checkbox" formControlName="resources">
-          <span class="text-white uppercase font-semibold">
-            Lecturas y Recursos Online
-          </span>
-        </label>
-
-        <!-- input text -->
-        <label class="flex flex-row gap-4 items-center">
-          <input type="checkbox" formControlName="activities">
-          <span class="text-white uppercase font-semibold">
-            Actividades
-          </span>
-        </label>
-
       </div>
     </ng-container>
   </form>
