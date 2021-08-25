@@ -53,13 +53,13 @@
     #projectVideo="routerLinkActive" [active]="projectVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
     *ngIf="cityConf.enabledPages?.projectVideo">
     Placa Hackaton del Proyecto
-    </a>
+  </a>
 
-    <!--  -->
-    <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-manual']" routerLinkActive
-      #manualVideo="routerLinkActive" [active]="manualVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
-      *ngIf="cityConf.enabledPages?.manualVideo">
-      Placa descarga manual
+  <!--  -->
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-manual']" routerLinkActive
+    #manualVideo="routerLinkActive" [active]="manualVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
+    *ngIf="cityConf.enabledPages?.manualVideo">
+    Placa descarga manual
   </a>
 
   <dashboard-sidebar-divider *ngIf="cityConf.enabledPages?.activities"></dashboard-sidebar-divider>
@@ -68,22 +68,22 @@
     Actividades de la ciudad
   </h2>
 
-  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.questionary" dashboard-sidebar-item
-    [routerLink]="['/ciudades', cityConf.id,'cuestionario']" routerLinkActive #questionary="routerLinkActive"
-    [active]="questionary.isActive">
-    Cuestionario Multiple Choice
-  </a>
-
-  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.project" dashboard-sidebar-item
-    [routerLink]="['/ciudades', cityConf.id,'proyecto']" routerLinkActive #project="routerLinkActive"
-    [active]="project.isActive">
-    Proyecto Docente
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.contribution" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'contribucion']" routerLinkActive #contribution="routerLinkActive"
+    [active]="contribution.isActive">
+    Tu Contribución
   </a>
 
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.clubhouse" dashboard-sidebar-item
     [routerLink]="['/ciudades', cityConf.id,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
     [active]="clubhouse.isActive">
     Encuentros Clubhouse
+  </a>
+
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.project" dashboard-sidebar-item
+    [routerLink]="['/ciudades', cityConf.id,'proyecto']" routerLinkActive #project="routerLinkActive"
+    [active]="project.isActive">
+    Proyecto docente
   </a>
 
   <dashboard-sidebar-divider></dashboard-sidebar-divider>
