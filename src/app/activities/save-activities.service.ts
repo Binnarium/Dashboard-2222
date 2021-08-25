@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
-import { CityActivityDto } from './city-activity.dto';
+import { ActivitiesDto } from './activities.dto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SaveActivityService {
+export class SaveActivitiesService {
 
   constructor(
     private readonly afFirestore: AngularFirestore,
   ) { }
 
-  public save$(cityId: string, payload: CityActivityDto): Observable<boolean> {
-    const saveTask = this.afFirestore.collection('cities')
-      .doc(cityId)
-      .collection('pages')
-      .doc<CityActivityDto>('activity')
+  public save$(payload: ActivitiesDto): Observable<boolean> {
+    const saveTask = this.afFirestore.collection('application')
+      .doc<ActivitiesDto>('activities')
       .set(payload, { merge: true });
 
     return from(saveTask).pipe(

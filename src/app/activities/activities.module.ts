@@ -2,19 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
-import { CityActivityComponent } from './city-activity.component';
-import { LoadActivityService } from './load-activity.service';
-import { SaveActivityService } from './save-activity.service';
+import { SharedModule } from '../shared/shared.module';
+import { ActivitiesComponent } from './activities.component';
+import { LoadActivitiesService } from './load-activities.service';
+import { SaveActivitiesService } from './save-activities.service';
 
 const routes: Routes = [{
   path: '',
-  component: CityActivityComponent,
+  component: ActivitiesComponent,
 }];
 
 @NgModule({
   declarations: [
-    CityActivityComponent
+    ActivitiesComponent
   ],
   imports: [
     CommonModule,
@@ -23,8 +23,8 @@ const routes: Routes = [{
     RouterModule.forChild(routes)
   ],
   providers: [
-    LoadActivityService,
-    SaveActivityService,
+    LoadActivitiesService,
+    SaveActivitiesService,
   ]
 })
-export class CityIntroductionModule { }
+export class ActivitiesModule { }

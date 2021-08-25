@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CityActivityDto } from './city-activity.dto';
+import { ActivitiesDto } from './activities.dto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoadActivityService {
+export class LoadActivitiesService {
 
   constructor(
     private readonly afFirestore: AngularFirestore,
   ) { }
 
-  public load$(cityId: string): Observable<CityActivityDto | null> {
-    return this.afFirestore.collection('cities')
-      .doc(cityId)
-      .collection('pages')
-      .doc<CityActivityDto>('activity')
+  public load$(): Observable<ActivitiesDto | null> {
+    return this.afFirestore.collection('application')
+      .doc<ActivitiesDto>('activities')
       .valueChanges()
       .pipe(
         map(data => data ?? null),
