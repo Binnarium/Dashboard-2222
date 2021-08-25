@@ -14,6 +14,7 @@ const routes: Routes = [
       { path: 'contenido', loadChildren: () => import('./city-content/city-content.module').then(m => m.CityContentModule) },
       { path: 'objetivo', loadChildren: () => import('./city-objective/city-objective.module').then(m => m.CityObjectiveModule) },
       { path: 'recursos', loadChildren: () => import('./city-resources/city-resources.module').then(m => m.CityResourcesModule) },
+      { path: 'actividades', loadChildren: () => import('./city-activities/city-activity.module').then(m => m.CityIntroductionModule) },
       { path: 'video-proyecto', loadChildren: () => import('./city-project-video/city-project-video.module').then(m => m.CityProjectVideoModule) },
       { path: 'video-manual', loadChildren: () => import('./city-manual-video/city-manual-video.module').then(m => m.CityManualVideoModule) },
       { path: 'configuracion', loadChildren: () => import('./city-configuration/city-configuration.module').then(m => m.CityConfigurationModule) },

@@ -48,6 +48,11 @@
     Lecturas y Recursos Online
   </a>
 
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'actividades']" routerLinkActive
+    #activities="routerLinkActive" [active]="activities.isActive" *ngIf="cityConf.enabledPages?.activities">
+    Actividades de la ciudad
+  </a>
+
   <!--  -->
   <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-proyecto']" routerLinkActive
     #projectVideo="routerLinkActive" [active]="projectVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
@@ -65,7 +70,7 @@
   <dashboard-sidebar-divider *ngIf="cityConf.enabledPages?.activities"></dashboard-sidebar-divider>
 
   <h2 dashboard-sidebar-section-name *ngIf="cityConf.enabledPages?.activities">
-    Actividades de la ciudad
+    Configurar Actividades de la ciudad
   </h2>
 
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.contribution" dashboard-sidebar-item
