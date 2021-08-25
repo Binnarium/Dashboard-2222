@@ -43,6 +43,20 @@ const routes: Routes = [
     canActivate: [CanAccessDashboardGuard]
   },
 
+  // start video module
+  {
+    path: 'video-introduccion',
+    loadChildren: () => import('./start-video/start-video.module').then(m => m.StartVideoModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
+  // team module
+  {
+    path: 'ficha-equipo',
+    loadChildren: () => import('./team/team.module').then(m => m.TeamModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
   // redirect all inconsistent routes to home
   {
     path: '**',

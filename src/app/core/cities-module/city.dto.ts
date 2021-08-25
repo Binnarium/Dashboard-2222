@@ -5,10 +5,12 @@ export interface CityEnabledPagesDto {
   introductoryVideo: boolean | null;
   argumentation: boolean | null;
   resources: boolean | null;
-
+  projectVideo: boolean | null;
+  manualVideo: boolean | null;
   activities: boolean | null;
+
   // activities
-  questionary: boolean | null;
+  contribution: boolean | null;
   clubhouse: boolean | null;
   project: boolean | null;
 }
