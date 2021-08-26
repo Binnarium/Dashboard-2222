@@ -8,6 +8,7 @@ export interface CityEnabledPagesDto {
   projectVideo: boolean | null;
   manualVideo: boolean | null;
   activities: boolean | null;
+  content: boolean | null;
 
   // activities
   contribution: boolean | null;

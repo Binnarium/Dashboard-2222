@@ -39,7 +39,7 @@
 
 
   <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'contenido']" routerLinkActive
-    #content="routerLinkActive" [active]="content.isActive">
+    #content="routerLinkActive" [active]="content.isActive" *ngIf="cityConf.enabledPages?.content ">
     Videos y Podcast
   </a>
 
