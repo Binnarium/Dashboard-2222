@@ -50,6 +50,13 @@ const routes: Routes = [
     canActivate: [CanAccessDashboardGuard]
   },
 
+  // start video module
+  {
+    path: 'actividades',
+    loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
   // team module
   {
     path: 'ficha-equipo',

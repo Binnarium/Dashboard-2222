@@ -42,6 +42,12 @@
     Ficha del Equipo
   </a>
 
+  <!-- activities -->
+  <a dashboard-sidebar-item routerLink="/actividades" routerLinkActive #activities="routerLinkActive"
+    [active]="activities.isActive">
+    Descripción Actividades
+  </a>
+
   <!-- app conf -->
   <a dashboard-sidebar-item routerLink="/configuracion" routerLinkActive #appConf="routerLinkActive"
     [active]="appConf.isActive">
