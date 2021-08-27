@@ -50,6 +50,7 @@ export class CityConfigurationComponent implements OnDestroy {
       resources: this.fb.control(true),
       projectVideo: this.fb.control(true),
       manualVideo: this.fb.control(true),
+      microMesoMacro: this.fb.control(true),
     })
   });
 
@@ -84,7 +85,7 @@ export class CityConfigurationComponent implements OnDestroy {
         const checkboxFields: Array<keyof CityEnabledPagesDto> = [
           'activities', 'project', 'contribution', 'clubhouse',
           'argumentation', 'introductoryVideo', 'resources',
-          'projectVideo', 'manualVideo', 'content'
+          'projectVideo', 'manualVideo', 'content', 'microMesoMacro'
         ];
         checkboxFields.forEach(field => this.enabledPagesControl.controls[field].setValue(conf.enabledPages![field] ?? false, { emitEvent: false })
         )
