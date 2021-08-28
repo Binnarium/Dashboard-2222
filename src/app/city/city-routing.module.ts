@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: 'objetivo', loadChildren: () => import('./city-objective/city-objective.module').then(m => m.CityObjectiveModule) },
       { path: 'recursos', loadChildren: () => import('./city-resources/city-resources.module').then(m => m.CityResourcesModule) },
       { path: 'video-proyecto', loadChildren: () => import('./city-project-video/city-project-video.module').then(m => m.CityProjectVideoModule) },
+      { path: 'micro-meso-macro', loadChildren: () => import('./city-micro-meso-macro/city-micro-meso-macro.module').then(m => m.CityMicroMesoMacroModule) },
       { path: 'video-manual', loadChildren: () => import('./city-manual-video/city-manual-video.module').then(m => m.CityManualVideoModule) },
       { path: 'configuracion', loadChildren: () => import('./city-configuration/city-configuration.module').then(m => m.CityConfigurationModule) },
       { path: 'contribucion', loadChildren: () => import('./city-contribution/city-contribution.module').then(m => m.CityQuizzesModule) },
