@@ -1,0 +1,73 @@
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Configurar Placa Lo Micro, Lo Meso, Lo Macro
+    </h1>
+
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
+  </dashboard-topbar>
+
+
+  <!-- main content of page -->
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Titulo
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Texto que se mostrara sobre la imagen.
+      </span>
+
+      <!-- input text -->
+      <!-- input text -->
+      <input type="text" formControlName="title"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+    </div>
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Imagen
+      </h3>
+
+      <!-- input text -->
+      <dashboard-upload-image [image]="form.controls.image.value" (completed)="uploadImage($event)">
+      </dashboard-upload-image>
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Subtitulo
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Texto que se mostrara debajo de la imagen.
+      </span>
+
+      <!-- input text -->
+      <!-- input text -->
+      <input type="text" formControlName="subtitle"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+    </div>
+  </form>
+
+</dashboard-container>
