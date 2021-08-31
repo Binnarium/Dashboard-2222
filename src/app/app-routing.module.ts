@@ -56,6 +56,12 @@ const routes: Routes = [
     loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule),
     canActivate: [CanAccessDashboardGuard]
   },
+  // points explanation
+  {
+    path: 'explicacion-puntos',
+    loadChildren: () => import('./points-explanation/points-explanation.module').then(m => m.PointsExplanationModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
 
   // team module
   {

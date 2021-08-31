@@ -49,6 +49,11 @@
   </a>
 
   <!-- app conf -->
+  <a dashboard-sidebar-item routerLink="/explicacion-puntos" routerLinkActive #pointsExplanation="routerLinkActive"
+    [active]="pointsExplanation.isActive">
+    Explicación Puntos
+  </a>
+  <!-- app conf -->
   <a dashboard-sidebar-item routerLink="/configuracion" routerLinkActive #appConf="routerLinkActive"
     [active]="appConf.isActive">
     configuración de la Aplicación
