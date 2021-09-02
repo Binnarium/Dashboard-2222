@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'contribucion', loadChildren: () => import('./city-contribution/city-contribution.module').then(m => m.CityQuizzesModule) },
       { path: 'proyecto', loadChildren: () => import('./city-project/city-project.module').then(m => m.CityProjectModule) },
       { path: 'clubhouse', loadChildren: () => import('./city-clubhouse/city-clubhouse.module').then(m => m.CityClubhouseModule) },
+      { path: 'video-final', loadChildren: () => import('./city-final-video/city-final-video.module').then(m => m.CityFinalVideoModule) },
     ]
   }
 ];
