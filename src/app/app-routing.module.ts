@@ -9,6 +9,13 @@ const routes: Routes = [
     loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule)
   },
 
+  // players module
+  {
+    path: 'jugadores',
+    loadChildren: () => import('./players/players.module').then(m => m.PlayersModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
   // welcome module
   {
     path: 'bienvenida',

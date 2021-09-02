@@ -4,8 +4,14 @@
   </h3>
 
   <!-- Players -->
-  <a dashboard-sidebar-item>
+  <a dashboard-sidebar-item routerLink="/jugadores" routerLinkActive #players="routerLinkActive"
+    [active]="players.isActive">
     Jugadores
+  </a>
+  <!-- inscriptions link -->
+  <a dashboard-sidebar-item routerLink="/inscripciones" routerLinkActive #inscriptions="routerLinkActive"
+    [active]="inscriptions.isActive">
+    Inscribir jugadores
   </a>
 
   <!-- divide cities from other content -->
