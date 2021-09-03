@@ -47,20 +47,22 @@
   <dashboard-sidebar-divider *ngIf="cityConf.enabledPages?.introductoryVideo
           || cityConf.enabledPages?.manualVideo
           || cityConf.enabledPages?.projectVideo
-          || cityConf.enabledPages?.microMesoMacro"></dashboard-sidebar-divider>
+          || cityConf.enabledPages?.microMesoMacro
+          || cityConf.enabledPages?.finalVideo"></dashboard-sidebar-divider>
 
   <h2 dashboard-sidebar-section-name *ngIf="cityConf.enabledPages?.introductoryVideo
           || cityConf.enabledPages?.manualVideo
           || cityConf.enabledPages?.projectVideo
-          || cityConf.enabledPages?.microMesoMacro">
+          || cityConf.enabledPages?.microMesoMacro
+          || cityConf.enabledPages?.finalVideo">
     Placas de la ciudad
   </h2>
 
   <!--  -->
   <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id,'video-introductorio']" routerLinkActive
-    #introductoryVideo="routerLinkActive" [active]="introductoryVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
-    *ngIf="cityConf.enabledPages?.introductoryVideo">
-    Placa Introductoria
+    #introductoryVideo="routerLinkActive" [active]="introductoryVideo.isActive"
+    [routerLinkActiveOptions]="{exact: true}" *ngIf="cityConf.enabledPages?.introductoryVideo">
+    Placa Video Introductorio
   </a>
 
   <!--  -->
@@ -84,6 +86,11 @@
     Lo Micro, Lo Meso, Lo Macro
   </a>
 
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-final']" routerLinkActive
+    #finalVideo="routerLinkActive" [active]="finalVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
+    *ngIf="cityConf.enabledPages?.finalVideo">
+    Placa Video Final
+  </a>
 
   <dashboard-sidebar-divider *ngIf="cityConf.enabledPages?.activities"></dashboard-sidebar-divider>
 

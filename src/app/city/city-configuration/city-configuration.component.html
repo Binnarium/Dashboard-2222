@@ -119,9 +119,17 @@
           </span>
         </label>
 
-      </div>
-      <!-- form group -->
-      <div dashboard-form-group *ngIf="enabledPagesControl.controls.activities.value">
+        <!-- introductory video -->
+        <label class="flex flex-row gap-4 items-center">
+          <input type="checkbox" formControlName="finalVideo">
+          <span class="text-white uppercase font-semibold">
+            Placa Final
+          </span>
+        </label>
+
+        <div dashboard-form-group *ngIf="enabledPagesControl.controls.activities.value">
+        </div>
+        <!-- form group -->
         <!-- label -->
         <h3 dashboard-form-label>
           Actividades de la Ciudad
