@@ -39,8 +39,8 @@ const routes: Routes = [
 
   // home module
   {
-    path: 'configuracion-clubhouse',
-    loadChildren: () => import('./clubhouse-configuration/clubhouse-configuration.module').then(m => m.ClubhouseConfigurationModule),
+    path: 'explicacion-clubhouse',
+    loadChildren: () => import('./clubhouse-explanation/clubhouse-explanation.module').then(m => m.ClubhouseExplanationModule),
     canActivate: [CanAccessDashboardGuard]
   },
   // home module

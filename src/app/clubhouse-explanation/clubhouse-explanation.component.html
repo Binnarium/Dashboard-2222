@@ -3,7 +3,7 @@
   <dashboard-topbar>
     <!-- page title -->
     <h1 class="text-white text-xl font-bold">
-      Configurar Encuentros Clubhouse
+      Configurar Explicación Clubhouse
     </h1>
 
     <!-- saved text -->
@@ -17,35 +17,54 @@
     </span>
   </dashboard-topbar>
 
-
   <!-- main content of page -->
   <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
-    <!-- form group -->
-    <div dashboard-form-group>
-      <!-- label -->
-      <label dashboard-form-label>
-        Tema de la Ciudad
-      </label>
-
-      <!-- input text -->
-      <input type="text" formControlName="theme"
-        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
-    </div>
 
     <!-- form group -->
     <div dashboard-form-group>
       <!-- label -->
       <label dashboard-form-label>
-        Explicación de la actividad
+        Explicación
       </label>
 
       <!-- explanation -->
       <span class="text-white text-base">
-        Corta explicación que describa la actividad. o Tematicas
+        Utiliza los diferentes títulos para resaltar textos de la explicación.
       </span>
 
       <!-- input text -->
       <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
     </div>
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Room Clubhouse
+      </h3>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Enlace del room para unirse al club de Lab Móvil 2222
+      </span>
+
+      <!-- input text -->
+      <input type="url" formControlName="clubUrl"
+        class="px-4 py-4  text-gray-700 bg-white  text-sm focus:outline-none focus:shadow-outline w-full">
+    </div>
+
+    <!-- IMAGE form control -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <h3 dashboard-form-label>
+        Video explicación
+      </h3>
+
+      <!-- input text -->
+      <dashboard-upload-video [video]="form.controls.video.value" (completed)="uploadVideo($event)">
+      </dashboard-upload-video>
+    </div>
+
   </form>
+
 </dashboard-container>

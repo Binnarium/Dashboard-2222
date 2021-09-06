@@ -18,4 +18,4 @@ const routes: Routes = [{ path: '', component: CityContributionComponent }]
     ReactiveFormsModule,
   ]
 })
-export class CityQuizzesModule { }
+export class CityContributionModule { }
