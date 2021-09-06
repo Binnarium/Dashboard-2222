@@ -60,6 +60,11 @@
     Explicación Puntos
   </a>
   <!-- app conf -->
+  <a dashboard-sidebar-item routerLink="/explicacion-clubhouse" routerLinkActive #clubhouseExplanation="routerLinkActive"
+    [active]="clubhouseExplanation.isActive">
+    Explicación Clubhouse
+  </a>
+  <!-- app conf -->
   <a dashboard-sidebar-item routerLink="/configuracion" routerLinkActive #appConf="routerLinkActive"
     [active]="appConf.isActive">
     configuración de la Aplicación

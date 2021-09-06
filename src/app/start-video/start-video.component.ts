@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { interval, Observable, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { VideoDTO } from 'src/app/shared/upload/asset.dto';
@@ -16,7 +15,6 @@ export class StartVideoComponent implements OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly route: ActivatedRoute,
     private readonly loadProjectVideoService: LoadStartVideoService,
     private readonly saveProjectVideoService: SaveStartVideoService,
   ) { }
