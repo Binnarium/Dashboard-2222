@@ -3,24 +3,49 @@
   <dashboard-topbar>
     <!-- page title -->
     <h1 class="text-white text-xl font-bold">
-      Configurar Clubhouse
+      Configurar Encuentros Clubhouse
     </h1>
 
-    <!-- saved text
-      <span class="uppercase text-white text-sm font-bold">
-        <ng-container *ngIf="saved; else savingTemplate">
-          Guardado <i class="far fa-save"></i>
-        </ng-container>
-        <ng-template #savingTemplate>
-          <i class=" animate-spin fas fa-spinner"></i>
-        </ng-template>
-      </span>
-    -->
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
   </dashboard-topbar>
 
 
   <!-- main content of page -->
-  <div class="w-full p-8 flex flex-col gap-8">
-    <h3>Próximamente...</h3>
-  </div>
+  <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Tema de la Ciudad
+      </label>
+
+      <!-- input text -->
+      <input type="text" formControlName="theme"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Explicación de la actividad
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Corta explicación que describa la actividad. o Tematicas
+      </span>
+
+      <!-- input text -->
+      <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
+    </div>
+  </form>
 </dashboard-container>

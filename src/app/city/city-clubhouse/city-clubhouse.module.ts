@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CityClubhouseComponent } from './city-clubhouse.component';
 
-
 const routes: Routes = [{ path: '', component: CityClubhouseComponent }]
 
 @NgModule({
