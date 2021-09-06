@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'micro-meso-macro', loadChildren: () => import('./city-micro-meso-macro/city-micro-meso-macro.module').then(m => m.CityMicroMesoMacroModule) },
       { path: 'video-manual', loadChildren: () => import('./city-manual-video/city-manual-video.module').then(m => m.CityManualVideoModule) },
       { path: 'configuracion', loadChildren: () => import('./city-configuration/city-configuration.module').then(m => m.CityConfigurationModule) },
-      { path: 'contribucion', loadChildren: () => import('./city-contribution/city-contribution.module').then(m => m.CityQuizzesModule) },
+      { path: 'contribucion', loadChildren: () => import('./city-contribution/city-contribution.module').then(m => m.CityContributionModule) },
       { path: 'proyecto', loadChildren: () => import('./city-project/city-project.module').then(m => m.CityProjectModule) },
       { path: 'clubhouse', loadChildren: () => import('./city-clubhouse/city-clubhouse.module').then(m => m.CityClubhouseModule) },
       { path: 'video-final', loadChildren: () => import('./city-final-video/city-final-video.module').then(m => m.CityFinalVideoModule) },
