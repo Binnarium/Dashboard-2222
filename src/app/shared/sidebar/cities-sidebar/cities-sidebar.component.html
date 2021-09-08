@@ -98,12 +98,23 @@
     Configurar Actividades de la ciudad
   </h2>
 
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.contributionExplanation" dashboard-sidebar-item
+    [routerLink]="['/explicacion-colaboraciones']" routerLinkActive #contributionExplanation="routerLinkActive"
+    [active]="contributionExplanation.isActive">
+    Explicación del manifiesto
+  </a>
+
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.contribution" dashboard-sidebar-item
     [routerLink]="['/ciudades', cityConf.id,'contribucion']" routerLinkActive #contribution="routerLinkActive"
     [active]="contribution.isActive">
     Tu Contribución
   </a>
 
+  <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.clubhouseExplanation" dashboard-sidebar-item
+    [routerLink]="['/explicacion-clubhouse']" routerLinkActive #clubhouseExplanation="routerLinkActive"
+    [active]="clubhouseExplanation.isActive">
+    Explicación Clubhouse
+  </a>
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.clubhouse" dashboard-sidebar-item
     [routerLink]="['/ciudades', cityConf.id,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
     [active]="clubhouse.isActive">
