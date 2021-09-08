@@ -39,10 +39,18 @@ const routes: Routes = [
 
   // home module
   {
+    path: 'explicacion-colaboraciones',
+    loadChildren: () => import('./collaboration-explanation/collaboration-explanation.module').then(m => m.CollaborationExplanationModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
+  // home module
+  {
     path: 'explicacion-clubhouse',
     loadChildren: () => import('./clubhouse-explanation/clubhouse-explanation.module').then(m => m.ClubhouseExplanationModule),
     canActivate: [CanAccessDashboardGuard]
   },
+
   // home module
   {
     path: 'configuracion',

@@ -13,7 +13,9 @@ export interface CityEnabledPagesDto {
   finalVideo: boolean | null;
 
   // activities
+  contributionExplanation: boolean | null;
   contribution: boolean | null;
+  clubhouseExplanation: boolean | null;
   clubhouse: boolean | null;
   project: boolean | null;
 }
