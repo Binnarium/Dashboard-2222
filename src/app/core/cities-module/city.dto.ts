@@ -11,6 +11,7 @@ export interface CityEnabledPagesDto {
   content: boolean | null;
   microMesoMacro: boolean | null;
   finalVideo: boolean | null;
+  hackatonMedals: boolean | null;
 
   // activities
   contributionExplanation: boolean | null;
