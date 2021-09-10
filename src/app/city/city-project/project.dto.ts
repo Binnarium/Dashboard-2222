@@ -4,4 +4,5 @@ export interface ProjectDto {
   activity: string;
   explanation: string;
   audio: AudioContentDto;
+  allow: 'ALLOW#FILE' | 'ALLOW#AUDIO' | 'ALLOW#NONE';
 }
