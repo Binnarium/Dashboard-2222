@@ -1,0 +1,52 @@
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Registrar inscripciones
+    </h1>
+
+  </dashboard-topbar>
+
+  <!-- content -->
+  <div class="pt-8">
+    <dashboard-read-file (upload)="readFile($event)"></dashboard-read-file>
+  </div>
+
+  <p class="text-white pt-8">
+    El archivo con la informacion de inscripciones tener el siguiente formato. <code
+      class="font-bold bg-black bg-opacity-30">Nombres</code>,
+    <code class="font-bold bg-black bg-opacity-30">Apellido</code> y <code
+      class="font-bold bg-black bg-opacity-30">Correo Electrónico</code>. (Se omitira la primera linea)
+  </p>
+
+  <table class="mt-4 border-collapse border border-black px-4 py-3 bg-white w-full">
+    <thead>
+      <tr>
+        <th class="border border-black px-4 py-3">#</th>
+        <th class="border border-black px-4 py-3">Nombres</th>
+        <th class="border border-black px-4 py-3">Apellidos</th>
+        <th class="border border-black px-4 py-3">Correo Electrónico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inscription of (inscriptions$ | async); let idx = index">
+        <td class="border border-black px-4 py-3">{{ idx + 1 }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.name | titlecase }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.lastName | titlecase }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <dashboard-footer>
+
+    <button class="bg-black text-white px-4 py-2 font-medium text-sm uppercase" (click)="save()">
+      Guardar inscripciones
+      <!-- loader with spin animation when creating new -->
+      <ng-container *ngIf="isSaving">
+        <i class="fas fa-spinner animate-spin"></i>
+      </ng-container>
+    </button>
+  </dashboard-footer>
+</dashboard-container>
