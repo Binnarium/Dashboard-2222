@@ -1,0 +1,7 @@
+<label class="py-3 px-4 bg-white w-full cursor-pointer" for="inputFile">
+
+  <input (change)="fileChange($event)" accept=".csv" type="file" class="hidden" id="inputFile" />
+  <span class="font-bold uppercase text-xs">
+    {{ fileName }}
+  </span>
+</label>

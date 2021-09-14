@@ -6,16 +6,15 @@
       Configurar Proyecto Docente
     </h1>
 
-    <!-- saved text
-      <span class="uppercase text-white text-sm font-bold">
-        <ng-container *ngIf="saved; else savingTemplate">
-          Guardado <i class="far fa-save"></i>
-        </ng-container>
-        <ng-template #savingTemplate>
-          <i class=" animate-spin fas fa-spinner"></i>
-        </ng-template>
-      </span>
-    -->
+    <!-- saved text -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="saved; else savingTemplate">
+        Guardado <i class="far fa-save"></i>
+      </ng-container>
+      <ng-template #savingTemplate>
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-template>
+    </span>
   </dashboard-topbar>
 
 
@@ -36,6 +35,27 @@
       <!-- input text -->
       <input type="text" formControlName="activity"
         class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+    </div>
+
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Documentos Permitidos
+      </label>
+
+      <!-- activity -->
+      <span class="text-white text-base">
+        Tipos de documentos que se pueden subir
+      </span>
+
+      <!-- input text -->
+      <select formControlName="allow"
+        class="px-4 py-4 placeholder-gray-400 text-gray-700 bg-white  text-sm  focus:outline-none  w-full ">
+        <option value="ALLOW#FILE">Permitir Archivo</option>
+        <option value="ALLOW#AUDIO">Permitir Audio</option>
+        <option value="ALLOW#NONE">No puede subir documentos</option>
+      </select>
     </div>
 
     <!-- form group -->

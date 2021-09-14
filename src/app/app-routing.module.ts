@@ -16,6 +16,12 @@ const routes: Routes = [
     canActivate: [CanAccessDashboardGuard]
   },
 
+  {
+    path: 'inscripciones',
+    loadChildren: () => import('./inscriptions/inscriptions.module').then(m => m.InscriptionsModule),
+    canActivate: [CanAccessDashboardGuard]
+  },
+
   // welcome module
   {
     path: 'bienvenida',

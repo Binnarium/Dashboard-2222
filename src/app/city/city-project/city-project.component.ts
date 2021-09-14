@@ -28,6 +28,7 @@ export class CityProjectComponent implements OnDestroy {
   public readonly form: FormGroup = this.fb.group(<Record<keyof ProjectDto, FormControl | FormGroup>>{
     activity: this.fb.control(null),
     explanation: this.fb.control(null),
+    allow: this.fb.control(<ProjectDto['allow']>'ALLOW#NONE'),
     audio: this.fb.group(<Record<keyof AudioDto, FormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
@@ -70,6 +71,8 @@ export class CityProjectComponent implements OnDestroy {
         (this.form.controls[<keyof ProjectDto>'activity'] as FormControl).setValue(project.activity, { emitEvent: false });
       if (project?.explanation)
         (this.form.controls[<keyof ProjectDto>'explanation'] as FormControl).setValue(project.explanation, { emitEvent: false });
+      if (project?.allow)
+        (this.form.controls[<keyof ProjectDto>'allow'] as FormControl).setValue(project.allow, { emitEvent: false });
       if (project?.audio)
         (this.form.controls[<keyof ProjectDto>'audio'] as FormGroup).setValue(project.audio, { emitEvent: false });
     }

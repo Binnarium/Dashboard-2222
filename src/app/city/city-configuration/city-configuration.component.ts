@@ -40,20 +40,21 @@ export class CityConfigurationComponent implements OnDestroy {
       url: this.fb.control(null),
     }),
     enabledPages: this.fb.group(<Record<keyof CityEnabledPagesDto, FormControl>>{
-      activities: this.fb.control(true),
-      contribution: this.fb.control(true),
-      content: this.fb.control(true),
-      clubhouse: this.fb.control(true),
-      clubhouseExplanation: this.fb.control(true),
-      contributionExplanation: this.fb.control(true),
-      project: this.fb.control(true),
-      argumentation: this.fb.control(true),
-      introductoryVideo: this.fb.control(true),
-      resources: this.fb.control(true),
-      projectVideo: this.fb.control(true),
-      manualVideo: this.fb.control(true),
-      microMesoMacro: this.fb.control(true),
-      finalVideo: this.fb.control(true),
+      activities: this.fb.control(false),
+      contribution: this.fb.control(false),
+      content: this.fb.control(false),
+      clubhouse: this.fb.control(false),
+      clubhouseExplanation: this.fb.control(false),
+      contributionExplanation: this.fb.control(false),
+      project: this.fb.control(false),
+      argumentation: this.fb.control(false),
+      introductoryVideo: this.fb.control(false),
+      resources: this.fb.control(false),
+      projectVideo: this.fb.control(false),
+      manualVideo: this.fb.control(false),
+      microMesoMacro: this.fb.control(false),
+      finalVideo: this.fb.control(false),
+      hackatonMedals: this.fb.control(false),
     })
   });
 
@@ -89,7 +90,8 @@ export class CityConfigurationComponent implements OnDestroy {
           'activities', 'project', 'contribution', 'clubhouse',
           'argumentation', 'introductoryVideo', 'resources',
           'projectVideo', 'manualVideo', 'content', 'microMesoMacro',
-          'finalVideo', 'clubhouseExplanation', 'contributionExplanation'
+          'finalVideo', 'clubhouseExplanation', 'contributionExplanation',
+          'hackatonMedals'
         ];
         checkboxFields.forEach(field => this.enabledPagesControl.controls[field].setValue(conf.enabledPages![field] ?? false, { emitEvent: false })
         )
