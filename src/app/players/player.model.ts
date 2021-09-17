@@ -7,6 +7,6 @@ export interface PlayerModel {
   email: string;
   uid: string;
   projectAwards?: Array<AwardModel>;
-  collaborationAwards?: Array<AwardModel>;
+  contributionAwards?: Array<AwardModel>;
   clubhouseAwards?: Array<AwardModel>;
 }
