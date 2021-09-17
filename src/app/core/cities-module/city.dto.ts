@@ -11,7 +11,6 @@ export interface CityEnabledPagesDto {
   content: boolean | null;
   microMesoMacro: boolean | null;
   finalVideo: boolean | null;
-  hackatonMedals: boolean | null;
 
   // activities
   contributionExplanation: boolean | null;
@@ -19,6 +18,7 @@ export interface CityEnabledPagesDto {
   clubhouseExplanation: boolean | null;
   clubhouse: boolean | null;
   project: boolean | null;
+  marathon: boolean | null;
 }
 
 export interface CityDto {

@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
-import { CollaborationExplanationDto } from './collaboration-explanation.dto';
+import { ContributionExplanationDto } from './contribution-explanation.dto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SaveCollaborationExplanationService {
+export class SaveContributionExplanationService {
 
   constructor(
     private readonly afFirestore: AngularFirestore,
   ) { }
 
-  public save$(payload: CollaborationExplanationDto): Observable<boolean> {
+  public save$(payload: ContributionExplanationDto): Observable<boolean> {
     const saveTask = this.afFirestore.collection('application')
-      .doc<CollaborationExplanationDto>('collaboration-explanation')
+      .doc<ContributionExplanationDto>('contribution-explanation')
       .set(payload, { merge: true });
 
     return from(saveTask).pipe(

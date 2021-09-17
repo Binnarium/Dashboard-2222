@@ -3,24 +3,24 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { VideoDTO } from '../shared/upload/asset.dto';
-import { CollaborationExplanationDto } from './collaboration-explanation.dto';
-import { LoadCollaborationExplanationService } from './load-collaboration-explanation.service';
-import { SaveCollaborationExplanationService } from './save-collaboration-explanation.service';
+import { ContributionExplanationDto } from './contribution-explanation.dto';
+import { LoadContributionExplanationService } from './load-contribution-explanation.service';
+import { SaveContributionExplanationService } from './save-contribution-explanation.service';
 
 @Component({
-  selector: 'dashboard-collaboration-explanation',
-  templateUrl: './collaboration-explanation.component.html',
+  selector: 'dashboard-Contribution-explanation',
+  templateUrl: './contribution-explanation.component.html',
 })
-export class CollaborationExplanationComponent implements OnDestroy {
+export class ContributionExplanationComponent implements OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly loadExplanationService: LoadCollaborationExplanationService,
-    private readonly saveExplanationService: SaveCollaborationExplanationService,
+    private readonly loadExplanationService: LoadContributionExplanationService,
+    private readonly saveExplanationService: SaveContributionExplanationService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CollaborationExplanationDto, FormControl | FormGroup>>{
+  public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionExplanationDto, FormControl | FormGroup>>{
     explanation: this.fb.control(null),
     manifestUrl: this.fb.control(null),
     video: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
@@ -36,18 +36,18 @@ export class CollaborationExplanationComponent implements OnDestroy {
   public saved = true;
 
   /** load from database */
-  private readonly loadCollaborationExplanationSub: Subscription = this.loadExplanationService.load$.pipe(
+  private readonly loadContributionExplanationSub: Subscription = this.loadExplanationService.load$.pipe(
     take(1),
     shareReplay(),
   ).subscribe(explanation => {
     if (explanation?.explanation)
-      this.form.controls[<keyof CollaborationExplanationDto>'explanation']
+      this.form.controls[<keyof ContributionExplanationDto>'explanation']
         .setValue(explanation.explanation, { emitEvent: false });
     if (explanation?.manifestUrl)
-      this.form.controls[<keyof CollaborationExplanationDto>'manifestUrl']
+      this.form.controls[<keyof ContributionExplanationDto>'manifestUrl']
         .setValue(explanation.manifestUrl, { emitEvent: false });
     if (explanation?.video)
-      this.form.controls[<keyof CollaborationExplanationDto>'video']
+      this.form.controls[<keyof ContributionExplanationDto>'video']
         .setValue(explanation.video, { emitEvent: false });
   });
 
@@ -59,12 +59,12 @@ export class CollaborationExplanationComponent implements OnDestroy {
   ).subscribe();
 
   ngOnDestroy(): void {
-    this.loadCollaborationExplanationSub.unsubscribe();
+    this.loadContributionExplanationSub.unsubscribe();
     this.autoSaveSub.unsubscribe();
   }
 
   uploadVideo(video: NonNullable<VideoDTO>) {
-    this.form.controls[<keyof CollaborationExplanationDto>'video'].setValue(video);
+    this.form.controls[<keyof ContributionExplanationDto>'video'].setValue(video);
   }
 
 }

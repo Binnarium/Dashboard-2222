@@ -22,8 +22,6 @@ export class CityClubhouseComponent implements OnDestroy {
 
   /** form so upload content */
   public readonly form: FormGroup = this.fb.group(<Record<keyof ClubhouseDto, FormControl>>{
-    theme: this.fb.control(null),
-    explanation: this.fb.control(null),
   });
 
   /** Current state of the form if its value have been saved */
@@ -55,10 +53,6 @@ export class CityClubhouseComponent implements OnDestroy {
   private readonly loadClubhouseSub: Subscription = this.clubhouse$.subscribe(
     // every time a new value comes, update the controls
     contribution => {
-      if (contribution?.explanation)
-        (this.form.controls[<keyof ClubhouseDto>'explanation'] as FormControl).setValue(contribution.explanation, { emitEvent: false });
-      if (contribution?.theme)
-        (this.form.controls[<keyof ClubhouseDto>'theme'] as FormControl).setValue(contribution.theme, { emitEvent: false });
     }
   );
 

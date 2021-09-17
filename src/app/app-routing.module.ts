@@ -46,7 +46,7 @@ const routes: Routes = [
   // home module
   {
     path: 'explicacion-colaboraciones',
-    loadChildren: () => import('./collaboration-explanation/collaboration-explanation.module').then(m => m.CollaborationExplanationModule),
+    loadChildren: () => import('./contribution-explanation/contribution-explanation.module').then(m => m.ContributionExplanationModule),
     canActivate: [CanAccessDashboardGuard]
   },
 

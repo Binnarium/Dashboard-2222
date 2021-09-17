@@ -3,7 +3,7 @@
   <dashboard-topbar>
     <!-- page title -->
     <h1 class="text-white text-xl font-bold">
-      Configurar Actividad de contribucion
+      Configurar Actividad de Manifiesto-wiki por la educación
     </h1>
 
     <!-- saved text -->
@@ -24,12 +24,15 @@
     <div dashboard-form-group>
       <!-- label -->
       <label dashboard-form-label>
-        Tema de la Actividad (Contribución)
+        Tema de la Actividad
       </label>
 
-      <!-- input text -->
-      <input type="text" formControlName="theme"
-        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
+      <!-- explanation -->
+      <span class="text-white text-base">
+        La tematica se encuentra ligada al titulo de la <a routerLink="../historia"
+          class="bg-gray px-2 py-1 cursor-pointer">introduccion Tematica</a>
+      </span>
+
     </div>
 
     <!-- form group -->
@@ -48,36 +51,21 @@
       <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
     </div>
 
-    <!-- IMAGE form control -->
+    <!-- form group -->
     <div dashboard-form-group>
       <!-- label -->
-      <h3 dashboard-form-label>
-        Contribuciones permitidas
-      </h3>
+      <label dashboard-form-label>
+        Enlace
+      </label>
 
       <!-- explanation -->
       <span class="text-white text-base">
-        Selecciona que tipos de contribuciones estan disponibles en esta sección
+        Enlace del pubpub de la actividad
       </span>
 
-      <label class="flex flex-row gap-4 items-center">
-        <input type="checkbox" formControlName="allowIdea">
-        <span class="text-white uppercase font-semibold">
-          Agregar Idea
-        </span>
-      </label>
-      <label class="flex flex-row gap-4 items-center">
-        <input type="checkbox" formControlName="allowLecture">
-        <span class="text-white uppercase font-semibold">
-          Agregar Lectura
-        </span>
-      </label>
-      <label class="flex flex-row gap-4 items-center">
-        <input type="checkbox" formControlName="allowProject">
-        <span class="text-white uppercase font-semibold">
-          Agregar Proyecto
-        </span>
-      </label>
+      <!-- input text-->
+      <input type="url" formControlName="pubUrl"
+        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
     </div>
   </form>
 </dashboard-container>

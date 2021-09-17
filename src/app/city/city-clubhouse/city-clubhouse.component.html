@@ -24,28 +24,14 @@
     <div dashboard-form-group>
       <!-- label -->
       <label dashboard-form-label>
-        Tema de la Ciudad
-      </label>
-
-      <!-- input text -->
-      <input type="text" formControlName="theme"
-        class="px-4 py-4 text-gray-700 bg-white text-sm focus:outline-none focus:shadow-outline w-full">
-    </div>
-
-    <!-- form group -->
-    <div dashboard-form-group>
-      <!-- label -->
-      <label dashboard-form-label>
-        Explicación de la actividad
+        Tema de la Actividad
       </label>
 
       <!-- explanation -->
       <span class="text-white text-base">
-        Corta explicación que describa la actividad. o Tematicas
+        La tematica se encuentra ligada al titulo de la <a routerLink="../historia"
+          class="bg-gray px-2 py-1 cursor-pointer">introduccion Tematica</a>
       </span>
-
-      <!-- input text -->
-      <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
     </div>
   </form>
 </dashboard-container>

@@ -23,10 +23,7 @@ export class CityContributionComponent implements OnDestroy {
 
   /** form so upload content */
   public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionDto, FormControl>>{
-    theme: this.fb.control(null),
-    allowIdea: this.fb.control(false),
-    allowLecture: this.fb.control(false),
-    allowProject: this.fb.control(false),
+    pubUrl: this.fb.control(null),
     explanation: this.fb.control(null),
   });
 
@@ -61,14 +58,8 @@ export class CityContributionComponent implements OnDestroy {
     contribution => {
       if (contribution?.explanation)
         (this.form.controls[<keyof ContributionDto>'explanation'] as FormControl).setValue(contribution.explanation, { emitEvent: false });
-      if (contribution?.theme)
-        (this.form.controls[<keyof ContributionDto>'theme'] as FormControl).setValue(contribution.theme, { emitEvent: false });
-      if (contribution?.allowIdea)
-        (this.form.controls[<keyof ContributionDto>'allowIdea'] as FormControl).setValue(contribution.allowIdea, { emitEvent: false });
-      if (contribution?.allowLecture)
-        (this.form.controls[<keyof ContributionDto>'allowLecture'] as FormControl).setValue(contribution.allowLecture, { emitEvent: false });
-      if (contribution?.allowProject)
-        (this.form.controls[<keyof ContributionDto>'allowProject'] as FormControl).setValue(contribution.allowProject, { emitEvent: false });
+      if (contribution?.pubUrl)
+        (this.form.controls[<keyof ContributionDto>'pubUrl'] as FormControl).setValue(contribution.pubUrl, { emitEvent: false });
     }
   );
 
