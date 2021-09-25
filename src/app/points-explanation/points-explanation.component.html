@@ -35,6 +35,18 @@
       <!-- input text -->
       <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
     </div>
+<!-- IMAGE form control -->
+<div dashboard-form-group>
+  <!-- label -->
+  <h3 dashboard-form-label>
+    Audio
+  </h3>
+
+  <!-- input text -->
+  <dashboard-upload-audio [audio]="audioControl.value" (completed)="uploadAudio($event)">
+  </dashboard-upload-audio>
+</div>
+
   </form>
 
 </dashboard-container>

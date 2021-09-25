@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
+import { AudioDto } from '../shared/upload/asset.dto';
 import { LoadPointsExplanationService } from './load-points-explanation.service';
 import { PointsExplanationDto } from './points-explanation.dto';
 import { SavePointsExplanationService } from './save-points-explanation.service';
@@ -21,6 +22,13 @@ export class PointsExplanationComponent implements OnDestroy {
   /** form so upload content */
   public readonly form: FormGroup = this.fb.group(<Record<keyof PointsExplanationDto, FormControl | FormGroup>>{
     explanation: this.fb.control(null),
+    audio: this.fb.group(<Record<keyof AudioDto, FormControl>>{
+      duration: this.fb.control(null),
+      format: this.fb.control(null),
+      name: this.fb.control(null),
+      path: this.fb.control(null),
+      url: this.fb.control(null),
+    }),
   });
 
   /** Current state of the form if its value have been saved */
@@ -34,6 +42,9 @@ export class PointsExplanationComponent implements OnDestroy {
     if (pointsExplanation?.explanation)
       this.form.controls[<keyof PointsExplanationDto>'explanation']
         .setValue(pointsExplanation.explanation, { emitEvent: false });
+    if (pointsExplanation?.audio)
+      (this.form.controls[<keyof PointsExplanationDto>'audio'] as FormGroup).setValue(pointsExplanation.audio, { emitEvent: false });
+
   });
 
   private autoSaveSub: Subscription = this.form.valueChanges.pipe(
@@ -47,4 +58,13 @@ export class PointsExplanationComponent implements OnDestroy {
     this.loadPointsExplanationSub.unsubscribe();
     this.autoSaveSub.unsubscribe();
   }
+
+  get audioControl(): FormGroup {
+    return this.form.get(<keyof PointsExplanationDto>'audio') as FormGroup;
+  }
+
+  uploadAudio(audio: AudioDto,) {
+    this.audioControl.setValue(audio);
+  }
+
 }
