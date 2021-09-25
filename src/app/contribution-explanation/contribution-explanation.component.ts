@@ -23,6 +23,7 @@ export class ContributionExplanationComponent implements OnDestroy {
   public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionExplanationDto, FormControl | FormGroup>>{
     explanation: this.fb.control(null),
     manifestUrl: this.fb.control(null),
+    codeExplanation: this.fb.control(null),
     video: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
@@ -46,6 +47,9 @@ export class ContributionExplanationComponent implements OnDestroy {
     if (explanation?.manifestUrl)
       this.form.controls[<keyof ContributionExplanationDto>'manifestUrl']
         .setValue(explanation.manifestUrl, { emitEvent: false });
+    if (explanation?.codeExplanation)
+      this.form.controls[<keyof ContributionExplanationDto>'codeExplanation']
+        .setValue(explanation.codeExplanation, { emitEvent: false });
     if (explanation?.video)
       this.form.controls[<keyof ContributionExplanationDto>'video']
         .setValue(explanation.video, { emitEvent: false });

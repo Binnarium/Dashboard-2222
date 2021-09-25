@@ -36,6 +36,23 @@
       <dashboard-textarea [control]="form.controls.explanation"></dashboard-textarea>
     </div>
 
+    <!-- form group -->
+    <div dashboard-form-group>
+      <!-- label -->
+      <label dashboard-form-label>
+        Explicación Código de Contribuciones
+      </label>
+
+      <!-- explanation -->
+      <span class="text-white text-base">
+        Indicaciones para que los juegadores agreguen su código en su perfil de clubhouse. Utiliza el texto especial de
+        <em class="bg-black bg-opacity-25">SHOW-CODE</em> para que sea remplazado por el código del jugador.
+      </span>
+
+      <!-- input text -->
+      <dashboard-textarea [control]="form.controls.codeExplanation"></dashboard-textarea>
+    </div>
+
     <!-- IMAGE form control -->
     <div dashboard-form-group>
       <!-- label -->
