@@ -1,38 +1,80 @@
-<dashboard-container>
+<dashboard-container wide>
   <dashboard-topbar>
     <h1 class="text-white text-xl font-bold">
       Jugadores en la plataforma
     </h1>
+    <!-- saving indicator -->
+    <span class="uppercase text-white text-sm font-bold">
+      <ng-container *ngIf="isSaving; else saveTemplate">
+        <i class=" animate-spin fas fa-spinner"></i>
+      </ng-container>
+      <ng-template #saveTemplate>
+        Guardado <i class="far fa-save"></i>
+      </ng-template>
+    </span>
+
   </dashboard-topbar>
 
   <table class="mt-4 border-collapse border border-black px-4 py-3 bg-white w-full">
     <thead>
       <tr>
-        <th class="border border-black px-4 py-3" rowspan="2">Id</th>
         <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Correo Electhonico</th>
-        <th class="border border-black px-4 py-3" colspan="3">Medallas Obtenidas</th>
+        <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
+        <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
+        <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
+        <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
+        <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
       </tr>
       <tr>
-        <th class="border border-black px-4 py-3">Colab.</th>
-        <th class="border border-black px-4 py-3">Clubh.</th>
-        <th class="border border-black px-4 py-3">Proje.</th>
+        <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
+        <th class="border border-black px-4 py-3 truncate">Clubhouse</th>
+        <th class="border border-black px-4 py-3 truncate">Proyecto</th>
+        <th class="border border-black px-4 py-3 truncate">Maratón</th>
       </tr>
     </thead>
 
     <tbody *ngIf="players$|async as players">
       <tr *ngFor="let player of players">
-        <td class="border border-black px-4 py-3">{{player.uid.slice(0,5)}}</td>
         <td class="border border-black px-4 py-3 truncate">{{player.displayName}}</td>
         <td class="border border-black px-4 py-3">{{player.email}}</td>
         <td class="border border-black px-4 py-3">
-          {{player.contributionAwards?.length ?? 0}}
+          <ng-container *ngIf="!!player.pubCode">
+            <span class="font-mono bg-opacity-20 mr-2"
+              [ngClass]="!!player.pubUserId ?'bg-green':'bg-primary'">{{player.pubCode}}</span>
+            {{player.contributionAwards?.length ?? 0}}
+          </ng-container>
+          <ng-template #noPubCode>
+            <span class="text-red">
+              NoCode
+            </span>
+          </ng-template>
         </td>
         <td class="border border-black px-4 py-3">
           {{player.clubhouseAwards?.length ?? 0}}
         </td>
         <td class="border border-black px-4 py-3">
           {{player.projectAwards?.length ?? 0}}
+        </td>
+        <td class="border border-black px-4 py-3">
+          {{player.projectAwards?.length ?? 0}}
+        </td>
+        <td class="border border-black px-4 py-3">
+          {{player.groupId}}
+        </td>
+        <td class="border border-black px-4 py-3">
+          <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
+            [value]='player.courseStatus'>
+            <option value="COURSE#NOT_STARTED">Por Empezar</option>
+            <option value="COURSE#IN_PROGRES">En Progreso</option>
+            <option value="COURSE#CONTINUE_NEXT_PHASE">Finalizado & Continua siguiente fase</option>
+            <option value="COURSE#CAN_NOT_CONTINUE_NEXT_PHASE">Finalizado & No Continua</option>
+          </select>
+        </td>
+        <td class="border border-black px-4 py-3">
+          <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)" [value]='player.playerType'>
+            <option value="PLAYER#2000">Grupo de los 2000</option>
+            <option value="PLAYER#TESTER">Tester</option>
+          </select>
         </td>
       </tr>
     </tbody>
