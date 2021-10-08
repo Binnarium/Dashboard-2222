@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { switchMapTo } from 'rxjs/operators';
 import { LoadPlayersService } from './load-player.service';
 import { PlayerModel } from './player.model';
+import { UpdateCourseStatusService } from './update-course-status.service';
+import { UpdatePlayerTypeService } from './update-player-type.service';
 
 @Component({
   selector: 'dashboard-players',
@@ -11,15 +13,51 @@ import { PlayerModel } from './player.model';
   styles: [
   ]
 })
-export class PlayersComponent {
+export class PlayersComponent implements OnDestroy {
 
   constructor(
-    private readonly loadPlayerService: LoadPlayersService,
     private readonly route: ActivatedRoute,
+    private readonly loadPlayerService: LoadPlayersService,
+    private readonly _updateCourseStatusService: UpdateCourseStatusService,
+    private readonly _updatePlayerTypeService: UpdatePlayerTypeService,
   ) { }
+
+  private _savingSub: Subscription | null = null;
 
   public readonly players$: Observable<Array<PlayerModel>> = this.route.queryParams.pipe(
     switchMapTo(this.loadPlayerService.getPlayers$()),
   );
 
+  ngOnDestroy(): void {
+    this._savingSub?.unsubscribe();
+  }
+
+  updateCourseStatus(playerId: string, value: string) {
+    if (!!this._savingSub)
+      return
+
+    this._savingSub = this._updateCourseStatusService.save$(playerId, value).subscribe((saved) => {
+      if (!saved)
+        alert('Ocurrio un problema al actualizar los datos');
+
+      this._savingSub?.unsubscribe();
+      this._savingSub = null;
+    });
+  }
+
+  updatePlayerType(playerId: string, value: string) {
+    if (!!this._savingSub)
+      return
+
+    this._savingSub = this._updatePlayerTypeService.save$(playerId, value).subscribe((saved) => {
+      if (!saved)
+        alert('Ocurrio un problema al actualizar los datos');
+
+      this._savingSub?.unsubscribe();
+      this._savingSub = null;
+    });
+  }
+
+
+  get isSaving(): boolean { return !!this._savingSub };
 }
