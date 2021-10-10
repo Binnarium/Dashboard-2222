@@ -72,12 +72,7 @@
     Placa descarga manual
   </a>
 
-  <!--  -->
-  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-proyecto']" routerLinkActive
-    #projectVideo="routerLinkActive" [active]="projectVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
-    *ngIf="cityConf.enabledPages?.projectVideo">
-    Placa Maratón del Proyecto
-  </a>
+
 
   <!--  -->
   <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'micro-meso-macro']" routerLinkActive
@@ -125,6 +120,13 @@
     [routerLink]="['/ciudades', cityConf.id,'clubhouse']" routerLinkActive #clubhouse="routerLinkActive"
     [active]="clubhouse.isActive">
     Encuentros Clubhouse
+  </a>
+
+  <!--  -->
+  <a dashboard-sidebar-item [routerLink]="['/ciudades', cityConf.id, 'video-proyecto']" routerLinkActive
+    #projectVideo="routerLinkActive" [active]="projectVideo.isActive" [routerLinkActiveOptions]="{exact: true}"
+    *ngIf="cityConf.enabledPages?.projectVideo">
+    Placa Video del Proyecto
   </a>
 
   <a *ngIf="cityConf.enabledPages?.activities && cityConf.enabledPages?.project" dashboard-sidebar-item
