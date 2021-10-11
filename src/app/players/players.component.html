@@ -65,7 +65,7 @@
           <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
             [value]='player.courseStatus'>
             <option value="COURSE#NOT_STARTED">Por Empezar</option>
-            <option value="COURSE#IN_PROGRES">En Progreso</option>
+            <option value="COURSE#IN_PROGRESS">En Progreso</option>
             <option value="COURSE#CONTINUE_NEXT_PHASE">Finalizado & Continua siguiente fase</option>
             <option value="COURSE#CAN_NOT_CONTINUE_NEXT_PHASE">Finalizado & No Continua</option>
           </select>

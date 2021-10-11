@@ -10,6 +10,7 @@ export interface CityEnabledPagesDto {
   activities: boolean | null;
   content: boolean | null;
   microMesoMacro: boolean | null;
+  thanksVideo: boolean | null;
   finalVideo: boolean | null;
 
   // activities
