@@ -25,6 +25,9 @@ export class CityContributionComponent implements OnDestroy {
   public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionDto, FormControl>>{
     pubUrl: this.fb.control(null),
     explanation: this.fb.control(null),
+    teachingPractice: this.fb.control(null),
+    educativeEducations: this.fb.control(null),
+    governmentManagement: this.fb.control(null),
   });
 
   /** Current state of the form if its value have been saved */
@@ -60,6 +63,12 @@ export class CityContributionComponent implements OnDestroy {
         (this.form.controls[<keyof ContributionDto>'explanation'] as FormControl).setValue(contribution.explanation, { emitEvent: false });
       if (contribution?.pubUrl)
         (this.form.controls[<keyof ContributionDto>'pubUrl'] as FormControl).setValue(contribution.pubUrl, { emitEvent: false });
+      if (contribution?.teachingPractice)
+        (this.form.controls[<keyof ContributionDto>'teachingPractice'] as FormControl).setValue(contribution.teachingPractice, { emitEvent: false });
+      if (contribution?.educativeEducations)
+        (this.form.controls[<keyof ContributionDto>'educativeEducations'] as FormControl).setValue(contribution.educativeEducations, { emitEvent: false });
+      if (contribution?.governmentManagement)
+        (this.form.controls[<keyof ContributionDto>'governmentManagement'] as FormControl).setValue(contribution.governmentManagement, { emitEvent: false });
     }
   );
 
