@@ -15,6 +15,26 @@
         </span>
       </ng-template>
 
+      <!-- processed badge -->
+      <div class="absolute top-6 left-6 z-3">
+        <div class="p-2 bg-black">
+          <div class="flex flex-row gap-2" *ngIf="betterVideo$ | async as betterVideo; else notProcessed ">
+            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
+              *ngIf="!!betterVideo.sdUrl">SD</span>
+            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
+              *ngIf="!!betterVideo.hdUrl">HD</span>
+            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
+              *ngIf="!!betterVideo.previewUrl">Preview</span>
+          </div>
+
+          <ng-template #notProcessed>
+            <div class="text-white">
+              <i class="fas fa-video-slash"></i> Procesando...
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
       <!-- Upload button -->
       <div class="absolute top-6 right-6 z-3">
         <!-- progress bar -->
@@ -28,8 +48,8 @@
             <div class="relative h-full text-white text-xs font-bold  flex justify-center items-center z-3 p-2 flex-col">
               {{progress?.percentage}}%
             </div>
-            </div>
-            </ng-container>
+          </div>
+          </ng-container>
 
         <!-- template text to upload the asset -->
         <ng-template #uploadInput>
@@ -46,10 +66,10 @@
               <span class="ml-2 text-xs uppercase font-semibold">
                 Subir Video
               </span>
-              </label>
-              </div>
-              </ng-template>
-              </div>
-              </div>
+            </label>
+            </div>
+            </ng-template>
+            </div>
+            </div>
   </div>
-  </div>
+</div>

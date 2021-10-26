@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule, FirebaseOptions } from '@angular/fire';
 import { AngularFireAnalyticsModule, APP_NAME, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
@@ -26,6 +27,7 @@ const firebaseConfig: Readonly<FirebaseOptions> = {
     AngularFireStorageModule,
     AngularFireMessagingModule,
     AngularFireFunctionsModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     ScreenTrackingService,
@@ -40,6 +42,7 @@ const firebaseConfig: Readonly<FirebaseOptions> = {
     AngularFireStorageModule,
     AngularFireMessagingModule,
     AngularFireFunctionsModule,
+    AngularFireDatabaseModule,
   ]
 
 })

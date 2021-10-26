@@ -11,5 +11,6 @@ import { UploadVideoComponent } from './upload-video/upload-video.component';
   imports: [CommonModule],
   declarations: [UploadVideoComponent, UploadImageComponent, UploadDocumentComponent, UploadAudioComponent],
   exports: [UploadVideoComponent, UploadImageComponent, UploadDocumentComponent, UploadAudioComponent],
+
 })
 export class UploadModule { }
