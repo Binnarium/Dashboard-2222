@@ -6,6 +6,7 @@ import { IUpload, UploadFileProgressDto } from '../i-upload';
 import { UploadSingleFileService } from '../upload-single-file.service';
 import { BetterVideoModel } from './better-video.model';
 import { LoadBetterVideoService } from './load-better-video.service';
+import { TranscodeVideoService } from './transcode-video.service';
 
 @Component({
   selector: 'dashboard-upload-video',
@@ -13,6 +14,7 @@ import { LoadBetterVideoService } from './load-better-video.service';
   providers: [
     { provide: IUpload, useClass: UploadSingleFileService },
     LoadBetterVideoService,
+    TranscodeVideoService,
   ]
 })
 export class UploadVideoComponent implements OnDestroy {
@@ -20,6 +22,7 @@ export class UploadVideoComponent implements OnDestroy {
   constructor(
     private readonly uploadService: IUpload,
     private readonly loadBetterVideo: LoadBetterVideoService,
+    private readonly transcodeVideoService: TranscodeVideoService,
   ) { }
 
   public video: VideoDTO | null = null;
@@ -41,6 +44,26 @@ export class UploadVideoComponent implements OnDestroy {
   public progress: UploadFileProgressDto | null = null;
 
   private uploadFileSubscription: Subscription | null = null;
+  private transcodeSub: Subscription | null = null;
+
+  ngOnDestroy(): void {
+    this.uploadFileSubscription?.unsubscribe();
+    this.transcodeSub?.unsubscribe();
+  }
+
+  transcode() {
+    if (!!this.transcodeSub)
+      return;
+    if (!!this.video?.path)
+      this.transcodeSub = this.transcodeVideoService.transcode$(this.video?.path).subscribe(transcoding => {
+        const msg = transcoding ? 'El video se va a procesar, puede tomar unos minutos' : 'Ocurrio un problema, vuelve a intentarlo';
+
+        alert(msg);
+
+        this.transcodeSub?.unsubscribe();
+        this.transcodeSub = null;
+      });
+  }
 
   upload(event: any): void {
     const file = event.target.files.item(0);
@@ -70,7 +93,4 @@ export class UploadVideoComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.uploadFileSubscription?.unsubscribe();
-  }
 }

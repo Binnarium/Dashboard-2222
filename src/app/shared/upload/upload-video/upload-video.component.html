@@ -33,7 +33,15 @@
             </div>
           </ng-template>
         </div>
+        <!-- trascode btn -->
+        <div class="mt-4" *ngIf="!(betterVideo$ | async) ">
+
+          <button class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white" (click)="transcode()">
+            Procesar
+          </button>
+        </div>
       </div>
+
 
       <!-- Upload button -->
       <div class="absolute top-6 right-6 z-3">
@@ -49,7 +57,7 @@
               {{progress?.percentage}}%
             </div>
           </div>
-          </ng-container>
+        </ng-container>
 
         <!-- template text to upload the asset -->
         <ng-template #uploadInput>
@@ -67,9 +75,10 @@
                 Subir Video
               </span>
             </label>
-            </div>
-            </ng-template>
-            </div>
-            </div>
+          </div>
+          </ng-template>
+          </div>
+          </div>
   </div>
 </div>
+{{video?.name}}
