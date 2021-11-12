@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { PlayersTypes } from '../shared/data/players-types.data';
 import { InscriptionModel } from './models/inscription.model';
 
 @Injectable({
@@ -17,12 +18,20 @@ export class TransformCsvToInscriptionService {
   protected transformRowToObject(row: Array<string>): InscriptionModel {
 
     // store in variables
-    const [name, lastName, email] = row;
+    const [name, lastName, email, playerType] = row;
+
+    const playersTypes: Array<string> = Object.keys(PlayersTypes);
+
+    if (!playersTypes.includes(playerType)) {
+      alert('Tipo de jugador invalido');
+      throw new Error("invalid player type");
+    }
 
     return <InscriptionModel>{
       email,
       lastName,
       name,
+      playerType
     };
   }
 }

@@ -2,11 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMapTo } from 'rxjs/operators';
+import { PlayersTypes } from "../shared/data/players-types.data";
 import { LoadPlayersService } from './load-player.service';
 import { PlayerModel } from './player.model';
 import { UpdateCourseStatusService } from './update-course-status.service';
 import { UpdatePlayerTypeService } from './update-player-type.service';
-
 @Component({
   selector: 'dashboard-players',
   templateUrl: './players.component.html',
@@ -23,6 +23,8 @@ export class PlayersComponent implements OnDestroy {
   ) { }
 
   private _savingSub: Subscription | null = null;
+
+  public playersTypes: Array<string> = Object.keys(PlayersTypes);
 
   public readonly players$: Observable<Array<PlayerModel>> = this.route.queryParams.pipe(
     switchMapTo(this.loadPlayerService.getPlayers$()),

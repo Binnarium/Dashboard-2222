@@ -78,8 +78,7 @@
         </td>
         <td class="border border-black px-4 py-3">
           <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)" [value]='player.playerType'>
-            <option value="PLAYER#2000">Grupo de los 2000</option>
-            <option value="PLAYER#TESTER">Tester</option>
+            <option *ngFor="let playerType of playersTypes" [value]="playerType">{{playerType|playerType}}</option>
           </select>
         </td>
       </tr>

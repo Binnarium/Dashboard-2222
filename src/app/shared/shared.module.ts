@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ComponentsModule } from './components/components.module';
+import { DataModule } from './data/data.module';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from './forms/forms.module';
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -16,6 +17,7 @@ import { UploadModule } from './upload/upload.module';
     UploadModule,
     FormsModule,
     ComponentsModule,
+    DataModule,
   ],
   declarations: [
     TopbarComponent,
@@ -28,6 +30,7 @@ import { UploadModule } from './upload/upload.module';
     TopbarComponent,
     FooterComponent,
     ComponentsModule,
+    DataModule,
   ],
 })
 export class SharedModule { }

@@ -27,6 +27,7 @@
         <th class="border border-black px-4 py-3">Nombres</th>
         <th class="border border-black px-4 py-3">Apellidos</th>
         <th class="border border-black px-4 py-3">Correo Electrónico</th>
+        <th class="border border-black px-4 py-3">Tipo de Inscripción</th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
         <td class="border border-black px-4 py-3">{{ inscription.name | titlecase }}</td>
         <td class="border border-black px-4 py-3">{{ inscription.lastName | titlecase }}</td>
         <td class="border border-black px-4 py-3">{{ inscription.email }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.playerType | playerType }}</td>
       </tr>
     </tbody>
   </table>
