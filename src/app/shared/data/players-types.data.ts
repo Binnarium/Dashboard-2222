@@ -1,20 +1,22 @@
+import { Pipe, PipeTransform } from '@angular/core';
 
 /**
  * Data types used to identify different kinds of players
  */
-export const PlayersTypes: Record<string, string> = {
+const PlayersTypesMap: Record<string, string> = {
+  "PLAYER#TESTER": "Tester",
   "PLAYER#2000": "Grupo de los 2000",
   "PLAYER#INVITED": "Invitado",
-  "PLAYER#TESTER": "Tester",
-} as const;
+};
 
-import { Pipe, PipeTransform } from '@angular/core';
+export const PlayersTypes: Array<string> = Object.keys(PlayersTypesMap);
+
 
 @Pipe({
-  name: 'playerType'
+  name: 'playerTypePipe'
 })
 export class PlayerTypePipe implements PipeTransform {
   transform(value: string): string {
-    return PlayersTypes[value] ?? 'Tipo de Jugador invalido';
+    return PlayersTypesMap[value] ?? 'Tipo de Jugador invalido';
   }
 }

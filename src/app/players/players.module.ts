@@ -6,6 +6,7 @@ import { PlayersRoutingModule } from './players-routing.module';
 import { PlayersComponent } from './players.component';
 import { UpdateCourseStatusService } from './update-course-status.service';
 import { UpdatePlayerTypeService } from './update-player-type.service';
+import { UpdatePlayerWebAccessService } from './update-player-web-access.service';
 
 
 
@@ -22,6 +23,7 @@ import { UpdatePlayerTypeService } from './update-player-type.service';
     LoadPlayersService,
     UpdateCourseStatusService,
     UpdatePlayerTypeService,
+    UpdatePlayerWebAccessService,
   ]
 })
 export class PlayersModule { }

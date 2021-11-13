@@ -7,6 +7,7 @@ import { LoadPlayersService } from './load-player.service';
 import { PlayerModel } from './player.model';
 import { UpdateCourseStatusService } from './update-course-status.service';
 import { UpdatePlayerTypeService } from './update-player-type.service';
+import { UpdatePlayerWebAccessService } from './update-player-web-access.service';
 @Component({
   selector: 'dashboard-players',
   templateUrl: './players.component.html',
@@ -20,11 +21,12 @@ export class PlayersComponent implements OnDestroy {
     private readonly loadPlayerService: LoadPlayersService,
     private readonly _updateCourseStatusService: UpdateCourseStatusService,
     private readonly _updatePlayerTypeService: UpdatePlayerTypeService,
+    private readonly _updatePlayerWebAccessService: UpdatePlayerWebAccessService,
   ) { }
 
   private _savingSub: Subscription | null = null;
 
-  public playersTypes: Array<string> = Object.keys(PlayersTypes);
+  public playersTypes: Array<string> = PlayersTypes;
 
   public readonly players$: Observable<Array<PlayerModel>> = this.route.queryParams.pipe(
     switchMapTo(this.loadPlayerService.getPlayers$()),
@@ -52,6 +54,19 @@ export class PlayersComponent implements OnDestroy {
       return
 
     this._savingSub = this._updatePlayerTypeService.save$(playerId, value).subscribe((saved) => {
+      if (!saved)
+        alert('Ocurrio un problema al actualizar los datos');
+
+      this._savingSub?.unsubscribe();
+      this._savingSub = null;
+    });
+  }
+
+  updatePlayerWebAccess(playerId: string, value: boolean) {
+    if (!!this._savingSub)
+      return
+
+    this._savingSub = this._updatePlayerWebAccessService.save$(playerId, value).subscribe((saved) => {
       if (!saved)
         alert('Ocurrio un problema al actualizar los datos');
 

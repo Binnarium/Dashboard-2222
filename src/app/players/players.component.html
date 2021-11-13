@@ -15,7 +15,7 @@
 
   </dashboard-topbar>
 
-  <table class="mt-4 border-collapse border border-black px-4 py-3 bg-white w-full">
+  <table class="my-4 border-collapse border border-black px-4 py-3 bg-white w-full">
     <thead>
       <tr>
         <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
@@ -24,6 +24,7 @@
         <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
         <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
         <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
+        <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
       </tr>
       <tr>
         <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
@@ -77,9 +78,15 @@
           </select>
         </td>
         <td class="border border-black px-4 py-3">
-          <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)" [value]='player.playerType'>
-            <option *ngFor="let playerType of playersTypes" [value]="playerType">{{playerType|playerType}}</option>
+          <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
+            <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt | playerTypePipe}}
+            </option>
           </select>
+        </td>
+        <td class="border border-black px-4 py-3">
+          <input #checkboxWebAccess type="checkbox" (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)"
+            [checked]="player.allowWebAccess">
+          {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
         </td>
       </tr>
     </tbody>
