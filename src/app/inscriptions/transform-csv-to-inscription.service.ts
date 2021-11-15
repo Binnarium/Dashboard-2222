@@ -20,9 +20,10 @@ export class TransformCsvToInscriptionService {
     // store in variables
     const [name, lastName, email, playerType] = row;
 
-    const playersTypes: Array<string> = Object.keys(PlayersTypes);
+    const playersTypes: Array<string> = PlayersTypes;
 
     if (!playersTypes.includes(playerType)) {
+      console.log(playerType)
       alert('Tipo de jugador invalido');
       throw new Error("invalid player type");
     }
