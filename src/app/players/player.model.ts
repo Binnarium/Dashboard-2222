@@ -1,5 +1,6 @@
 export interface AwardModel {
   cityId: string;
+  count: number;
   obtained: boolean;
 }
 export interface PlayerModel {
@@ -12,7 +13,7 @@ export interface PlayerModel {
   pubCode?: string;
   pubUserId?: string;
   projectAwards?: Array<AwardModel>;
-  contributionAwards?: Array<AwardModel>;
+  contributionsAwards?: Array<AwardModel>;
   clubhouseAwards?: Array<AwardModel>;
   allowWebAccess?: boolean;
 }

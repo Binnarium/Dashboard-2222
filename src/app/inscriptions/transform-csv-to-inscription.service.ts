@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { PlayersTypes } from '../shared/data/players-types.data';
+import { PlayersTypes } from 'src/app/shared/data/players-types.data';
 import { InscriptionModel } from './models/inscription.model';
 
 @Injectable({

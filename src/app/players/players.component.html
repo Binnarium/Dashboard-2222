@@ -18,6 +18,7 @@
   <table class="my-4 border-collapse border border-black px-4 py-3 bg-white w-full">
     <thead>
       <tr>
+        <th class="border border-black px-4 py-3" rowspan="2">Nro</th>
         <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
         <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
         <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
@@ -35,14 +36,15 @@
     </thead>
 
     <tbody *ngIf="players$|async as players">
-      <tr *ngFor="let player of players">
+      <tr *ngFor="let player of players; let i = index">
+        <td class="border border-black px-4 py-3 truncate">{{i+1}}</td>
         <td class="border border-black px-4 py-3 truncate">{{player.displayName}}</td>
         <td class="border border-black px-4 py-3">{{player.email}}</td>
         <td class="border border-black px-4 py-3">
           <ng-container *ngIf="!!player.pubCode">
             <span class="font-mono bg-opacity-20 mr-2"
               [ngClass]="!!player.pubUserId ?'bg-green':'bg-primary'">{{player.pubCode}}</span>
-            {{player.contributionAwards?.length ?? 0}}
+            {{player.contributionsAwards?.length ?? 0}}
           </ng-container>
           <ng-template #noPubCode>
             <span class="text-red">
@@ -67,19 +69,20 @@
             [value]='player.courseStatus'>
             <option value="COURSE#NOT_STARTED">Por Empezar</option>
             <option value="COURSE#IN_PROGRESS">En Progreso</option>
-            <option value="COURSE#NOT_APPROVED">Finalizado & No Continua</option>
-            <option value="COURSE#APPROVE_CAN_NOT_CONTINUE_NEXT_PHASE">Aprobado & No Continua</option>
-            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_CONTENT_ACCESS">Aprobado & Continua siguiente fase y
-              tiene acceso a los contenidos
+            <option value="COURSE#NOT_APPROVED">No Aprobado</option>
+            <option value="COURSE#APPROVE_CAN_NOT_CONTINUE_NEXT_PHASE">No continua</option>
+            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_CONTENT_ACCESS">Continua y tiene acceso a los
+              contenidos
             </option>
-            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_NO_CONTENT_ACCESS">Aprobado & Continua siguiente fase,
-              no tiene acceso a los contenidos
+            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_NO_CONTENT_ACCESS">Continua
+              sin acceso a los contenidos
             </option>
           </select>
         </td>
         <td class="border border-black px-4 py-3">
           <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
-            <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt | playerTypePipe}}
+            <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt |
+              playerTypePipe}}
             </option>
           </select>
         </td>

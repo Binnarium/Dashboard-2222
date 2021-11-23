@@ -13,7 +13,9 @@ export class LoadPlayersService {
     return this.afFirestore
       .collection<PlayerModel>(
         'players',
-        q => q.orderBy(<keyof PlayerModel>'displayName')
+        q => q
+          .where(<keyof PlayerModel>'playerType', '==', 'PLAYER#2000')
+          .orderBy(<keyof PlayerModel>'displayName'),
       )
       .valueChanges();
   }
