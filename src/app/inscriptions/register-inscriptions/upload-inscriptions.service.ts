@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
-import { InscriptionModel } from './models/inscription.model';
+import { InscriptionModel } from '../models/inscription.model';
 
 @Injectable({
   providedIn: 'root'

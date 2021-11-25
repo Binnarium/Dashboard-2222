@@ -8,7 +8,10 @@ import { UploadInscriptionsService } from './upload-inscriptions.service';
 @Component({
   selector: 'dashboard-inscriptions',
   templateUrl: './inscriptions.component.html',
-  styles: [
+  providers: [
+    TransformCsvToInscriptionService,
+    UploadInscriptionsService,
+    StringToCsvParserService,
   ]
 })
 export class InscriptionsComponent implements OnDestroy {
