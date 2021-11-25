@@ -6,15 +6,15 @@ import { TransformCsvToInscriptionService } from './transform-csv-to-inscription
 import { UploadInscriptionsService } from './upload-inscriptions.service';
 
 @Component({
-  selector: 'dashboard-inscriptions',
-  templateUrl: './inscriptions.component.html',
+  selector: 'dashboard-register-inscriptions',
+  templateUrl: './register-inscriptions.component.html',
   providers: [
     TransformCsvToInscriptionService,
     UploadInscriptionsService,
     StringToCsvParserService,
   ]
 })
-export class InscriptionsComponent implements OnDestroy {
+export class RegisterInscriptionsComponent implements OnDestroy {
   constructor(
     private readonly stringToCsvParserService: StringToCsvParserService,
     private readonly transformerService: TransformCsvToInscriptionService,

@@ -1,0 +1,32 @@
+<!-- make all the content fit in a full screen -->
+<main class="relative w-full min-h-screen bg-primary">
+  <!-- make a vertical layout -->
+  <div class="relative w-full h-full flex flex-row">
+
+    <!-- make sidebar static -->
+    <div class="sticky top-0 left-0 h-screen">
+      <dashboard-sidebar>
+        <h2 dashboard-sidebar-section-name>
+          Inscripciones
+        </h2>
+
+        <!--  -->
+        <a dashboard-sidebar-item [routerLink]="['/inscripciones']" routerLinkActive #list="routerLinkActive"
+          [active]="list.isActive" [routerLinkActiveOptions]="{exact: true}">
+          Listado de Inscripciones
+        </a>
+        <a dashboard-sidebar-item [routerLink]="['/inscripciones/registrar']" routerLinkActive
+          #register="routerLinkActive" [active]="register.isActive" [routerLinkActiveOptions]="{exact: true}">
+          Registrar nuevas Inscripciones
+
+        </a>
+
+      </dashboard-sidebar>
+    </div>
+
+    <!-- main content -->
+    <div class="flex-grow overflow-x-hidden">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

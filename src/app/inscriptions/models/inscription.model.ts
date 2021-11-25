@@ -4,4 +4,5 @@ export interface InscriptionModel {
   lastName: string;
   email: string;
   playerType: string;
+  hasRegistered?: boolean;
 }

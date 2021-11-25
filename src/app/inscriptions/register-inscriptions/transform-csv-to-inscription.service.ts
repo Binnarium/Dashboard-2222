@@ -32,7 +32,7 @@ export class TransformCsvToInscriptionService {
       email,
       lastName,
       name,
-      playerType
+      playerType,
     };
   }
 }

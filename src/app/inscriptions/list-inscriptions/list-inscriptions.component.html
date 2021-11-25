@@ -1,0 +1,35 @@
+<dashboard-container>
+  <!-- header -->
+  <dashboard-topbar>
+    <!-- page title -->
+    <h1 class="text-white text-xl font-bold">
+      Listado de inscripciones
+    </h1>
+
+  </dashboard-topbar>
+
+  <!-- content -->
+  <table class="mt-4 border-collapse border border-black px-4 py-3 bg-white w-full">
+    <thead>
+      <tr>
+        <th class="border border-black px-4 py-3">#</th>
+        <th class="border border-black px-4 py-3">Nombres</th>
+        <th class="border border-black px-4 py-3">Apellidos</th>
+        <th class="border border-black px-4 py-3">Correo Electrónico</th>
+        <th class="border border-black px-4 py-3">Tipo de Inscripción</th>
+        <th class="border border-black px-4 py-3">ha Ingresado?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inscription of (inscriptions$ | async); let idx = index">
+        <td class="border border-black px-4 py-3">{{ idx + 1 }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.name | titlecase }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.lastName | titlecase }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.email }}</td>
+        <td class="border border-black px-4 py-3">{{ inscription.playerType | playerTypePipe }}</td>
+        <td class="border border-black px-4 py-3">{{ !!inscription.hasRegistered? 'SI': 'NO' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</dashboard-container>

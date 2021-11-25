@@ -19,7 +19,7 @@ export class UploadInscriptionsService {
     data.forEach(inscription => {
       // references to all the documents that will be updated when a new mentor is created
       const inscriptionRef = this.db.collection('inscribed-players').doc(inscription.email).ref;
-      batch.set(inscriptionRef, inscription);
+      batch.set(inscriptionRef, inscription, { merge: true });
     });
 
     // batch writes
