@@ -12,87 +12,103 @@
         Guardado <i class="far fa-save"></i>
       </ng-template>
     </span>
-
   </dashboard-topbar>
+  <!-- filters -->
+  <section class="flex gap-2 mt-4">
+    <h3 class="text-white">
+      Filtrar jugadores:
+    </h3>
+    <a *ngFor="let playerType of playersTypes" class="px-2 py-1 bg-black text-white text-sm" [routerLink]="['.']"
+      [queryParams]="{ playerType }">
+      {{playerType | playerTypePipe}}
+    </a>
+    <a *ngIf="queriesByPlayerType$|async" class="px-2 py-1 bg-black text-white text-sm" [routerLink]="['.']"
+      [queryParams]="{ playerType : null}">
+      Remover Filtros
+    </a>
+  </section>
 
-  <table class="my-4 border-collapse border border-black px-4 py-3 bg-white w-full">
-    <thead>
-      <tr>
-        <th class="border border-black px-4 py-3" rowspan="2">Nro</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
-        <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
-        <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
-      </tr>
-      <tr>
-        <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
-        <th class="border border-black px-4 py-3 truncate">Clubhouse</th>
-        <th class="border border-black px-4 py-3 truncate">Proyecto</th>
-        <th class="border border-black px-4 py-3 truncate">Maratón</th>
-      </tr>
-    </thead>
+  <div class="max-w-full overflow-x-scroll">
 
-    <tbody *ngIf="players$|async as players">
-      <tr *ngFor="let player of players; let i = index">
-        <td class="border border-black px-4 py-3 truncate">{{i+1}}</td>
-        <td class="border border-black px-4 py-3 truncate">{{player.displayName}}</td>
-        <td class="border border-black px-4 py-3">{{player.email}}</td>
-        <td class="border border-black px-4 py-3">
-          <ng-container *ngIf="!!player.pubCode">
-            <span class="font-mono bg-opacity-20 mr-2"
-              [ngClass]="!!player.pubUserId ?'bg-green':'bg-primary'">{{player.pubCode}}</span>
-            {{player.contributionsAwards?.length ?? 0}}
-          </ng-container>
-          <ng-template #noPubCode>
-            <span class="text-red">
-              NoCode
-            </span>
-          </ng-template>
-        </td>
-        <td class="border border-black px-4 py-3">
-          {{player.clubhouseAwards?.length ?? 0}}
-        </td>
-        <td class="border border-black px-4 py-3">
-          {{player.projectAwards?.length ?? 0}}
-        </td>
-        <td class="border border-black px-4 py-3">
-          {{player.projectAwards?.length ?? 0}}
-        </td>
-        <td class="border border-black px-4 py-3">
-          {{player.groupId}}
-        </td>
-        <td class="border border-black px-4 py-3">
-          <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
-            [value]='player.courseStatus'>
-            <option value="COURSE#NOT_STARTED">Por Empezar</option>
-            <option value="COURSE#IN_PROGRESS">En Progreso</option>
-            <option value="COURSE#NOT_APPROVED">No Aprobado</option>
-            <option value="COURSE#APPROVE_CAN_NOT_CONTINUE_NEXT_PHASE">No continua</option>
-            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_CONTENT_ACCESS">Continua y tiene acceso a los
-              contenidos
-            </option>
-            <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_NO_CONTENT_ACCESS">Continua
-              sin acceso a los contenidos
-            </option>
-          </select>
-        </td>
-        <td class="border border-black px-4 py-3">
-          <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
-            <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt |
-              playerTypePipe}}
-            </option>
-          </select>
-        </td>
-        <td class="border border-black px-4 py-3">
-          <input #checkboxWebAccess type="checkbox" (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)"
-            [checked]="player.allowWebAccess">
-          {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="my-4 border-collapse border border-black px-4 py-3 bg-white w-full">
+      <thead>
+        <tr>
+          <th class="border border-black px-4 py-3" rowspan="2">Nro</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
+          <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
+        </tr>
+        <tr>
+          <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
+          <th class="border border-black px-4 py-3 truncate">Clubhouse</th>
+          <th class="border border-black px-4 py-3 truncate">Proyecto</th>
+          <th class="border border-black px-4 py-3 truncate">Maratón</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="players$|async as players">
+        <tr *ngFor="let player of players; let i = index">
+          <td class="border border-black px-4 py-3 truncate">{{i+1}}</td>
+          <td class="border border-black px-4 py-3 truncate">{{player.displayName}}</td>
+          <td class="border border-black px-4 py-3">{{player.email}}</td>
+          <td class="border border-black px-4 py-3">
+            <ng-container *ngIf="!!player.pubCode">
+              <span class="font-mono bg-opacity-20 mr-2"
+                [ngClass]="!!player.pubUserId ?'bg-green':'bg-primary'">{{player.pubCode}}</span>
+              {{player.contributionsAwards?.length ?? 0}}
+            </ng-container>
+            <ng-template #noPubCode>
+              <span class="text-red">
+                NoCode
+              </span>
+            </ng-template>
+          </td>
+          <td class="border border-black px-4 py-3">
+            {{player.clubhouseAwards?.length ?? 0}}
+          </td>
+          <td class="border border-black px-4 py-3">
+            {{player.projectAwards?.length ?? 0}}
+          </td>
+          <td class="border border-black px-4 py-3">
+            {{player.projectAwards?.length ?? 0}}
+          </td>
+          <td class="border border-black px-4 py-3">
+            {{player.groupId}}
+          </td>
+          <td class="border border-black px-4 py-3">
+            <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
+              [value]='player.courseStatus'>
+              <option value="COURSE#NOT_STARTED">Por Empezar</option>
+              <option value="COURSE#IN_PROGRESS">En Progreso</option>
+              <option value="COURSE#NOT_APPROVED">No Aprobado</option>
+              <option value="COURSE#APPROVE_CAN_NOT_CONTINUE_NEXT_PHASE">No continua</option>
+              <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_CONTENT_ACCESS">Continua y tiene acceso a los
+                contenidos
+              </option>
+              <option value="COURSE#APPROVE_CONTINUE_NEXT_PHASE_HAS_NO_CONTENT_ACCESS">Continua
+                sin acceso a los contenidos
+              </option>
+            </select>
+          </td>
+          <td class="border border-black px-4 py-3">
+            <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
+              <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt |
+                playerTypePipe}}
+              </option>
+            </select>
+          </td>
+          <td class="border border-black px-4 py-3">
+            <input #checkboxWebAccess type="checkbox" (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)"
+              [checked]="player.allowWebAccess">
+            {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
+            </td>
+            </tr>
+            </tbody>
+            </table>
+  </div>
 
 </dashboard-container>

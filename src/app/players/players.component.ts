@@ -1,9 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { switchMapTo } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { PlayersTypes } from "../shared/data/players-types.data";
-import { LoadPlayersService } from './load-player.service';
+import { PlayersFiltersModel } from './filters.model';
+import { LoadPlayersService } from './load-players.service';
 import { PlayerModel } from './player.model';
 import { UpdateCourseStatusService } from './update-course-status.service';
 import { UpdatePlayerTypeService } from './update-player-type.service';
@@ -11,13 +12,12 @@ import { UpdatePlayerWebAccessService } from './update-player-web-access.service
 @Component({
   selector: 'dashboard-players',
   templateUrl: './players.component.html',
-  styles: [
-  ]
 })
 export class PlayersComponent implements OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly loadPlayerService: LoadPlayersService,
     private readonly _updateCourseStatusService: UpdateCourseStatusService,
     private readonly _updatePlayerTypeService: UpdatePlayerTypeService,
@@ -28,8 +28,12 @@ export class PlayersComponent implements OnDestroy {
 
   public playersTypes: Array<string> = PlayersTypes;
 
-  public readonly players$: Observable<Array<PlayerModel>> = this.route.queryParams.pipe(
-    switchMapTo(this.loadPlayerService.getPlayers$()),
+  public readonly params$: Observable<PlayersFiltersModel> = this.route.queryParams;
+
+  public readonly queriesByPlayerType$: Observable<boolean> = this.params$.pipe(map(p => !!p.playerType))
+
+  public readonly players$: Observable<Array<PlayerModel>> = this.params$.pipe(
+    switchMap((params) => this.loadPlayerService.getPlayers$(params)),
   );
 
   ngOnDestroy(): void {

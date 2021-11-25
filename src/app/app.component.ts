@@ -15,7 +15,7 @@ import { UserService } from './core/auth/user.service';
       </div>
 
       <!-- main content -->
-      <div class="flex-grow">
+      <div class="flex-grow overflow-x-hidden">
         <router-outlet></router-outlet>
       </div>
     </div>
