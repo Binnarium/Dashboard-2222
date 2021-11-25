@@ -25,7 +25,7 @@ export class UserService {
       if (!email)
         return of(user as UserDto);
 
-      const ref = this.userCollection(email);
+      const ref = this.userDocument(email);
 
       const userChanges = ref.valueChanges().pipe(
         map(data => data ? Object.assign(data, user) as UserDto : null)
@@ -39,7 +39,12 @@ export class UserService {
     map(user => !!user?.isAdmin)
   );
 
-  private userCollection(email: string) {
+  /**
+   * Get the firestore document reference to obtain a user
+   * @param email required user mail address
+   * @returns reference to the user document
+   */
+  public userDocument(email: string) {
     return this.afFirestore.collection('users').doc<UserRoleDto>(email);
   }
 }

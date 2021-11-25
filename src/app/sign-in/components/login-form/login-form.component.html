@@ -1,0 +1,15 @@
+<form [formGroup]="loginForm" class="flex flex-col gap-4 items-stretch w-full max-w-md">
+  <input formControlName="email" type="email" placeholder="Correo Electronico" class="p-4">
+  <input formControlName="password" type="password" placeholder="Contraseña" class="p-4">
+
+  <button (click)="login()" class="bg-black text-white px-4 py-2 font-medium text-xs uppercase ">
+    Iniciar Sesión
+  </button>
+  <button (click)="register()" class=" text-white px-4 py-2 font-medium text-xs uppercase ">
+    Nuevo? Registra una nueva cuenta!
+  </button>
+
+  <span *ngIf="isSigningIn" class="self-center">
+    <i class="text-white text-2xl animate-spin fas fa-spinner"></i>
+  </span>
+</form>

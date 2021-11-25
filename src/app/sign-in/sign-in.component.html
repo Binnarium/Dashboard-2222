@@ -21,34 +21,18 @@
           Esparza</a>, o intenta ingresar con una cuenta diferente.
       </ng-template>
     </span>
+    <button *ngIf="user$|async" (click)="signOut()"
+      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
+      Cerrar Sesión
+    </button>
   </ng-container>
 
   <ng-template #noUserTemplate>
     <h2 class="text-white text-xl text-center">
       Inicia sesión para acceder al panel administrador
     </h2>
+    <dashboard-login-form></dashboard-login-form>
   </ng-template>
 
-  <div id="login-actions" class="flex flex-row gap-8">
-    <button *ngIf="!(user$|async)" (click)="googleSignIn()"
-      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
-      Ingresa con Google
-    </button>
-    <button *ngIf="!(user$|async)" (click)="utplSignIn()"
-      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
-      Ingresa con Microsoft
-    </button>
-    <button *ngIf="!(user$|async)" (click)="utplSignIn()"
-      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
-      Ingresa con UTPL
-    </button>
-    <button *ngIf="user$|async" (click)="signOut()"
-      class="bg-black text-white px-4 py-2 font-medium text-sm uppercase whitespace-nowrap">
-      Cerrar Sesión
-    </button>
-  </div>
 
-  <span *ngIf="isSigningIn">
-    <i class="text-white text-2xl animate-spin fas fa-spinner"></i>
-  </span>
 </div>
