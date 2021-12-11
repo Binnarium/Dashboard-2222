@@ -19,12 +19,12 @@
       <div class="absolute top-6 left-6 z-3">
         <div class="p-2 bg-black">
           <div class="flex flex-row gap-2" *ngIf="betterVideo$ | async as betterVideo; else notProcessed ">
-            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
-              *ngIf="!!betterVideo.sdUrl">SD</span>
-            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
-              *ngIf="!!betterVideo.hdUrl">HD</span>
-            <span class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
-              *ngIf="!!betterVideo.previewUrl">Preview</span>
+            <a target="_blank" [href]="betterVideo.sdUrl" class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
+              *ngIf="!!betterVideo.sdUrl">SD</a>
+            <a target="_blank" [href]="betterVideo.hdUrl" class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white"
+              *ngIf="!!betterVideo.hdUrl">HD</a>
+            <a target="_blank" [href]="betterVideo.previewUrl"
+              class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white" *ngIf="!!betterVideo.previewUrl">Preview</a>
           </div>
 
           <ng-template #notProcessed>
@@ -34,7 +34,8 @@
           </ng-template>
         </div>
         <!-- trascode btn -->
-        <div class="mt-4" *ngIf="!(betterVideo$ | async) ">
+        <!-- <div class="mt-4" *ngIf="!(betterVideo$ | async) "> -->
+        <div class="mt-4">
 
           <button class="text-black p-1 rounded-sm capitalize font-bold text-xs bg-white" (click)="transcode()">
             Procesar
@@ -76,9 +77,9 @@
               </span>
             </label>
           </div>
-          </ng-template>
-          </div>
-          </div>
+        </ng-template>
+        </div>
+        </div>
   </div>
 </div>
 {{video?.name}}

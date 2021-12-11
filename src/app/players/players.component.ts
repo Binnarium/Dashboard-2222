@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { PlayersTypes } from "../shared/data/players-types.data";
@@ -17,8 +18,8 @@ export class PlayersComponent implements OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly router: Router,
     private readonly loadPlayerService: LoadPlayersService,
+    private readonly _afFunctions: AngularFireFunctions,
     private readonly _updateCourseStatusService: UpdateCourseStatusService,
     private readonly _updatePlayerTypeService: UpdatePlayerTypeService,
     private readonly _updatePlayerWebAccessService: UpdatePlayerWebAccessService,
@@ -79,6 +80,27 @@ export class PlayersComponent implements OnDestroy {
     });
   }
 
+  connectPubPub(uid: string, name: string) {
+    if (!!this._savingSub)
+      return
+
+    const profileUrl = prompt(`Ingresa la Url del perfil de ${name}`);
+
+    if (!profileUrl)
+      return;
+
+    const fn = this._afFunctions.httpsCallable<{ profileUrl: string, playerUid: string }, { pubsFound: number, pubsWatchersCreated: number, pubsWatchersExisting: number }>('CONTRIBUTIONS_updatePubWatchersFromProfile');
+
+    this._savingSub = fn({ playerUid: uid, profileUrl }).subscribe((res) => {
+      alert(`Econtrados: ${res.pubsFound}; Nuevos: ${res.pubsWatchersCreated}; Existentes: ${res.pubsWatchersExisting}`);
+    },
+      error => console.error(error),
+      () => {
+        this._savingSub?.unsubscribe();
+        this._savingSub = null;
+      }
+    );
+  }
 
   get isSaving(): boolean { return !!this._savingSub };
 }

@@ -55,7 +55,7 @@ export class UploadVideoComponent implements OnDestroy {
     if (!!this.transcodeSub)
       return;
     if (!!this.video?.path)
-      this.transcodeSub = this.transcodeVideoService.transcode$(this.video?.path).subscribe(transcoding => {
+      this.transcodeSub = this.transcodeVideoService.transcode$(this.video.path).subscribe(transcoding => {
         const msg = transcoding ? 'El video se va a procesar, puede tomar unos minutos' : 'Ocurrio un problema, vuelve a intentarlo';
 
         alert(msg);

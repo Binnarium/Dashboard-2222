@@ -41,6 +41,7 @@
           <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
           <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
           <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Opciones</th>
         </tr>
         <tr>
           <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
@@ -102,13 +103,19 @@
             </select>
           </td>
           <td class="border border-black px-4 py-3">
-            <input #checkboxWebAccess type="checkbox" (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)"
-              [checked]="player.allowWebAccess">
+            <input #checkboxWebAccess type="checkbox" [checked]="player.allowWebAccess"
+              (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)">
             {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
-            </td>
-            </tr>
-            </tbody>
-            </table>
+          </td>
+          <!-- options -->
+          <td class="border border-black px-4 py-3">
+            <button (click)="connectPubPub(player.uid, player.displayName)">
+              Conectar PubPub
+            </button>
+          </td>
+        </tr>
+        </tbody>
+        </table>
   </div>
 
 </dashboard-container>
