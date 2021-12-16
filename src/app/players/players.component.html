@@ -36,6 +36,7 @@
           <th class="border border-black px-4 py-3" rowspan="2">Nro</th>
           <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
           <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
+          <th class="border border-black px-4 py-3" rowspan="2">Grupo</th>
           <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
           <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
           <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
@@ -56,6 +57,7 @@
           <td class="border border-black px-4 py-3 truncate">{{i+1}}</td>
           <td class="border border-black px-4 py-3 truncate">{{player.displayName}}</td>
           <td class="border border-black px-4 py-3">{{player.email}}</td>
+          <td class="border border-black px-4 py-3">{{player.groupId}}</td>
           <td class="border border-black px-4 py-3">
             <ng-container *ngIf="!!player.pubCode">
               <span class="font-mono bg-opacity-20 mr-2"
