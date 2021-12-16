@@ -38,17 +38,19 @@
           <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
           <th class="border border-black px-4 py-3" rowspan="2">Grupo</th>
           <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
+          <!-- <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th> -->
+          <!-- <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th> -->
+          <ng-container *ngIf="!(queriesByPlayerType$|async)">
+            <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
+          </ng-container>
           <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
           <th class="border border-black px-4 py-3" rowspan="2">Opciones</th>
         </tr>
         <tr>
-          <th class="border border-black px-4 py-3 truncate">Colaboraciones</th>
-          <th class="border border-black px-4 py-3 truncate">Clubhouse</th>
-          <th class="border border-black px-4 py-3 truncate">Proyecto</th>
-          <th class="border border-black px-4 py-3 truncate">Maratón</th>
+          <th class="border border-black px-4 py-3 truncate">Wiki</th>
+          <th class="border border-black px-4 py-3 truncate">Club...</th>
+          <th class="border border-black px-4 py-3 truncate">Proy...</th>
+          <th class="border border-black px-4 py-3 truncate">Mara...</th>
         </tr>
       </thead>
 
@@ -79,10 +81,10 @@
           <td class="border border-black px-4 py-3">
             {{player.projectAwards?.length ?? 0}}
           </td>
-          <td class="border border-black px-4 py-3">
+          <!-- <td class="border border-black px-4 py-3">
             {{player.groupId}}
-          </td>
-          <td class="border border-black px-4 py-3">
+          </td> -->
+          <!-- <td class="border border-black px-4 py-3">
             <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
               [value]='player.courseStatus'>
               <option value="COURSE#NOT_STARTED">Por Empezar</option>
@@ -96,28 +98,30 @@
                 sin acceso a los contenidos
               </option>
             </select>
-          </td>
-          <td class="border border-black px-4 py-3">
-            <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
-              <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt |
-                playerTypePipe}}
-              </option>
-            </select>
-          </td>
+          </td> -->
+          <ng-container *ngIf="!(queriesByPlayerType$|async)">
+            <td class="border border-black px-4 py-3">
+              <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">
+                <option *ngFor="let pt of playersTypes" [value]="pt" [selected]="player.playerType === pt">{{pt |
+                  playerTypePipe}}
+                </option>
+              </select>
+            </td>
+          </ng-container>
           <td class="border border-black px-4 py-3">
             <input #checkboxWebAccess type="checkbox" [checked]="player.allowWebAccess"
               (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)">
             {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
           </td>
           <!-- options -->
-          <td class="border border-black px-4 py-3">
-            <button (click)="connectPubPub(player.uid, player.displayName)">
+          <td class="border border-black px-4 py-3 flex flex-wrap flex-row gap-1">
+            <button class="bg-black p-1 text-xs text-white" (click)="connectPubPub(player.uid, player.displayName)">
               Conectar PubPub
             </button>
           </td>
         </tr>
-        </tbody>
-        </table>
+      </tbody>
+      </table>
   </div>
 
 </dashboard-container>
