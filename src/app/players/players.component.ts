@@ -102,6 +102,28 @@ export class PlayersComponent implements OnDestroy {
     );
   }
 
+  moveGroup(uid: string, name: string) {
+    if (!!this._savingSub)
+      return
+
+    const newGroupId = prompt(`Ingresa el id del nuevo grupo de ${name}`);
+
+    if (!newGroupId)
+      return;
+
+    const fn = this._afFunctions.httpsCallable<{ newGroupId: string, playerId: string }, void>('CHAT_movePlayerChat');
+
+    this._savingSub = fn({ playerId: uid, newGroupId }).subscribe((_) => {
+      alert('Cambio de grupo exitoso')
+    },
+      error => alert(error),
+      () => {
+        this._savingSub?.unsubscribe();
+        this._savingSub = null;
+      }
+    );
+  }
+
 
   get isSaving(): boolean { return !!this._savingSub };
 }
