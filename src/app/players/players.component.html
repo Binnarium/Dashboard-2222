@@ -79,12 +79,9 @@
             {{player.projectAwards?.length ?? 0}}
           </td>
           <td class="border border-black px-4 py-3">
-            {{player.projectAwards?.length ?? 0}}
+            {{player.marathonAwards?.length ?? 0}}
           </td>
-          <!-- <td class="border border-black px-4 py-3">
-            {{player.groupId}}
-          </td> -->
-          <!-- <td class="border border-black px-4 py-3">
+          <td class="border border-black px-4 py-3">
             <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
               [value]='player.courseStatus'>
               <option value="COURSE#NOT_STARTED">Por Empezar</option>
@@ -98,7 +95,7 @@
                 sin acceso a los contenidos
               </option>
             </select>
-          </td> -->
+          </td>
           <ng-container *ngIf="!(queriesByPlayerType$|async)">
             <td class="border border-black px-4 py-3">
               <select #selectPlayerType (change)="updatePlayerType(player.uid, selectPlayerType.value)">

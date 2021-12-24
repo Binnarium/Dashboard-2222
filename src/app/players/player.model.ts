@@ -15,5 +15,6 @@ export interface PlayerModel {
   projectAwards?: Array<AwardModel>;
   contributionsAwards?: Array<AwardModel>;
   clubhouseAwards?: Array<AwardModel>;
+  marathonAwards?: Array<AwardModel>;
   allowWebAccess?: boolean;
 }
