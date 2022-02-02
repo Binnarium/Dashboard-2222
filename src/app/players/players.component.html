@@ -37,7 +37,7 @@
           <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
           <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
           <th class="border border-black px-4 py-3" rowspan="2">Grupo</th>
-          <th class="border border-black px-4 py-3" colspan="4">Medallas Obtenidas</th>
+          <th class="border border-black px-4 py-3" colspan="5">Medallas Obtenidas</th>
           <!-- <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th> -->
           <!-- <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th> -->
           <ng-container *ngIf="!(queriesByPlayerType$|async)">
@@ -51,6 +51,7 @@
           <th class="border border-black px-4 py-3 truncate">Club...</th>
           <th class="border border-black px-4 py-3 truncate">Proy...</th>
           <th class="border border-black px-4 py-3 truncate">Mara...</th>
+          <th class="border border-black px-4 py-3 truncate">Tall...</th>
         </tr>
       </thead>
 
@@ -82,6 +83,9 @@
             {{player.marathonAwards?.length ?? 0}}
           </td>
           <td class="border border-black px-4 py-3">
+            {{player.workshopAwards?.length ?? 0}}
+            </td>
+            <td class="border border-black px-4 py-3">
             <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
               [value]='player.courseStatus'>
               <option value="COURSE#NOT_STARTED">Por Empezar</option>
