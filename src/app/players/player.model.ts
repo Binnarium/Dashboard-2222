@@ -11,6 +11,7 @@ export interface PlayerModel {
   playerType?: string;
   groupId?: string;
   pubCode?: string;
+  proactivity?: number;
   pubUserId?: string;
   projectAwards?: Array<AwardModel>;
   contributionsAwards?: Array<AwardModel>;

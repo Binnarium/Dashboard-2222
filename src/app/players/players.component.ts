@@ -124,6 +124,47 @@ export class PlayersComponent implements OnDestroy {
     );
   }
 
+  recalculateAwards(uid: string) {
+    if (!!this._savingSub)
+      return
+
+
+    const fn = this._afFunctions.httpsCallable<{ uid: string }, void>('AWARDS_recalculateAwards');
+
+    this._savingSub = fn({ uid }).subscribe((_) => {
+      alert('Calculado!')
+    },
+      error => alert(error),
+      () => {
+        this._savingSub?.unsubscribe();
+        this._savingSub = null;
+      }
+    );
+  }
+
+  resetPassword(email: string) {
+    if (!!this._savingSub)
+      return
+
+
+    const fn = this._afFunctions.httpsCallable<{ email: string }, { link?: string }>('PLAYER_resetPassword');
+
+    this._savingSub = fn({ email }).subscribe(async ({ link }) => {
+      if (link) {
+        await navigator.clipboard.writeText(link);
+        alert('Enlace Copiado!')
+      }
+      else
+        alert('Ocurrió un error')
+    },
+      error => alert(error),
+      () => {
+        this._savingSub?.unsubscribe();
+        this._savingSub = null;
+      }
+    );
+  }
+
 
   get isSaving(): boolean { return !!this._savingSub };
 }
