@@ -8,7 +8,15 @@ import { CityColorService } from '../core/cities-module/city-color.service';
   selector: 'dashboard-city',
   template: `
 
-  
+  <div class="w-full h-full flex flex-row">
+    <div class="sticky top-0 left-0 h-screen">
+      <dashboard-cities-sidebar></dashboard-cities-sidebar>
+    </div>
+
+    <div class="flex-grow" [ngStyle]="{'background-color': cityColor$|async}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 
   `,
 })
