@@ -1,0 +1,35 @@
+<dashboard-sidebar *ngIf="player$ | async as player">
+
+    <h3 dashboard-sidebar-section-name>
+        {{ player.displayName }}
+    </h3>
+
+    <!--  -->
+    <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid]" routerLinkActive #information="routerLinkActive"
+        [active]="information.isActive" [routerLinkActiveOptions]="{exact: true}">
+        Información del Jugador
+    </a>
+
+    <dashboard-sidebar-divider></dashboard-sidebar-divider>
+
+    <h3 dashboard-sidebar-section-name>
+        Premios ({{ player.proactivity }})
+    </h3>
+
+    <!--  -->
+    <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid,'clubhouse']" routerLinkActive
+        #clubhouse="routerLinkActive" [active]="clubhouse.isActive" [routerLinkActiveOptions]="{exact: true}">
+        Clubhouse ({{player.clubhouseAwards?.length??0}})
+    </a>
+
+    <!--  -->
+    <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid,'proyecto']" routerLinkActive
+        #project="routerLinkActive" [active]="project.isActive">
+        Proyecto ({{player.projectAwards?.length??0}})
+    </a>
+
+    <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid, 'maraton']" routerLinkActive
+        #marathon="routerLinkActive" [active]="marathon.isActive">
+        Maratón ({{player.marathonAwards?.length??0}})
+    </a>
+</dashboard-sidebar>

@@ -17,6 +17,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'jugador/:playerId',
+    loadChildren: () => import('./player/player.module').then(m => m.PlayerModule),
+    canActivate: [CanAccessDashboardGuard],
+  },
+
+  {
     path: 'inscripciones',
     loadChildren: () => import('./inscriptions/inscriptions.module').then(m => m.InscriptionsModule),
     canActivate: [CanAccessDashboardGuard]

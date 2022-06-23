@@ -1,0 +1,54 @@
+<dashboard-container *ngIf="player$ | async as player">
+    <dashboard-topbar>
+        <!-- page title -->
+        <h1 class="text-white text-xl font-bold">
+            Información del Jugador
+        </h1>
+    </dashboard-topbar>
+
+    <main class="flex flex-col gap-6 py-6 items-stretch">
+        <!-- name -->
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Nombre:</b></p>
+            <p class="text-lg pl-8">{{player.displayName}}</p>
+        </div>
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Correo Electrónico:</b></p>
+            <p class="text-lg pl-8">{{player.email}}</p>
+        </div>
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Identificador:</b></p>
+            <p class="text-lg pl-8">{{player.uid}}</p>
+        </div>
+
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Premios Clubhouse:</b></p>
+            <p class="text-lg pl-8">
+                <b>{{player.clubhouseAwards?.length??0}}</b>
+                <dashboard-awards-cities-names [awards]="player.clubhouseAwards"></dashboard-awards-cities-names>
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Premios Proyecto:</b></p>
+            <p class="text-lg pl-8">
+                <b>{{player.projectAwards?.length??0}}</b>
+                <dashboard-awards-cities-names [awards]="player.projectAwards"></dashboard-awards-cities-names>
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Maraton de Proyectos:</b></p>
+            <p class="text-lg pl-8"><b>{{player.marathonAwards?.length??0}}</b></p>
+        </div>
+
+        <div class="flex flex-col gap-2 text-white">
+            <p><b>Grupo ({{player.groupId}}):</b></p>
+            <p class="text-lg pl-8">Id: {{player.groupId}}</p>
+        </div>
+    </main>
+
+</dashboard-container>

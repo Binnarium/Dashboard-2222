@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { PlayersFiltersModel } from './filters.model';
 import { PlayerModel } from './player.model';
 
@@ -26,6 +26,14 @@ export class LoadPlayersService {
       .valueChanges()
       .pipe(
         startWith([])
+      );
+  }
+
+  public getPlayer$(playerId: string): Observable<PlayerModel | null> {
+    return this.afFirestore.collection<PlayerModel>('players').doc(playerId)
+      .valueChanges()
+      .pipe(
+        map(p => p ?? null)
       );
   }
 }

@@ -8,8 +8,6 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { TopbarComponent } from './topbar/topbar.component';
 import { UploadModule } from './upload/upload.module';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
