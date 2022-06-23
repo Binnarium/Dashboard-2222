@@ -33,26 +33,16 @@
     <table class="my-4 border-collapse border border-black px-4 py-3 bg-white w-full">
       <thead>
         <tr>
-          <th class="border border-black px-4 py-3" rowspan="2">Nro</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Nombres y Apellidos</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Correo Electronico</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Grupo</th>
-          <th class="border border-black px-4 py-3" colspan="3">Medallas Obtenidas</th>
-          <!-- <th class="border border-black px-4 py-3" rowspan="2">Id de Grupo</th> -->
-          <!-- <th class="border border-black px-4 py-3" rowspan="2">Estatus Curso</th> -->
-          <th class="border border-black px-4 py-3" rowspan="2">Proceso del Curso</th>
+          <th class="border border-black px-4 py-3">Nro</th>
+          <th class="border border-black px-4 py-3">Nombres y Apellidos</th>
+          <th class="border border-black px-4 py-3">Correo Electronico</th>
+          <th class="border border-black px-4 py-3">Grupo</th>
+          <th class="border border-black px-4 py-3">Medallas </th>
+          <th class="border border-black px-4 py-3">Proceso del Curso</th>
           <ng-container *ngIf="!(queriesByPlayerType$|async)">
-            <th class="border border-black px-4 py-3" rowspan="2">Tipo de Jugador</th>
+            <th class="border border-black px-4 py-3">Tipo de Jugador</th>
           </ng-container>
-          <th class="border border-black px-4 py-3" rowspan="2">Acceso Web</th>
-          <th class="border border-black px-4 py-3" rowspan="2">Opciones</th>
-        </tr>
-        <tr>
-          <th class="border border-black px-4 py-3 truncate">Club...</th>
-          <th class="border border-black px-4 py-3 truncate">Proy...</th>
-          <!-- <th class="border border-black px-4 py-3 truncate">Mara...</th>
-                                        <th class="border border-black px-4 py-3 truncate">Tall...</th> -->
-          <th class="border border-black px-4 py-3 truncate">Total</th>
+          <!-- <th class="border border-black px-4 py-3">Acceso Web</th> -->
         </tr>
       </thead>
 
@@ -79,19 +69,17 @@
             </ng-template>
           </td> -->
           <td class="border border-black px-4 py-3">
-            {{player.clubhouseAwards?.length ?? 0}}
-          </td>
-          <td class="border border-black px-4 py-3">
-            {{player.projectAwards?.length ?? 0}}
-          </td>
-          <!-- <td class="border border-black px-4 py-3">
-            {{player.marathonAwards?.length ?? 0}}
-          </td> -->
-          <!-- <td class="border border-black px-4 py-3">
-                                          {{player.workshopAwards?.length ?? 0}}
-                                        </td> -->
-          <td class="border border-black px-4 py-3">
-            {{player.proactivity ?? 0}}
+            <span class="whitespace-nowrap">
+              {{player.clubhouseAwards?.length ?? 0}}<small>C</small>
+              /
+              {{player.projectAwards?.length ?? 0}}<small>P</small>
+              /
+              {{player.marathonAwards?.length ?? 0}}<small>M</small>
+              /
+              {{player.workshopAwards?.length ?? 0}}<small>W</small>
+              /
+              {{player.proactivity ?? 0}}<small>T</small>
+            </span>
             </td>
             <td class="border border-black px-4 py-3">
             <select #courseStatusSelect (change)="updateCourseStatus(player.uid, courseStatusSelect.value)"
@@ -116,26 +104,12 @@
               </select>
             </td>
           </ng-container>
-          <td class="border border-black px-4 py-3">
+          <!-- <td class="border border-black px-4 py-3">
             <input #checkboxWebAccess type="checkbox" [checked]="player.allowWebAccess"
               (change)="updatePlayerWebAccess(player.uid, checkboxWebAccess.checked)">
             {{checkboxWebAccess.checked ? 'Permitido': 'Negado'}}
-          </td>
+          </td> -->
           <!-- options -->
-          <td class="border border-black px-4 py-3 flex flex-wrap flex-row gap-1">
-            <!-- <button class="bg-black p-1 text-xs text-white" (click)="connectPubPub(player.uid, player.displayName)">
-              Conectar PubPub
-            </button> -->
-            <button class="bg-black p-1 text-xs text-white" (click)="moveGroup(player.uid, player.displayName)">
-              Mover Grupo
-            </button>
-            <button class="bg-black p-1 text-xs text-white" (click)="recalculateAwards(player.uid)">
-              Calcular Premios
-            </button>
-            <button class="bg-black p-1 text-xs text-white" (click)="resetPassword(player.email)">
-              Resetear Contraseña
-            </button>
-          </td>
         </tr>
       </tbody>
     </table>

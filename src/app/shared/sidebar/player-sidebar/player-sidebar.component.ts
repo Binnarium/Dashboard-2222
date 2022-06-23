@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { LoadPlayersService } from 'src/app/players/load-players.service';
+import { PlayerService } from 'src/app/core/services/player.service';
 import { PlayerModel } from 'src/app/players/player.model';
 
 @Component({
@@ -13,10 +13,10 @@ export class PlayerSidebarComponent {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly loadPlayerService: LoadPlayersService,
+    private readonly playerService: PlayerService,
   ) { }
 
   public readonly player$: Observable<PlayerModel | null> = this.route.params.pipe(
-    switchMap(params => this.loadPlayerService.getPlayer$(params.playerId)),
+    switchMap(params => this.playerService.getPlayer$(params.playerId)),
   );
 }

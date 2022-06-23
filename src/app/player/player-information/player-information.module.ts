@@ -14,6 +14,6 @@ import { PlayerInformationComponent } from './player-information.component';
     CommonModule,
     SharedModule,
     PlayerInformationRoutingModule
-  ]
+  ],
 })
 export class PlayerInformationModule { }

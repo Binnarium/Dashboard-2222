@@ -1,15 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { PlayerService } from '../core/services/player.service';
 import { PlayersTypes } from "../shared/data/players-types.data";
 import { PlayersFiltersModel } from './filters.model';
-import { LoadPlayersService } from './load-players.service';
 import { PlayerModel } from './player.model';
-import { UpdateCourseStatusService } from './update-course-status.service';
-import { UpdatePlayerTypeService } from './update-player-type.service';
-import { UpdatePlayerWebAccessService } from './update-player-web-access.service';
 @Component({
   selector: 'dashboard-players',
   templateUrl: './players.component.html',
@@ -18,11 +14,7 @@ export class PlayersComponent implements OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly loadPlayerService: LoadPlayersService,
-    private readonly _afFunctions: AngularFireFunctions,
-    private readonly _updateCourseStatusService: UpdateCourseStatusService,
-    private readonly _updatePlayerTypeService: UpdatePlayerTypeService,
-    private readonly _updatePlayerWebAccessService: UpdatePlayerWebAccessService,
+    private readonly playerService: PlayerService,
   ) { }
 
   private _savingSub: Subscription | null = null;
@@ -33,9 +25,11 @@ export class PlayersComponent implements OnDestroy {
 
   public readonly queriesByPlayerType$: Observable<boolean> = this.params$.pipe(map(p => !!p.playerType))
 
-  public readonly players$: Observable<Array<PlayerModel>> = this.params$.pipe(
-    switchMap((params) => this.loadPlayerService.getPlayers$(params)),
-  );
+  public readonly players$: Observable<Array<PlayerModel>> = this.playerService.players$;
+
+  // public readonly players$: Observable<Array<PlayerModel>> = this.params$.pipe(
+  //   switchMap((params) => this.playerService.getPlayers$(params)),
+  // );
 
   ngOnDestroy(): void {
     this._savingSub?.unsubscribe();
@@ -45,9 +39,9 @@ export class PlayersComponent implements OnDestroy {
     if (!!this._savingSub)
       return
 
-    this._savingSub = this._updateCourseStatusService.save$(playerId, value).subscribe((saved) => {
+    this._savingSub = this.playerService.updateCourseStatus$(playerId, value).subscribe((saved) => {
       if (!saved)
-        alert('Ocurrio un problema al actualizar los datos');
+        alert('Ocurrió un problema al actualizar los datos');
 
       this._savingSub?.unsubscribe();
       this._savingSub = null;
@@ -58,113 +52,14 @@ export class PlayersComponent implements OnDestroy {
     if (!!this._savingSub)
       return
 
-    this._savingSub = this._updatePlayerTypeService.save$(playerId, value).subscribe((saved) => {
+    this._savingSub = this.playerService.updatePlayerType$(playerId, value).subscribe((saved) => {
       if (!saved)
-        alert('Ocurrio un problema al actualizar los datos');
+        alert('Ocurrió un problema al actualizar los datos');
 
       this._savingSub?.unsubscribe();
       this._savingSub = null;
     });
   }
-
-  updatePlayerWebAccess(playerId: string, value: boolean) {
-    if (!!this._savingSub)
-      return
-
-    this._savingSub = this._updatePlayerWebAccessService.save$(playerId, value).subscribe((saved) => {
-      if (!saved)
-        alert('Ocurrio un problema al actualizar los datos');
-
-      this._savingSub?.unsubscribe();
-      this._savingSub = null;
-    });
-  }
-
-  connectPubPub(uid: string, name: string) {
-    if (!!this._savingSub)
-      return
-
-    const profileUrl = prompt(`Ingresa la Url del perfil de ${name}`);
-
-    if (!profileUrl)
-      return;
-
-    const fn = this._afFunctions.httpsCallable<{ profileUrl: string, playerUid: string }, { pubsFound: number, pubsWatchersCreated: number, pubsWatchersExisting: number }>('CONTRIBUTIONS_updatePubWatchersFromProfile');
-
-    this._savingSub = fn({ playerUid: uid, profileUrl }).subscribe((res) => {
-      alert(`Econtrados: ${res.pubsFound}; Nuevos: ${res.pubsWatchersCreated}; Existentes: ${res.pubsWatchersExisting}`);
-    },
-      error => console.error(error),
-      () => {
-        this._savingSub?.unsubscribe();
-        this._savingSub = null;
-      }
-    );
-  }
-
-  moveGroup(uid: string, name: string) {
-    if (!!this._savingSub)
-      return
-
-    const newGroupId = prompt(`Ingresa el id del nuevo grupo de ${name}`);
-
-    if (!newGroupId)
-      return;
-
-    const fn = this._afFunctions.httpsCallable<{ newGroupId: string, playerId: string }, void>('CHAT_movePlayerChat');
-
-    this._savingSub = fn({ playerId: uid, newGroupId }).subscribe((_) => {
-      alert('Cambio de grupo exitoso')
-    },
-      error => alert(error),
-      () => {
-        this._savingSub?.unsubscribe();
-        this._savingSub = null;
-      }
-    );
-  }
-
-  recalculateAwards(uid: string) {
-    if (!!this._savingSub)
-      return
-
-
-    const fn = this._afFunctions.httpsCallable<{ uid: string }, void>('AWARDS_recalculateAwards');
-
-    this._savingSub = fn({ uid }).subscribe((_) => {
-      alert('Calculado!')
-    },
-      error => alert(error),
-      () => {
-        this._savingSub?.unsubscribe();
-        this._savingSub = null;
-      }
-    );
-  }
-
-  resetPassword(email: string) {
-    if (!!this._savingSub)
-      return
-
-
-    const fn = this._afFunctions.httpsCallable<{ email: string }, { link?: string }>('PLAYER_resetPassword');
-
-    this._savingSub = fn({ email }).subscribe(async ({ link }) => {
-      if (link) {
-        await navigator.clipboard.writeText(link);
-        alert('Enlace Copiado!')
-      }
-      else
-        alert('Ocurrió un error')
-    },
-      error => alert(error),
-      () => {
-        this._savingSub?.unsubscribe();
-        this._savingSub = null;
-      }
-    );
-  }
-
 
   get isSaving(): boolean { return !!this._savingSub };
 }
