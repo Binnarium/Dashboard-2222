@@ -61,7 +61,7 @@
           <td class="border border-black px-4 py-3 truncate">{{i+1}}</td>
           <td class="border border-black px-4 py-3 truncate">
             <a [routerLink]="['/jugador', player.uid]">
-              {{player.displayName}}
+              {{player.displayName.slice(0,40)}}
             </a>
           </td>
           <td class="border border-black px-4 py-3">{{player.email}}</td>
