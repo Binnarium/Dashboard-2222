@@ -10,6 +10,7 @@
         Información del Jugador
     </a>
 
+
     <dashboard-sidebar-divider></dashboard-sidebar-divider>
 
     <h3 dashboard-sidebar-section-name>
@@ -31,5 +32,15 @@
     <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid, 'maraton']" routerLinkActive
         #marathon="routerLinkActive" [active]="marathon.isActive">
         Maratón ({{player.marathonAwards?.length??0}})
+    </a>
+    <dashboard-sidebar-divider></dashboard-sidebar-divider>
+    
+    <h3 dashboard-sidebar-section-name>
+        Funciones
+    </h3>
+    
+    <a dashboard-sidebar-item [routerLink]="['/jugador', player.uid, 'cambiar-grupo']" routerLinkActive
+        #changeGroup="routerLinkActive" [active]="changeGroup.isActive">
+        Cambiar Grupo
     </a>
 </dashboard-sidebar>
