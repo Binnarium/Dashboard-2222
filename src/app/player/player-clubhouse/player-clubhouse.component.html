@@ -1,1 +1,39 @@
-<p>player-clubhouse works!</p>
+<dashboard-container *ngIf="clubhouses$ | async as clubhouses">
+    <dashboard-topbar>
+        <h1 class="text-white text-xl font-bold">
+            Clubhouse del Jugador
+        </h1>
+    </dashboard-topbar>
+
+    <main class="flex flex-col items-stretch gap-6 my-6 w-full">
+        <button (click)="create()" class="bg-green px-4 py-2 text-white">
+            Crear Nuevo Clubhouse
+        </button>
+
+        <article *ngFor="let clubhouse of clubhouses; let i = index"
+            class="shadow-xl bg-white p-4 flex flex-col items-start gap-2">
+            <h2 class="font-medium truncate text-lg">
+                <ng-container *ngIf="clubhouse.name as name;else noNameTemplate">
+                    {{i+1}} {{clubhouse.name}}
+                </ng-container>
+                <ng-template #noNameTemplate>
+                    <span class="text-red">
+                        ** No se pudo obtener la información del Clubhouse
+                    </span>
+                </ng-template>
+            </h2>
+            <p>
+                {{clubhouse.cityId}}
+            </p>
+            <p>
+                {{clubhouse.clubhouseUrl}}
+            </p>
+            <div>
+                <button (click)="delete(clubhouse)" class="px-4 py-2 bg-red text-sm text-white">
+                    Eliminar
+                </button>
+            </div>
+        </article>
+
+        </main>
+        </dashboard-container>
