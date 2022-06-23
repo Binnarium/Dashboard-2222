@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ChatModel, ChatsService } from 'src/app/core/services/chats.service';
 import { PlayerService } from 'src/app/core/services/player.service';
 import { PlayerModel } from 'src/app/players/player.model';
 
@@ -15,6 +16,7 @@ export class PlayerInformationComponent {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly playerService: PlayerService,
+    private readonly chatsServices: ChatsService,
     private readonly _afFunctions: AngularFireFunctions,
   ) { }
 
@@ -24,13 +26,17 @@ export class PlayerInformationComponent {
     switchMap(params => this.playerService.getPlayer$(params.playerId)),
   );
 
+  public readonly chat$: Observable<ChatModel | null> = this.player$.pipe(
+    switchMap(p => !!p?.groupId ? this.chatsServices.getChat$(p.groupId) : of(null)),
+  );
+
   updatePlayerWebAccess(playerId: string, value: boolean) {
     if (!!this._savingSub)
       return
 
     this._savingSub = this.playerService.updateWebAccess$(playerId, value).subscribe((saved) => {
       if (!saved)
-        alert('Ocurrio un problema al actualizar los datos');
+        alert('Ocurrió un problema al actualizar los datos');
 
       this._savingSub?.unsubscribe();
       this._savingSub = null;

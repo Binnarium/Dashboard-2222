@@ -49,8 +49,8 @@
             <p><b>Funciones:</b></p>
             <div class="pl-8 flex flex-row gap-4">
                 <!-- <button class="bg-black px-4 py-2 text-sm text-white" (click)="connectPubPub(player.uid, player.displayName)">
-                                            Conectar PubPub
-                                        </button> -->
+                        Conectar PubPub
+                        </button> -->
                 <button class="bg-black px-4 py-2 text-sm text-white" (click)="moveGroup(player.uid, player.displayName)">
                     Mover Grupo
                 </button>
@@ -62,9 +62,13 @@
                 </button>
             </div>
 
-            <div class="flex flex-col gap-2 text-white">
+            <div *ngIf="chat$|async as chat" class="flex flex-col gap-2 text-white">
                 <p><b>Grupo ({{player.groupId}}):</b></p>
-                <p class="text-lg pl-8">Id: {{player.groupId}}</p>
+                <p class="text-lg pl-8" *ngFor="let participant of chat.participants">
+                    <a [routerLink]="['/jugador', participant.uid]">
+                        {{participant.displayName}}
+                    </a>
+                </p>
             </div>
         </div>
 
