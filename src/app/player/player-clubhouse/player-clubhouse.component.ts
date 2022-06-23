@@ -8,8 +8,6 @@ import { PlayerClubhouseModel, PlayerClubhouseService } from './player-clubhouse
 @Component({
   selector: 'dashboard-player-clubhouse',
   templateUrl: './player-clubhouse.component.html',
-  styles: [
-  ]
 })
 export class PlayerClubhouseComponent {
 

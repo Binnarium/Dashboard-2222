@@ -1,1 +1,34 @@
-<p>player-project works!</p>
+<dashboard-container *ngIf="projectFiles$ | async as files">
+    <dashboard-topbar>
+        <h1 class="text-white text-xl font-bold">
+            Archivos de Proyecto del Jugador
+        </h1>
+    </dashboard-topbar>
+
+    <main class="flex flex-col items-stretch gap-6 my-6 w-full">
+        <a routerLink="./nuevo" class="block bg-green px-4 py-2 text-white">
+            Subir Documento
+        </a>
+
+        <article *ngFor="let clubhouse of files; let i = index"
+            class="shadow-xl bg-white p-4 flex flex-col items-start gap-2">
+            <h2 class="font-medium truncate text-lg">
+                <ng-container *ngIf="clubhouse.file.path.split('/') as split">
+                    {{i+1}} {{split[split.length-1]}}
+                </ng-container>
+            </h2>
+            <p>
+                {{clubhouse.cityId}}
+            </p>
+            <div class="flex flex-row gap-4">
+                <a [href]="clubhouse.file.url" target="_blank" class="shadow-lg px-4 py-2 bg-white text-sm text-black">
+                    Visualizar
+                </a>
+                <button (click)="delete(clubhouse)" class="px-4 py-2 shadow-lg bg-red text-sm text-white">
+                    Eliminar
+                </button>
+            </div>
+        </article>
+
+    </main>
+    </dashboard-container>
