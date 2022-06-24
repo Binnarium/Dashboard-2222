@@ -48,8 +48,8 @@
             </h3>
 
             <!-- input text -->
-            <dashboard-upload-document [document]="form.controls.file.value" (completed)="uploadDocument($event)">
-            </dashboard-upload-document>
+            <dashboard-upload-any-document [document]="form.controls.file.value" (completed)="uploadDocument($event)">
+            </dashboard-upload-any-document>
         </div>
 
         <button type="button" (click)="create()" class="px-4 py-2 shadow-lg bg-green text-sm text-white">
