@@ -31,11 +31,13 @@ export class PlayerInformationComponent {
     switchMap(p => !!p?.groupId ? this.chatsServices.getChat$(p.groupId) : of(null)),
   );
 
-  updatePlayerWebAccess(playerId: string, value: boolean) {
+  updatePlayerWebAccess(value: boolean) {
     if (!!this._savingSub)
       return
 
-    this._savingSub = this.playerService.updateWebAccess$(playerId, value).subscribe((saved) => {
+    this._savingSub = this.player$.pipe(
+      switchMap(user => !!user ? this.playerService.updateWebAccess$(user.uid, value) : of(false))
+    ).subscribe((saved) => {
       if (!saved)
         alert('Ocurrió un problema al actualizar los datos');
 

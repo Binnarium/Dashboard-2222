@@ -51,6 +51,19 @@
                 <!-- <button class="bg-black px-4 py-2 text-sm text-white" (click)="connectPubPub(player.uid, player.displayName)">
                         Conectar PubPub
                         </button> -->
+                <!-- web access -->
+                <ng-container *ngIf="player.allowWebAccess; else allowWebAccessTemplate">
+                    <button class="bg-black px-4 py-2 text-sm text-white" (click)="updatePlayerWebAccess(false)">
+                        Eliminar Acceso Web
+                    </button>
+                </ng-container>
+                <ng-template #allowWebAccessTemplate>
+                    <button class="bg-black px-4 py-2 text-sm text-white" (click)="updatePlayerWebAccess(true)">
+                        Permitir Acceso Web
+                    </button>
+                </ng-template>
+                
+                <!-- prices -->
                 <button class="bg-black px-4 py-2 text-sm text-white" (click)="recalculateAwards(player.uid)">
                     Calcular Premios
                 </button>
