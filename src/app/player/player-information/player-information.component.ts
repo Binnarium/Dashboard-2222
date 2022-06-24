@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { shareReplay, switchMap } from 'rxjs/operators';
 import { ChatModel, ChatsService } from 'src/app/core/services/chats.service';
 import { PlayerService } from 'src/app/core/services/player.service';
 import { PlayerModel } from 'src/app/players/player.model';
@@ -24,6 +24,7 @@ export class PlayerInformationComponent {
 
   public readonly player$: Observable<PlayerModel | null> = this.route.params.pipe(
     switchMap(params => this.playerService.getPlayer$(params.playerId)),
+    shareReplay(1),
   );
 
   public readonly chat$: Observable<ChatModel | null> = this.player$.pipe(
@@ -58,28 +59,6 @@ export class PlayerInformationComponent {
       alert(`Econtrados: ${res.pubsFound}; Nuevos: ${res.pubsWatchersCreated}; Existentes: ${res.pubsWatchersExisting}`);
     },
       error => console.error(error),
-      () => {
-        this._savingSub?.unsubscribe();
-        this._savingSub = null;
-      }
-    );
-  }
-
-  moveGroup(uid: string, name: string) {
-    if (!!this._savingSub)
-      return
-
-    const newGroupId = prompt(`Ingresa el id del nuevo grupo de ${name}`);
-
-    if (!newGroupId)
-      return;
-
-    const fn = this._afFunctions.httpsCallable<{ newGroupId: string, playerId: string }, void>('CHAT_movePlayerChat');
-
-    this._savingSub = fn({ playerId: uid, newGroupId }).subscribe((_) => {
-      alert('Cambio de grupo exitoso')
-    },
-      error => alert(error),
       () => {
         this._savingSub?.unsubscribe();
         this._savingSub = null;

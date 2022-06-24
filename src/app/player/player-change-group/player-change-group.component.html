@@ -1,1 +1,46 @@
-<p>player-change-group works!</p>
+<dashboard-container>
+    <dashboard-topbar>
+        <h1 class="text-white text-xl font-bold">
+            Cambiar Grupo del Jugador
+        </h1>
+    </dashboard-topbar>
+
+    <form [formGroup]="form" class="w-full p-8 flex flex-col gap-8">
+
+        <!-- form group -->
+        <div dashboard-form-group>
+            <!-- label -->
+            <label dashboard-form-label>
+                Grupos
+            </label>
+
+            <!-- input text -->
+            <select class="px-4 py-4  bg-white text-sm focus:outline-none focus:shadow-outline w-full"
+                formControlName="groupId">
+                <option [value]="chat.id" *ngFor="let chat of chats$|async">
+                    {{chat.id}} - ({{chat.participants?.length ?? 0}})
+                </option>
+            </select>
+        </div>
+
+        <button type="button" (click)="changeGroup()" class="px-4 py-2 shadow-lg bg-green text-sm text-white">
+            <ng-container *ngIf="isSaving; else savingTemplate">
+                Guardando...
+            </ng-container>
+            <ng-template #savingTemplate>
+                Cambiar de Grupo
+            </ng-template>
+        </button>
+    </form>
+
+
+    <div *ngIf="chat$|async as chat" class="flex flex-col gap-2 text-white">
+        <p><b>Grupo Actual ({{chat.id}}):</b></p>
+        <p class="text-lg pl-8" *ngFor="let participant of chat.participants">
+            <a [routerLink]="['/jugador', participant.uid]">
+                {{participant.displayName}}
+            </a>
+        </p>
+    </div>
+
+</dashboard-container>

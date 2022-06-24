@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 import { PlayerModel } from 'src/app/players/player.model';
 
 export interface ChatModel {
-  participants: Array<Pick<PlayerModel, 'displayName' | 'uid'>>
+  id: string;
+  participants?: Array<Pick<PlayerModel, 'displayName' | 'uid'>>
 }
 
 @Injectable({
@@ -17,6 +18,15 @@ export class ChatsService {
     private readonly afFirestore: AngularFirestore,
   ) { }
 
+  public chatsGroups$ = this.afFirestore.collection<ChatModel>('chats',
+    q => q.orderBy('id').where('kind', '==', 'CHAT#GROUP'),
+  )
+    .valueChanges()
+    .pipe(
+      startWith([]),
+      shareReplay(1),
+    );
+
   public getChat$(groupId: string): Observable<ChatModel | null> {
     return this.afFirestore.collection<ChatModel>('chats').doc(groupId)
       .valueChanges()
@@ -24,5 +34,4 @@ export class ChatsService {
         map(p => p ?? null)
       );
   }
-
 }

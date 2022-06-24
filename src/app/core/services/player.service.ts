@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, mapTo, shareReplay, startWith } from 'rxjs/operators';
 import { PlayerModel } from 'src/app/players/player.model';
@@ -12,6 +13,7 @@ type _UpdatePlayerWebAccessModel = Pick<PlayerModel, 'allowWebAccess'>;
 export class PlayerService {
     constructor(
         private readonly afFirestore: AngularFirestore,
+        private readonly _afFunctions: AngularFireFunctions,
     ) { }
 
     players$: Observable<Array<PlayerModel>> = this.afFirestore
@@ -100,6 +102,14 @@ export class PlayerService {
         );
     }
 
-
-
+    moveGroup$(playerId: string, newGroupId: string): Observable<boolean> {
+        const fn = this._afFunctions.httpsCallable<{ newGroupId: string, playerId: string }, void>('CHAT_movePlayerChat');
+        return fn({ playerId: playerId, newGroupId }).pipe(
+            mapTo(true),
+            catchError(err => {
+                console.log(err);
+                return of(false)
+            }),
+        )
+    }
 }
