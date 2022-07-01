@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map, shareReplay, startWith } from 'rxjs/operators';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map, shareReplay, startWith } from 'rxjs/operators';
 import { PlayerModel } from 'src/app/players/player.model';
 
 export interface ChatModel {
@@ -16,6 +17,7 @@ export class ChatsService {
 
   constructor(
     private readonly afFirestore: AngularFirestore,
+    private readonly afFunctions: AngularFireFunctions,
   ) { }
 
   public chatsGroups$ = this.afFirestore.collection<ChatModel>('chats',
@@ -32,6 +34,19 @@ export class ChatsService {
       .valueChanges()
       .pipe(
         map(p => p ?? null)
+      );
+  }
+
+  public createChat$(name: string): Observable<string | null> {
+    //
+    const createFunc = this.afFunctions.httpsCallable<{ name: string }, { id: string }>('CHAT_createGroupChat');
+    return from(createFunc({ name }))
+      .pipe(
+        map(res => res.id ?? null),
+        catchError(err => {
+          console.log(err);
+          return of(null);
+        })
       );
   }
 }

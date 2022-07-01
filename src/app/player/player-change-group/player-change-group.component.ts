@@ -77,4 +77,27 @@ export class PlayerChangeGroupComponent implements OnInit {
       this.taskSub = null;
     });
   }
+
+  createGroup() {
+    if (!!this.taskSub)
+      return;
+
+    const name = prompt(`Ingresa el nombre del grupo sin espacios`)?.replace(' ', '_') ?? null;
+
+    if (name === null || name.length < 5) {
+      alert('Ingresa un nombre')
+      return
+    }
+
+    this.taskSub = this.chatsService.createChat$(name).pipe(
+    ).subscribe(name => {
+      if (name)
+        alert(`Se creo el grupo: ${name}`)
+      else
+        alert('No se creo el grupo');
+
+      this.taskSub?.unsubscribe();
+      this.taskSub = null;
+    });
+  }
 }
