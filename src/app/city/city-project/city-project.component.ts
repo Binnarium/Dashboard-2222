@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { SaveProjectService } from './project.service';
 export class CityProjectComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadProjectService: LoadProjectService,
     private readonly saveProjectService: SaveProjectService,
@@ -25,11 +25,11 @@ export class CityProjectComponent implements OnDestroy {
 
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ProjectDto, FormControl | FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof ProjectDto, UntypedFormControl | UntypedFormGroup>>{
     activity: this.fb.control(null),
     explanation: this.fb.control(null),
     allow: this.fb.control(<ProjectDto['allow']>'ALLOW#NONE'),
-    audio: this.fb.group(<Record<keyof AudioDto, FormControl>>{
+    audio: this.fb.group(<Record<keyof AudioDto, UntypedFormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
       name: this.fb.control(null),
@@ -68,13 +68,13 @@ export class CityProjectComponent implements OnDestroy {
     // every time a new value comes, update the controls
     project => {
       if (project?.activity)
-        (this.form.controls[<keyof ProjectDto>'activity'] as FormControl).setValue(project.activity, { emitEvent: false });
+        (this.form.controls[<keyof ProjectDto>'activity'] as UntypedFormControl).setValue(project.activity, { emitEvent: false });
       if (project?.explanation)
-        (this.form.controls[<keyof ProjectDto>'explanation'] as FormControl).setValue(project.explanation, { emitEvent: false });
+        (this.form.controls[<keyof ProjectDto>'explanation'] as UntypedFormControl).setValue(project.explanation, { emitEvent: false });
       if (project?.allow)
-        (this.form.controls[<keyof ProjectDto>'allow'] as FormControl).setValue(project.allow, { emitEvent: false });
+        (this.form.controls[<keyof ProjectDto>'allow'] as UntypedFormControl).setValue(project.allow, { emitEvent: false });
       if (project?.audio)
-        (this.form.controls[<keyof ProjectDto>'audio'] as FormGroup).setValue(project.audio, { emitEvent: false });
+        (this.form.controls[<keyof ProjectDto>'audio'] as UntypedFormGroup).setValue(project.audio, { emitEvent: false });
     }
   );
 
@@ -83,8 +83,8 @@ export class CityProjectComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get projectAudioControl(): FormGroup {
-    return this.form.get(<keyof ProjectDto>'audio') as FormGroup;
+  get projectAudioControl(): UntypedFormGroup {
+    return this.form.get(<keyof ProjectDto>'audio') as UntypedFormGroup;
   }
 
   uploadAudio(audio: AudioDto,) {

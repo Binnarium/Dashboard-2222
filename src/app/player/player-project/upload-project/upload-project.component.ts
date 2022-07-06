@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { CreatePlayerProjectModel, PlayerProjectService } from '../player-clubho
 export class UploadProjectComponent {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly playerProjectService: PlayerProjectService,
@@ -28,7 +28,7 @@ export class UploadProjectComponent {
   private taskSub: Subscription | null = null;
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CreatePlayerProjectModel, FormGroup | FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CreatePlayerProjectModel, UntypedFormGroup | UntypedFormControl>>{
     cityId: this.fb.control(null),
     kind: this.fb.control(null),
     file: this.fb.group(<DocumentDTO>{

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { VideoDTO } from '../shared/upload/asset.dto';
@@ -14,17 +14,17 @@ import { SaveContributionExplanationService } from './save-contribution-explanat
 export class ContributionExplanationComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadExplanationService: LoadContributionExplanationService,
     private readonly saveExplanationService: SaveContributionExplanationService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionExplanationDto, FormControl | FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof ContributionExplanationDto, UntypedFormControl | UntypedFormGroup>>{
     explanation: this.fb.control(null),
     manifestUrl: this.fb.control(null),
     codeExplanation: this.fb.control(null),
-    video: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
+    video: this.fb.group(<Record<keyof VideoDTO, UntypedFormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
       name: this.fb.control(null),

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { shareReplay, switchMap, take } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class PlayerChangeGroupComponent implements OnInit {
 
   constructor(
     private readonly chatsService: ChatsService,
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly playerService: PlayerService,
@@ -33,7 +33,7 @@ export class PlayerChangeGroupComponent implements OnInit {
   chats$ = this.chatsService.chatsGroups$;
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group({
+  public readonly form: UntypedFormGroup = this.fb.group({
     groupId: this.fb.control(null),
   });
 

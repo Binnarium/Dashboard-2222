@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -15,14 +15,14 @@ import { SaveMicroMesoMacroService } from './save-micro-meso-macro.service';
 export class CityMicroMesoMacroComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadMicroMesoMacroService: LoadMicroMesoMacroService,
     private readonly saveMicroMesoMacroService: SaveMicroMesoMacroService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityMicroMesoMacro, FormGroup | FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityMicroMesoMacro, UntypedFormGroup | UntypedFormControl>>{
     title: this.fb.control(null),
     subtitle: this.fb.control(null),
     image: this.fb.group(<ImageDTO>{

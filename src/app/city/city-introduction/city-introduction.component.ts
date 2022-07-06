@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -16,14 +16,14 @@ import { SaveIntroductionService } from './save-introduction.service';
 export class CityIntroductionComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadIntroductionService: LoadIntroductionService,
     private readonly saveIntroductionService: SaveIntroductionService,
   ) { }
 
   /** form so upload content */
-  public readonly informationForm: FormGroup = this.fb.group(<Record<keyof IntroductionDto, FormControl>>{
+  public readonly informationForm: UntypedFormGroup = this.fb.group(<Record<keyof IntroductionDto, UntypedFormControl>>{
     description: this.fb.control(null),
   });
 

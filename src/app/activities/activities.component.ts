@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { interval, Observable, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ActivitiesDto } from './activities.dto';
@@ -15,13 +15,13 @@ import { SaveActivitiesService } from './save-activities.service';
 export class ActivitiesComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadActivitiesService: LoadActivitiesService,
     private readonly saveActivitiesService: SaveActivitiesService,
   ) { }
 
   /** form so upload content */
-  public readonly activitiesForm: FormGroup = this.fb.group(<Record<keyof ActivitiesDto, FormControl>>{
+  public readonly activitiesForm: UntypedFormGroup = this.fb.group(<Record<keyof ActivitiesDto, UntypedFormControl>>{
     clubhouse: this.fb.control(null),
     project: this.fb.control(null),
     contribution: this.fb.control(null),

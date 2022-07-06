@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -14,14 +14,14 @@ import { SaveClubhouseService } from './save-clubhouse.service';
 export class CityClubhouseComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadClubhouseService: LoadClubhouseService,
     private readonly saveClubhouseService: SaveClubhouseService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ClubhouseDto, FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof ClubhouseDto, UntypedFormControl>>{
   });
 
   /** Current state of the form if its value have been saved */

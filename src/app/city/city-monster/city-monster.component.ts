@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -17,14 +17,14 @@ import { SaveMonsterService } from './save-monster.service';
 export class CityMonsterComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadMonsterService: LoadMonsterService,
     private readonly saveMonsterService: SaveMonsterService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityMonsterDto, FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityMonsterDto, UntypedFormGroup>>{
     illustration: this.fb.group(<ImageDTO>{
       height: null,
       name: null,

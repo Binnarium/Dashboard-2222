@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, UntypedFormControl } from '@angular/forms';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import * as ClassicEditor from '../../../../../packages/ckeditor5-build-classic/';
 
@@ -20,11 +20,11 @@ export class TextareaComponent implements OnInit {
     this._control = formControl;
   }
 
-  get control(): FormControl {
+  get control(): UntypedFormControl {
     if (!this._control)
       throw new Error("you need to share a form control");
 
-    return this._control as FormControl;
+    return this._control as UntypedFormControl;
   }
 
   ngOnInit(): void {

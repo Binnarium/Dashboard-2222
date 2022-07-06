@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { AudioDto } from '../shared/upload/asset.dto';
@@ -14,15 +14,15 @@ import { SavePointsExplanationService } from './save-points-explanation.service'
 export class PointsExplanationComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadExplanationService: LoadPointsExplanationService,
     private readonly saveExplanationService: SavePointsExplanationService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof PointsExplanationDto, FormControl | FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof PointsExplanationDto, UntypedFormControl | UntypedFormGroup>>{
     explanation: this.fb.control(null),
-    audio: this.fb.group(<Record<keyof AudioDto, FormControl>>{
+    audio: this.fb.group(<Record<keyof AudioDto, UntypedFormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
       name: this.fb.control(null),
@@ -43,7 +43,7 @@ export class PointsExplanationComponent implements OnDestroy {
       this.form.controls[<keyof PointsExplanationDto>'explanation']
         .setValue(pointsExplanation.explanation, { emitEvent: false });
     if (pointsExplanation?.audio)
-      (this.form.controls[<keyof PointsExplanationDto>'audio'] as FormGroup).setValue(pointsExplanation.audio, { emitEvent: false });
+      (this.form.controls[<keyof PointsExplanationDto>'audio'] as UntypedFormGroup).setValue(pointsExplanation.audio, { emitEvent: false });
 
   });
 
@@ -59,8 +59,8 @@ export class PointsExplanationComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get audioControl(): FormGroup {
-    return this.form.get(<keyof PointsExplanationDto>'audio') as FormGroup;
+  get audioControl(): UntypedFormGroup {
+    return this.form.get(<keyof PointsExplanationDto>'audio') as UntypedFormGroup;
   }
 
   uploadAudio(audio: AudioDto,) {

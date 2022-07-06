@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/auth/authentication.service';
 
@@ -11,10 +11,10 @@ export class LoginFormComponent implements OnDestroy {
 
   constructor(
     private readonly _authService: AuthenticationService,
-    private readonly _fb: FormBuilder,
+    private readonly _fb: UntypedFormBuilder,
   ) { }
 
-  public readonly loginForm: FormGroup = this._fb.group({
+  public readonly loginForm: UntypedFormGroup = this._fb.group({
     email: [null, Validators.email,],
     password: [null, Validators.minLength(6)],
   });

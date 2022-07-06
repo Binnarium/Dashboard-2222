@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -15,14 +15,14 @@ import { SaveFinalVideoService } from './save-final-video.service';
 export class CityFinalVideoComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadFinalVideoService: LoadFinalVideoService,
     private readonly saveFinalVideoService: SaveFinalVideoService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityFinalVideoDto, FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityFinalVideoDto, UntypedFormGroup>>{
     video: this.fb.group(<VideoDTO>{
       duration: null,
       format: null,

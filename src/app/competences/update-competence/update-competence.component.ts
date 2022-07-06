@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { SaveCompetenceService } from './save-competence.service';
 })
 export class UpdateCompetenceComponent implements OnDestroy {
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly loadCompetenceService: LoadCompetenceService,
@@ -26,7 +26,7 @@ export class UpdateCompetenceComponent implements OnDestroy {
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CompetenceDto, any>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CompetenceDto, any>>{
     id: null,
     image: { height: null, name: null, path: null, url: null, width: null, },
     kind: null,

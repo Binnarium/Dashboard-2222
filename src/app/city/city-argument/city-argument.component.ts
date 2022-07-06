@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -16,14 +16,14 @@ import { SaveArgumentService } from './save-argument.service';
 export class CityArgumentComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadArgumentService: LoadArgumentService,
     private readonly saveArgumentService: SaveArgumentService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityArgumentDto, FormArray>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityArgumentDto, UntypedFormArray>>{
     questions: this.fb.array([]),
   });
 
@@ -69,8 +69,8 @@ export class CityArgumentComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get questionsArray(): FormArray {
-    return this.form.controls['questions'] as FormArray;
+  get questionsArray(): UntypedFormArray {
+    return this.form.controls['questions'] as UntypedFormArray;
   }
 
   addQuestion(): void {

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { AppConfigurationDto } from './app-configuration.dto';
@@ -15,13 +15,13 @@ import { SaveAppConfigurationService } from './save-app-configuration.service';
 export class AppConfigurationComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadAppConfigurationService: LoadAppConfigurationService,
     private readonly saveAppConfigurationService: SaveAppConfigurationService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof AppConfigurationDto, FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof AppConfigurationDto, UntypedFormControl>>{
     courseFinalizationDate: this.fb.control(null),
   });
 

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -16,14 +16,14 @@ import { SaveContentService } from './save-content.service';
 export class CityContentComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadContentService: LoadContentService,
     private readonly saveContentService: SaveContentService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group({
+  public readonly form: UntypedFormGroup = this.fb.group({
     content: this.fb.array([]),
   });
 
@@ -89,8 +89,8 @@ export class CityContentComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get cityContent(): FormArray {
-    return this.form.get('content') as FormArray;
+  get cityContent(): UntypedFormArray {
+    return this.form.get('content') as UntypedFormArray;
   }
 
   uploadContent(content: NonNullable<VideoDTO | AudioDto>, index: number) {
@@ -129,8 +129,8 @@ export class CityContentComponent implements OnDestroy {
     this.cityContent.push(this.fb.group(voidVideo));
   }
 
-  public getDescriptionControl(index: number): FormControl {
-    return ((this.form.controls['content'] as FormArray).at(index) as FormGroup).controls['description'] as FormControl;
+  public getDescriptionControl(index: number): UntypedFormControl {
+    return ((this.form.controls['content'] as UntypedFormArray).at(index) as UntypedFormGroup).controls['description'] as UntypedFormControl;
   }
 
 

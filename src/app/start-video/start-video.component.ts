@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { interval, Observable, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { VideoDTO } from 'src/app/shared/upload/asset.dto';
@@ -14,13 +14,13 @@ import { StartVideoDto } from './start-video.dto';
 export class StartVideoComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadProjectVideoService: LoadStartVideoService,
     private readonly saveProjectVideoService: SaveStartVideoService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof StartVideoDto, FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof StartVideoDto, UntypedFormGroup>>{
     video: this.fb.group(<VideoDTO>{
       duration: null,
       format: null,

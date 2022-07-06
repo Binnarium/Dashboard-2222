@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -17,14 +17,14 @@ import { SaveHistoryService } from './save-history.service';
 export class CityHistoryComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadHistoryService: LoadHistoryService,
     private readonly saveHistoryService: SaveHistoryService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group({
+  public readonly form: UntypedFormGroup = this.fb.group({
     content: this.fb.array([]),
   });
 
@@ -86,15 +86,15 @@ export class CityHistoryComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get historyContent(): FormArray {
-    return this.form.get('content') as FormArray;
+  get historyContent(): UntypedFormArray {
+    return this.form.get('content') as UntypedFormArray;
   }
 
   uploadImage(image: ImageDTO, index: number) {
     this.historyContent.controls[index].setValue({ ...image, kind: 'HISTORY#IMAGE' },);
   }
-  public getDescriptionControl(index: number): FormControl {
-    return (this.historyContent.controls[index] as FormGroup).controls['text'] as FormControl;
+  public getDescriptionControl(index: number): UntypedFormControl {
+    return (this.historyContent.controls[index] as UntypedFormGroup).controls['text'] as UntypedFormControl;
   }
 
   addTitle() {

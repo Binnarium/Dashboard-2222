@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { interval, Subscription } from 'rxjs';
 import { debounce, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import { VideoDTO } from '../shared/upload/asset.dto';
@@ -14,17 +14,17 @@ import { WelcomeDto } from './welcome.dto';
 export class WelcomeComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly loadWelcomeService: LoadWelcomeService,
     private readonly saveWelcomeService: SaveWelcomeService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof WelcomeDto, FormControl | FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof WelcomeDto, UntypedFormControl | UntypedFormGroup>>{
     profundityText: this.fb.control(null),
     pageTitle: this.fb.control(null),
     workloadText: this.fb.control(null),
-    welcomeVideo: this.fb.group(<Record<keyof VideoDTO, FormControl>>{
+    welcomeVideo: this.fb.group(<Record<keyof VideoDTO, UntypedFormControl>>{
       duration: this.fb.control(null),
       format: this.fb.control(null),
       name: this.fb.control(null),

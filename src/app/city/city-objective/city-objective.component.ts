@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { SaveObjectiveService } from './save-objective.service';
 export class CityObjectiveComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadObjectiveService: LoadObjectiveService,
     private readonly saveObjectiveService: SaveObjectiveService,
@@ -25,7 +25,7 @@ export class CityObjectiveComponent implements OnDestroy {
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ObjectiveDto, FormControl | FormArray | FormGroup>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof ObjectiveDto, UntypedFormControl | UntypedFormArray | UntypedFormGroup>>{
     mainObjective: this.fb.control(null),
     competences: this.fb.group({}),
     ideas: this.fb.array([]),
@@ -88,12 +88,12 @@ export class CityObjectiveComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get ideasArray(): FormArray {
-    return this.form.controls[<keyof ObjectiveDto>'ideas'] as FormArray;
+  get ideasArray(): UntypedFormArray {
+    return this.form.controls[<keyof ObjectiveDto>'ideas'] as UntypedFormArray;
   }
 
-  get competencesGroup(): FormGroup {
-    return this.form.controls[<keyof ObjectiveDto>'competences'] as FormGroup;
+  get competencesGroup(): UntypedFormGroup {
+    return this.form.controls[<keyof ObjectiveDto>'competences'] as UntypedFormGroup;
   }
 
   addIdeas(): void {

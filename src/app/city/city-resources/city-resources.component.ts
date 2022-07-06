@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -17,14 +17,14 @@ import { SaveResourcesService } from './save-resources.service';
 export class CityResourcesComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadResourcesService: LoadResourcesService,
     private readonly saveResourcesService: SaveResourcesService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityResourcesDto, FormArray>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityResourcesDto, UntypedFormArray>>{
     externalLinks: this.fb.array([]),
     readings: this.fb.array([]),
   });
@@ -73,8 +73,8 @@ export class CityResourcesComponent implements OnDestroy {
     this.autoSaveSub.unsubscribe();
   }
 
-  get readingsFormArray(): FormArray {
-    return this.form.controls[<keyof CityResourcesDto>'readings'] as FormArray;
+  get readingsFormArray(): UntypedFormArray {
+    return this.form.controls[<keyof CityResourcesDto>'readings'] as UntypedFormArray;
   }
 
 
@@ -87,8 +87,8 @@ export class CityResourcesComponent implements OnDestroy {
     this.readingsFormArray.removeAt(index)
   }
 
-  get externalLinksFormArray(): FormArray {
-    return this.form.controls[<keyof CityResourcesDto>'externalLinks'] as FormArray;
+  get externalLinksFormArray(): UntypedFormArray {
+    return this.form.controls[<keyof CityResourcesDto>'externalLinks'] as UntypedFormArray;
   }
 
 
@@ -100,14 +100,14 @@ export class CityResourcesComponent implements OnDestroy {
     this.externalLinksFormArray.removeAt(index);
   }
 
-  private createReadingGroup(reading?: ReadingDto): FormGroup {
-    return this.fb.group(<Record<keyof ReadingDto, FormControl | FormGroup>>{
+  private createReadingGroup(reading?: ReadingDto): UntypedFormGroup {
+    return this.fb.group(<Record<keyof ReadingDto, UntypedFormControl | UntypedFormGroup>>{
       name: this.fb.control(reading?.name),
       author: this.fb.control(reading?.author),
       about: this.fb.control(reading?.about),
       link: this.fb.control(reading?.link),
       publishedYear: this.fb.control(reading?.publishedYear),
-      cover: this.fb.group(<Record<keyof ImageDTO, FormControl>>{
+      cover: this.fb.group(<Record<keyof ImageDTO, UntypedFormControl>>{
         height: this.fb.control(reading?.cover?.height),
         name: this.fb.control(reading?.cover?.name),
         path: this.fb.control(reading?.cover?.path),
@@ -117,8 +117,8 @@ export class CityResourcesComponent implements OnDestroy {
     });
   }
 
-  private createLinkGroup(link?: ExternalLinkDto): FormGroup {
-    return this.fb.group(<Record<keyof ExternalLinkDto, FormControl | FormGroup>>{
+  private createLinkGroup(link?: ExternalLinkDto): UntypedFormGroup {
+    return this.fb.group(<Record<keyof ExternalLinkDto, UntypedFormControl | UntypedFormGroup>>{
       title: this.fb.control(link?.title),
       description: this.fb.control(link?.description),
       link: this.fb.control(link?.link),
@@ -127,17 +127,17 @@ export class CityResourcesComponent implements OnDestroy {
   }
 
   uploadCover(image: ImageDTO, index: number) {
-    (this.readingsFormArray.controls[index] as FormGroup).controls[<keyof ReadingDto>'cover'].setValue(image);
+    (this.readingsFormArray.controls[index] as UntypedFormGroup).controls[<keyof ReadingDto>'cover'].setValue(image);
   }
 
-  public getAboutControl(index: number): FormControl {
-    return ((this.form.controls[<keyof CityResourcesDto>'readings'] as FormArray)
-      .at(index) as FormGroup)
-      .controls[<keyof ReadingDto>'about'] as FormControl;
+  public getAboutControl(index: number): UntypedFormControl {
+    return ((this.form.controls[<keyof CityResourcesDto>'readings'] as UntypedFormArray)
+      .at(index) as UntypedFormGroup)
+      .controls[<keyof ReadingDto>'about'] as UntypedFormControl;
   }
-  public getLinkDescriptionControl(index: number): FormControl {
-    return ((this.form.controls[<keyof CityResourcesDto>'externalLinks'] as FormArray)
-      .at(index) as FormGroup)
-      .controls[<keyof ExternalLinkDto>'description'] as FormControl;
+  public getLinkDescriptionControl(index: number): UntypedFormControl {
+    return ((this.form.controls[<keyof CityResourcesDto>'externalLinks'] as UntypedFormArray)
+      .at(index) as UntypedFormGroup)
+      .controls[<keyof ExternalLinkDto>'description'] as UntypedFormControl;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -17,29 +17,29 @@ import { SaveCityConfigurationService } from './save-city-configuration.service'
 export class CityConfigurationComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadCityConfigurationService: LoadCityConfigurationService,
     private readonly saveCityConfigurationService: SaveCityConfigurationService,
   ) { }
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof CityDto, FormGroup>>{
-    icon: this.fb.group(<Record<keyof ImageDTO, FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof CityDto, UntypedFormGroup>>{
+    icon: this.fb.group(<Record<keyof ImageDTO, UntypedFormControl>>{
       height: this.fb.control(null),
       name: this.fb.control(null),
       path: this.fb.control(null),
       width: this.fb.control(null),
       url: this.fb.control(null),
     }),
-    iconMap: this.fb.group(<Record<keyof ImageDTO, FormControl>>{
+    iconMap: this.fb.group(<Record<keyof ImageDTO, UntypedFormControl>>{
       height: this.fb.control(null),
       name: this.fb.control(null),
       path: this.fb.control(null),
       width: this.fb.control(null),
       url: this.fb.control(null),
     }),
-    enabledPages: this.fb.group(<Record<keyof CityEnabledPagesDto, FormControl>>{
+    enabledPages: this.fb.group(<Record<keyof CityEnabledPagesDto, UntypedFormControl>>{
       activities: this.fb.control(false),
       contribution: this.fb.control(false),
       content: this.fb.control(false),
@@ -116,14 +116,14 @@ export class CityConfigurationComponent implements OnDestroy {
     this.iconMapControl.setValue(image);
   }
 
-  get enabledPagesControl(): FormGroup {
-    return this.form.controls[<keyof CityDto>'enabledPages'] as FormGroup;
+  get enabledPagesControl(): UntypedFormGroup {
+    return this.form.controls[<keyof CityDto>'enabledPages'] as UntypedFormGroup;
   }
 
-  get iconControl(): FormGroup {
-    return this.form.controls[<keyof CityDto>'icon'] as FormGroup;
+  get iconControl(): UntypedFormGroup {
+    return this.form.controls[<keyof CityDto>'icon'] as UntypedFormGroup;
   }
-  get iconMapControl(): FormGroup {
-    return this.form.controls[<keyof CityDto>'iconMap'] as FormGroup;
+  get iconMapControl(): UntypedFormGroup {
+    return this.form.controls[<keyof CityDto>'iconMap'] as UntypedFormGroup;
   }
 }

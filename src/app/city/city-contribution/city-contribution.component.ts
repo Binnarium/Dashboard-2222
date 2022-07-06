@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, interval, Observable, Subscription } from 'rxjs';
 import { debounce, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { SaveContributionService } from './save-contribution.service';
 export class CityContributionComponent implements OnDestroy {
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly loadContributionService: LoadContributionService,
     private readonly saveContributionService: SaveContributionService,
@@ -22,7 +22,7 @@ export class CityContributionComponent implements OnDestroy {
 
 
   /** form so upload content */
-  public readonly form: FormGroup = this.fb.group(<Record<keyof ContributionDto, FormControl>>{
+  public readonly form: UntypedFormGroup = this.fb.group(<Record<keyof ContributionDto, UntypedFormControl>>{
     pubUrl: this.fb.control(null),
     explanation: this.fb.control(null),
     teachingPractice: this.fb.control(null),
@@ -60,15 +60,15 @@ export class CityContributionComponent implements OnDestroy {
     // every time a new value comes, update the controls
     contribution => {
       if (contribution?.explanation)
-        (this.form.controls[<keyof ContributionDto>'explanation'] as FormControl).setValue(contribution.explanation, { emitEvent: false });
+        (this.form.controls[<keyof ContributionDto>'explanation'] as UntypedFormControl).setValue(contribution.explanation, { emitEvent: false });
       if (contribution?.pubUrl)
-        (this.form.controls[<keyof ContributionDto>'pubUrl'] as FormControl).setValue(contribution.pubUrl, { emitEvent: false });
+        (this.form.controls[<keyof ContributionDto>'pubUrl'] as UntypedFormControl).setValue(contribution.pubUrl, { emitEvent: false });
       if (contribution?.teachingPractice)
-        (this.form.controls[<keyof ContributionDto>'teachingPractice'] as FormControl).setValue(contribution.teachingPractice, { emitEvent: false });
+        (this.form.controls[<keyof ContributionDto>'teachingPractice'] as UntypedFormControl).setValue(contribution.teachingPractice, { emitEvent: false });
       if (contribution?.educativeEducations)
-        (this.form.controls[<keyof ContributionDto>'educativeEducations'] as FormControl).setValue(contribution.educativeEducations, { emitEvent: false });
+        (this.form.controls[<keyof ContributionDto>'educativeEducations'] as UntypedFormControl).setValue(contribution.educativeEducations, { emitEvent: false });
       if (contribution?.governmentManagement)
-        (this.form.controls[<keyof ContributionDto>'governmentManagement'] as FormControl).setValue(contribution.governmentManagement, { emitEvent: false });
+        (this.form.controls[<keyof ContributionDto>'governmentManagement'] as UntypedFormControl).setValue(contribution.governmentManagement, { emitEvent: false });
     }
   );
 
