@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 import { from, Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
 import { AppConfigurationDto, AppConfigurationFirebaseDto } from './app-configuration.dto';

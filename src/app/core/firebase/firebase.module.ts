@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule, FirebaseOptions } from '@angular/fire';
-import { AngularFireAnalyticsModule, APP_NAME, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule, FirebaseOptions } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule, APP_NAME, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 const firebaseConfig: Readonly<FirebaseOptions> = {
   apiKey: "AIzaSyAFvNurg0IOZb61Q9oK53zlJwJjMTu76E0",

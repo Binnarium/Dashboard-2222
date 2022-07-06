@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VideoDTO } from '../asset.dto';
