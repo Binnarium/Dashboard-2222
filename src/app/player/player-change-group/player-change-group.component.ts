@@ -82,7 +82,7 @@ export class PlayerChangeGroupComponent implements OnInit {
     if (!!this.taskSub)
       return;
 
-    const name = prompt(`Ingresa el nombre del grupo sin espacios`)?.replace(' ', '_') ?? null;
+    const name = prompt(`Ingresa el nombre del grupo sin espacios`)?.replace(/\s+/g, '_') ?? null;
 
     if (name === null || name.length < 5) {
       alert('Ingresa un nombre')
