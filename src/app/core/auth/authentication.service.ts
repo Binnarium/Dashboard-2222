@@ -49,7 +49,12 @@ export class AuthenticationService {
    */
   private async _registerNewAccount(email: string, password: string): Promise<void> {
     /// validate user has an account
-    const userSnap = await this.userService.userDocument(email).get().toPromise();
+    console.log('FIXME: remove to promise')
+    const userSnap = await this.userService.userDocument(email).get().toPromise() ?? null;
+
+    if (!userSnap)
+      throw new Error('account-not-found');
+
     const userData = userSnap.exists ? userSnap.data()! : null;
 
     /// validate user has a role in the predefined accounts to create a new user

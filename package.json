@@ -14,7 +14,7 @@
     "@angular/common": "^14.0.4",
     "@angular/compiler": "^14.0.4",
     "@angular/core": "^14.0.4",
-    "@angular/fire": "^7.0.4",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.4",
     "@angular/platform-browser": "^14.0.4",
     "@angular/platform-browser-dynamic": "^14.0.4",
@@ -23,10 +23,9 @@
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "autoprefixer": "^10.2.6",
-    "firebase": "^7.0 || ^8.0",
     "postcss": "^8.3.5",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.2.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

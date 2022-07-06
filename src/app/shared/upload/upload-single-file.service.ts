@@ -24,7 +24,7 @@ export class UploadSingleFileService extends IUpload {
           percentage,
           path,
           name: file.name,
-          url: state === 'FINISH' ? await d?.ref.getDownloadURL() : null,
+          url: state === 'FINISH' ? await d?.ref.getDownloadURL() ?? null : null,
         };
 
         return data;

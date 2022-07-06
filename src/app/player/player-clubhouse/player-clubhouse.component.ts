@@ -47,7 +47,8 @@ export class PlayerClubhouseComponent {
     if (!!this.taskSub)
       return;
 
-    const cities = await this.loadCitiesService.cities$.pipe(take(1)).toPromise();
+    console.log('FIXME: remove to promise')
+    const cities = await this.loadCitiesService.cities$.pipe(take(1)).toPromise() ?? [];
 
     const url = prompt(`Ingresa la Url del clubhouse`) ?? null;
 
